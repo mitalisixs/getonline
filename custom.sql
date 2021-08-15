@@ -1,0 +1,1 @@
+INSERT INTO `settings` (`id`, `name`, `value`, `created_at`, `updated_at`) VALUES (NULL, 'google_captcha_key', NULL, NULL, NULL), (NULL, 'google_captcha_secret', NULL, NULL, NULL);
