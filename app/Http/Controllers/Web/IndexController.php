@@ -18,6 +18,8 @@ use View;
 use DB;
 use Cookie;
 use App\Models\Core\Setting;
+
+// Added by Mitali for test
 class IndexController extends Controller
 {
 
