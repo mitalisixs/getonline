@@ -10,7 +10,7 @@
                <h2> @lang('website.PRODUCT CATEGORIES')
                </h2>
                <p>
-                 @lang('website.Categories Text For Home Page')
+                {{ $result['commonContent']["settings"]["product_category_text"]}}
                 </p>
                </div>
              </div>

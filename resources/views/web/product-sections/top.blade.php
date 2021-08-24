@@ -10,7 +10,7 @@
 
             </h2>
             <p>
-              @lang('website.Top Sellings Of the Week Detail')</p>
+              {{ $result['commonContent']["settings"]["top_selling_text"]}}
           </div>
         </div>
       </div>

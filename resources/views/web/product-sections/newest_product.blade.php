@@ -9,7 +9,7 @@
           <div class="pro-heading-title">
             <h2> @lang('website.NEW ARRIVAL')
             </h2>
-            <p>@lang('website.Newest Products Detail')
+            <p>  {{ $result['commonContent']["settings"]["new_arrival_text"]}}
                </p>
           </div>
         </div>

@@ -9,7 +9,7 @@
              <h2>  @lang('website.WELCOME TO STORE')
              </h2>
              <p> 
-               @lang('website.WELCOME TO STORE DETAIL')
+              {{ $result['commonContent']["settings"]["welcome_store_text"]}}
               </p>
              </div>
            </div>

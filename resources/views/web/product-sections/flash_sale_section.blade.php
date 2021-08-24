@@ -10,7 +10,7 @@
                 <h2> @lang('website.Flash Sale')
                 </h2>
                 <p> 
-                  @lang('website.Flash Sale Text')
+                  {{ $result['commonContent']["settings"]["flash_sale_text"]}}
                 </div>
           </div>
     

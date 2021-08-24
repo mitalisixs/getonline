@@ -265,6 +265,59 @@
                                              
                                          </div>
                                      </div>
+                                     <hr>
+                                        <h4>Site Texts</h4>
+                                        <hr>
+                                  
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 col-md-3 control-label">Product Category Section Text</label>
+                                            <div class="col-sm-10 col-md-4">
+                                                {!! Form::textarea($result['settings'][131]->name, $result['settings'][131]->value, array('class'=>'form-control', 'id'=>$result['settings'][131]->name)) !!}
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">
+                                                    Enter Product Category Section Text</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 col-md-3 control-label">Top Selling  Section Text</label>
+                                            <div class="col-sm-10 col-md-4">
+                                                {!! Form::textarea($result['settings'][132]->name, $result['settings'][132]->value, array('class'=>'form-control', 'id'=>$result['settings'][132]->name)) !!}
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">
+                                                    Enter Top Selling  Section Text</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 col-md-3 control-label">New Arrival Section Text</label>
+                                            <div class="col-sm-10 col-md-4">
+                                                {!! Form::textarea($result['settings'][133]->name, $result['settings'][133]->value, array('class'=>'form-control', 'id'=>$result['settings'][133]->name)) !!}
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">
+                                                    Enter New Arrival Section Text</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 col-md-3 control-label">Falsh Sale Section Text</label>
+                                            <div class="col-sm-10 col-md-4">
+                                                {!! Form::textarea($result['settings'][134]->name, $result['settings'][134]->value, array('class'=>'form-control', 'id'=>$result['settings'][134]->name)) !!}
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">
+                                                    Enter Falsh Sale Section Text</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 col-md-3 control-label">Special Product Section Text</label>
+                                            <div class="col-sm-10 col-md-4">
+                                                {!! Form::textarea($result['settings'][135]->name, $result['settings'][135]->value, array('class'=>'form-control', 'id'=>$result['settings'][135]->name)) !!}
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">
+                                                    Enter Special Product  Section Text</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 col-md-3 control-label">Welcome Store Section Text</label>
+                                            <div class="col-sm-10 col-md-4">
+                                                {!! Form::textarea($result['settings'][136]->name, $result['settings'][136]->value, array('class'=>'form-control', 'id'=>$result['settings'][136]->name)) !!}
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">
+                                                    Enter Welcome Store Section Text</span>
+                                            </div>
+                                        </div>
+
                                     </div>
 
 
