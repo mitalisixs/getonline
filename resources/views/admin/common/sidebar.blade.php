@@ -55,7 +55,7 @@
         <a href="{{ URL::to('admin/currencies/display')}}">
           <i class="fa fa-circle-o"></i> {{ trans('labels.currency') }}
         </a>
-      </li>
+      </li>   
       <?php } ?>    
       <?php
         if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->customers_view == 1){
@@ -102,8 +102,9 @@
                   <i class="fa fa-circle-o" aria-hidden="true"></i> <span>{{ trans('labels.reviews') }}</span>@if($result['commonContent']['new_reviews']>0)<span class="label label-success pull-right">{{$result['commonContent']['new_reviews']}} {{ trans('labels.new') }}</span>@endif
                 </a>
               </li>
+              <?php if($result['commonContent']["setting"]["show_upload_logo"]=="1"){ ?>
               <li class="{{ Request::is('admin/uploaded-designs') ? 'active' : '' }} "><a href="{{ URL::to('admin/uploaded-designs')}}"><i class="fa fa-circle-o"></i> Uploaded Designs</a></li>
-             
+              <?php } ?>
             <?php } ?>
           </ul>
         </li>

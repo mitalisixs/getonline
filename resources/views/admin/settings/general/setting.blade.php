@@ -249,6 +249,22 @@
 
                                         
 
+                                        <hr>
+                                        <h4>Upload Your Design</h4>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-md-3 control-label" style="">Upload Your Design</label>
+                                         <div class="col-sm-10 col-md-4">
+                                             <label class=" control-label">
+                                                   <input type="radio" name="show_upload_logo" value="1" class="flat-red" @if($result['settings'][130]->value=='1') checked @endif > &nbsp;Enable
+                                             </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                             <label class=" control-label">
+                                                   <input type="radio" name="show_upload_logo" value="0" class="flat-red" @if($result['settings'][130]->value=='0') checked @endif >  &nbsp;Disable
+                                             </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                             
+                                         </div>
+                                     </div>
                                     </div>
 
 

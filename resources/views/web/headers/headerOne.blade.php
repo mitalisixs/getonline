@@ -94,9 +94,9 @@
               <ul class="navbar-nav ">
                 {!! $result['commonContent']["menusRecursive"] !!}
                   
-                <li class="nav-item ">
+                {{-- <li class="nav-item ">
                   <a class="btn btn-secondary" href="{{url('shop?type=special')}}">@lang('website.SPECIAL DEALS')</a>
-                </li> 
+                </li>  --}}
 
               </ul>
             </div>
