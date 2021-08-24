@@ -199,6 +199,7 @@ class AdminController extends Controller
 
 
 		$result['commonContent'] = $this->Setting->commonContent();
+		//dd($result['commonContent']["setting"]["show_upload_logo"]);
 
 		return view("admin.dashboard",$title)->with('result', $result);
 	}

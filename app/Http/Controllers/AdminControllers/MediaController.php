@@ -158,12 +158,14 @@ class MediaController extends Controller
     }
     public function uploadImageFromUrl($url)
     {   
-       // dd($url);
+       
         $info = pathinfo($url);
+		//dd($info);
         $contents = @file_get_contents($url,true);
+		 
         if ($contents === false) {
             //There is an error opening the file
-            return 540;
+            return 1;
         }
 
         $file = public_path('images/' . $info['basename']);

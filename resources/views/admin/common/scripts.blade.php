@@ -102,7 +102,6 @@ $("img").click(function() {
   });
 
   jQuery("#btn11").click(function() {
-	
     var images =  '<?php echo $images; ?>';
     var all_images = JSON.parse(images);
     jQuery.each(all_images, function() {
@@ -2815,7 +2814,8 @@ $(document).on('click','#regenrate', function(e){
 
 // NORMAL FORM
 
-$(document).on('submit','#geniusform123',function(e){
+
+$(document).on('submit','#geniusform',function(e){
 	$("#loader").show();
 	e.preventDefault();
   	var fd = new FormData(this);

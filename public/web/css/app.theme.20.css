@@ -1,5 +1,6 @@
 /*! fancyBox v2.1.5 fancyapps.com | fancyapps.com/fancybox/#license */
 /* colorcode- #7CACC2 */
+/* hover - coloer #2682af */
 .fancybox-wrap,
 .fancybox-skin,
 .fancybox-outer,
@@ -9067,7 +9068,8 @@ readers do not read off random characters that represent icons */
  */
 
 :root {
-  --blue: #7CACC2;
+  --blue: #
+  ;
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
@@ -11666,7 +11668,7 @@ fieldset:disabled a.btn {
 .btn-secondary:hover {
   color: #fff;
   background-color: #2386ee;
-  border-color: #1880ed;
+  border-color: #2682af;
 }
 
 .btn-secondary:focus,
@@ -11685,7 +11687,7 @@ fieldset:disabled a.btn {
 .btn-secondary:not(:disabled):not(.disabled).active,
 .show > .btn-secondary.dropdown-toggle {
   color: #fff;
-  background-color: #1880ed;
+  background-color: #2682af;
   border-color: #127ae7;
 }
 
@@ -11742,7 +11744,7 @@ fieldset:disabled a.btn {
 .btn-info:hover {
   color: #fff;
   background-color: #2386ee;
-  border-color: #1880ed;
+  border-color: #2682af;
 }
 
 .btn-info:focus,
@@ -11761,7 +11763,7 @@ fieldset:disabled a.btn {
 .btn-info:not(:disabled):not(.disabled).active,
 .show > .btn-info.dropdown-toggle {
   color: #fff;
-  background-color: #1880ed;
+  background-color: #2682af;
   border-color: #127ae7;
 }
 
@@ -14229,7 +14231,7 @@ a.badge-primary.focus {
 a.badge-secondary:hover,
 a.badge-secondary:focus {
   color: #fff;
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 a.badge-secondary:focus,
@@ -14263,7 +14265,7 @@ a.badge-success.focus {
 a.badge-info:hover,
 a.badge-info:focus {
   color: #fff;
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 a.badge-info:focus,
@@ -15795,7 +15797,7 @@ a.bg-secondary:hover,
 a.bg-secondary:focus,
 button.bg-secondary:hover,
 button.bg-secondary:focus {
-  background-color: #1880ed !important;
+  background-color: #2682af !important;
 }
 
 .bg-success {
@@ -15817,7 +15819,7 @@ a.bg-info:hover,
 a.bg-info:focus,
 button.bg-info:hover,
 button.bg-info:focus {
-  background-color: #1880ed !important;
+  background-color: #2682af !important;
 }
 
 .bg-warning {
@@ -21549,7 +21551,7 @@ a:hover,
 }
 
 .btn-secondary:before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .btn-primary:hover {
@@ -22117,7 +22119,7 @@ iframe#instagram-embed-0 .logged-in .Header {
 .modal .carousel .carousel-control-prev::after,
 .modal .carousel .carousel-control-next::after {
   content: "";
-  background-color: #1880ed;
+  background-color: #2682af;
   opacity: 0;
 }
 
@@ -22790,7 +22792,7 @@ a.carousel-control-next.btn-secondary.swipe-to-top:focus {
 }
 
 .product article .product-hover .icons .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .product article .product-hover .btn {
@@ -22880,7 +22882,7 @@ a.carousel-control-next.btn-secondary.swipe-to-top:focus {
 }
 
 .product-ad article picture .product-hover .icons .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .product-ad article picture .product-hover .btn {
@@ -23014,7 +23016,7 @@ a.carousel-control-next.btn-secondary.swipe-to-top:focus {
 }
 
 .product-ad .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .product-ad .detail {
@@ -23109,7 +23111,7 @@ a.carousel-control-next.btn-secondary.swipe-to-top:focus {
 }
 
 .pro-content .slick-arrow::after {
-  background-color: #1880ed;
+  background-color: #2682af;
   opacity: 0;
 }
 
@@ -23844,7 +23846,7 @@ a.carousel-control-next.btn-secondary.swipe-to-top:focus {
 }
 
 .slider-nav .slick-arrow::after {
-  background-color: #1880ed;
+  background-color: #2682af;
   opacity: 0;
 }
 
@@ -24282,7 +24284,7 @@ article:hover .btn-hover {
 }
 
 .product4.product .thumb .product-action-vertical .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .product4.product article {
@@ -24419,7 +24421,7 @@ article:hover .btn-hover {
 }
 
 .product5.product .thumb .product-action-vertical .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .product5.product .product-action {
@@ -24473,7 +24475,7 @@ article:hover .btn-hover {
 }
 
 .product6.product article .thumb .product-action-vertical .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .product6.product article:hover {
@@ -24526,7 +24528,7 @@ article:hover .btn-hover {
 }
 
 .product7.product article .thumb .product-action-vertical .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .product7.product article:hover {
@@ -24673,7 +24675,7 @@ article:hover .btn-hover {
 }
 
 .product9.product .thumb .product-action-vertical .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .product9.product article {
@@ -24757,7 +24759,7 @@ article:hover .btn-hover {
 }
 
 .product9.product .product-action .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .product2.product10 article .pro-thumb .badges {
@@ -24817,7 +24819,7 @@ article:hover .btn-hover {
 }
 
 .product11.product article .content .pro-counter .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .product11.product article .producthover {
@@ -24864,7 +24866,7 @@ article:hover .btn-hover {
 }
 
 .product11.product article .producthover .icons .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .product11.product article .producthover .btn {
@@ -25016,7 +25018,7 @@ article:hover .btn-hover {
 }
 
 .product14.product .thumb .product-action-vertical .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .product14.product .product-action {
@@ -25076,7 +25078,7 @@ article:hover .btn-hover {
 }
 
 .product14.product article .content .product-icon .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .product14.product article .content .pro-counter {
@@ -31731,12 +31733,12 @@ li:hover > .mega-dropdown-item::before {
 
 .header-nine .header-navbar nav .navbar-collapse ul .nav-item .nav-link {
   font-family: "Montserrat-Regular", sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: #212529;
   padding-top: 1.2rem;
   padding-bottom: 1.2rem;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 6px;
+  padding-left: 6px;
   text-transform: uppercase;
 }
 
@@ -33478,11 +33480,11 @@ body[dir=rtl] .header-mobile .header-navbar .form-inline .search .btn-secondary 
 
 .sticky-header .header-sticky-inner nav .navbar-collapse ul .nav-item .nav-link {
   font-family: "Montserrat-Regular", sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.6rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 6px;
+  padding-left: 6px;
   text-transform: uppercase;
 }
 
@@ -36731,7 +36733,7 @@ body[dir=rtl] .header-mobile .header-navbar .form-inline .search .btn-secondary 
 
 .carousel-content .carousel-control-prev::after,
 .carousel-content .carousel-control-next::after {
-  background-color: #1880ed;
+  background-color: #2682af;
   opacity: 0;
 }
 
@@ -37022,7 +37024,7 @@ body[dir=rtl] .header-mobile .header-navbar .form-inline .search .btn-secondary 
 .modal .carousel .carousel-control-prev::after,
 .modal .carousel .carousel-control-next::after {
   content: "";
-  background-color: #1880ed;
+  background-color: #2682af;
   opacity: 0;
 }
 
@@ -37197,7 +37199,7 @@ a.carousel-control-next.btn-secondary.swipe-to-top:focus {
 }
 
 .categories-content .cat-banner .categories-image a .categories-title:after {
-  background-color: #1880ed;
+  background-color: #2682af;
   opacity: 0;
   content: "";
   position: absolute;
@@ -37431,7 +37433,7 @@ a.carousel-control-next.btn-secondary.swipe-to-top:focus {
 }
 
 .pro-fs-content .pro-thumb .product-flash-hover .icons .icon::before {
-  background-color: #1880ed;
+  background-color: #2682af;
 }
 
 .pro-fs-content .pro-thumb .product-flash-hover .btn {

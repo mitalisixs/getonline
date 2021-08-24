@@ -539,6 +539,7 @@ class ProductController extends Controller
       
    //     echo "<pre>";print_r($subCategoriesArray);echo "</pre>";exit;
         //
+	
             unset($array[0]);
 		  foreach ($array as $line) {
               $input = [];
@@ -562,58 +563,73 @@ class ProductController extends Controller
                         $subCategories = $this->category->allcategories(1)->toArray();
                         foreach($subCategories as $cat){
                             $cat=(array) $cat;
-                            $subCategoriesArray[strtolower($cat['name']).'_'.$cat['parent_id']]=$cat;
+                            $subCategoriesArray[strtolower($cat['slug']).'_'.$cat['parent_id']]=$cat;
                         }
 
                         //	dd($subCategories);
       			        //	dd($subCategoriesArray);
 					 //   echo "--------------------$i------------------------------"."<br/>";
-					    //echo "<pre>";print_r($subCategoriesArray);echo "</pre>";
+					//    echo "<pre>";print_r($subCategoriesArray);echo "</pre>";
                         $uploadImage=540;
-                        if(isset($subCategoriesArray[$line[1].'_'.'0']) && $subCategoriesArray[$line[1].'_'.'0']["parent_id"]==0 ){
-                            
-                            $id= $subCategoriesArray[$line[1].'_'.'0']['id'];
-                            $input['categories'][]= $id;
-                            #echo "in parent category--->".$id."------".$line[1]."</br>";
-                            
-                        }else{
+						if($line[1]!=""){
+							$lin1_slug = $this->myVarsetting->slugify($line[1]);
+							
+							if(isset($subCategoriesArray[$lin1_slug.'_'.'0']) && $subCategoriesArray[$lin1_slug.'_'.'0']["parent_id"]==0 ){
+								
+								$id= $subCategoriesArray[$line[1].'_'.'0']['id'];
+								$input['categories'][]= $id;
+								#echo "in parent category--->".$id."------".$line[1]."</br>";
+								
+							}else{
 
-                            $id = $this->mycategory->insertData(["categoryName_1"=>$line[1],"categoryName"=>$line[1],"parent_id"=>0,"image_id"=>$uploadImage,"image_icone"=>$uploadImage,"categories_status"=>1,"insert_api"=>1]);
-                            $input['categories'][] = $id;
-                            $subCategoriesArray[$line[1].'_'.'0']=["id"=>$id,"parent_id"=>0];
-                          //  $subCategoriesArray[$line[1].'_'.'0']=$cat;
-                            #echo "not parent category--->".$id."------".$line[1]."</br>";
+								$id = $this->mycategory->insertData(["categoryName_1"=>$line[1],"categoryName"=>$line[1],"parent_id"=>0,"image_id"=>$uploadImage,"image_icone"=>$uploadImage,"categories_status"=>1,"insert_api"=>1]);
+								$input['categories'][] = $id;
+								$subCategoriesArray[$line[1].'_'.'0']=["id"=>$id,"parent_id"=>0];
+							  //  $subCategoriesArray[$line[1].'_'.'0']=$cat;
+								#echo "not parent category--->".$id."------".$line[1]."</br>";
 
-                        }
-                        $pID=$id;
-                        if(isset($subCategoriesArray[$line[2]."_".$pID] ) && $subCategoriesArray[$line[2]."_".$pID]["parent_id"]==$pID ){
-                            $sId= $subCategoriesArray[$line[2]."_".$pID]['id'];
-                            $input['categories'][]= $sId;
-                            #echo "in sub category--->".$sId."------".$line[2]."</br>";
-                        }else{
+							}
+						}
+						$pID=$id;
+                    //    echo "<pre>pid---->";print_r($pID);echo "</pre>";
+						if($line[2]!=""){
+							
+							$lin1_slug2 = $this->myVarsetting->slugify($line[2]);
+							//echo "<pre>sid check---->";print_r($lin1_slug2."_".$pID);echo "</pre>";
+							if(isset($subCategoriesArray[$lin1_slug2."_".$pID] ) && $subCategoriesArray[$lin1_slug2."_".$pID]["parent_id"]==$pID ){
+								$sId= $subCategoriesArray[$lin1_slug2."_".$pID]['id'];
+								$input['categories'][]= $sId;
+								#echo "in sub category--->".$sId."------".$line[2]."</br>";
+							}else{
 
-                            $sId = $this->mycategory->insertData(["categoryName_1"=>$line[2],"categoryName"=>$line[2],"parent_id"=>$pID,"image_id"=>$uploadImage,"image_icone"=>$uploadImage,"categories_status"=>1,"insert_api"=>1]);
-                            $input['categories'][] = $sId;
-                            $subCategoriesArray[$line[2]."_".$pID]=["id"=>$sId,"parent_id"=>$pID];
-                            #echo "not in sub category--->".$sId."------".$line[2]."</br>";
-                        }
+								$sId = $this->mycategory->insertData(["categoryName_1"=>$line[2],"categoryName"=>$line[2],"parent_id"=>$pID,"image_id"=>$uploadImage,"image_icone"=>$uploadImage,"categories_status"=>1,"insert_api"=>1]);
+								$input['categories'][] = $sId;
+								$subCategoriesArray[$line[2]."_".$pID]=["id"=>$sId,"parent_id"=>$pID];
+								#echo "not in sub category--->".$sId."------".$line[2]."</br>";
+							}
+						}
                         //	dd($line);
-                        if(isset($subCategoriesArray[$line[3]."_".$sId]) && $subCategoriesArray[$line[3]."_".$sId]["parent_id"]==$sId ){
-                            $cId= $subCategoriesArray[$line[3]."_".$sId]['id'];
-                            $input['categories'][]=  $cId;
-                            #echo "in child category--->".$cId."------".$line[3]."</br>";
-                        }else{
-                            $cId = $this->mycategory->insertData(["categoryName_1"=>$line[3],"categoryName"=>$line[3],"parent_id"=>$sId,"image_id"=>$uploadImage,"image_icone"=>$uploadImage,"categories_status"=>1,"insert_api"=>1]);
-                            $input['categories'][] = $cId;
-                            $subCategoriesArray[$line[3]."_".$sId]=["id"=>$cId,"parent_id"=>$sId];
-                            #echo "not in child category--->".$cId."------".$line[3]."</br>";
-                        }
+						if($line[3]!=""){
+							$lin1_slug3 = $this->myVarsetting->slugify($line[3]);
+						//	echo "<pre>sid check---->";print_r($lin1_slug3."_".$sId);echo "</pre>";
+							if(isset($subCategoriesArray[$lin1_slug3."_".$sId]) && $subCategoriesArray[$lin1_slug3."_".$sId]["parent_id"]==$sId ){
+								$cId= $subCategoriesArray[$lin1_slug3."_".$sId]['id'];
+								$input['categories'][]=  $cId;
+								#echo "in child category--->".$cId."------".$line[3]."</br>";
+							}else{
+								$cId = $this->mycategory->insertData(["categoryName_1"=>$line[3],"categoryName"=>$line[3],"parent_id"=>$sId,"image_id"=>$uploadImage,"image_icone"=>$uploadImage,"categories_status"=>1,"insert_api"=>1]);
+								$input['categories'][] = $cId;
+								$subCategoriesArray[$line[3]."_".$sId]=["id"=>$cId,"parent_id"=>$sId];
+								#echo "not in child category--->".$cId."------".$line[3]."</br>";
+							}
+						}
 					
                         
 					
-                        $image_id=540;
+                        $image_id=1;
                         
                         if($line[5]!=""){
+							//dd("test");
                             $image_id = $this->myimages->uploadImageFromUrl($line[5]);
                         
                         }
@@ -642,8 +658,8 @@ class ProductController extends Controller
                         $input["isFlash"]='';
                         $input["products_quantity"]= $line[8];
                         
-                        
-                        
+                      //  echo "<pre>";print_r($input);echo "</pre>";
+                        //dd($input);
                         $product_id = $this->products->insertWithArray($input);
 		                $this->products->insertProductImages(json_decode(json_encode(["products_id"=>$product_id,"image_id"=>$image_id,"htmlcontent"=>"bulkupload"])));
 
