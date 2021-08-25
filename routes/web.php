@@ -139,3 +139,4 @@ Route::group(['namespace' => 'Web','middleware' => $middleware], function () {
    
 	   return "Route cache file removed";
    });
+   Route::get('/flush-data', 'Web\IndexController@flushData');

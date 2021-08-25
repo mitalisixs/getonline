@@ -384,6 +384,10 @@ class Menus extends Model
     public static function catalogmenu(){
         $language = new SiteSettingController();
         $languages = $language->getLanguages();
+        $existCatalog=DB::table('menus')->where("type",3)->pluck("id")->toArray();
+        foreach($existCatalog as $ex){
+            self::deletemenu($ex);
+        }
         $items = DB::table('categories')
             ->leftJoin('image_categories', 'categories.categories_icon', '=', 'image_categories.image_id')
             ->leftJoin('categories_description', 'categories_description.categories_id', '=', 'categories.categories_id')
