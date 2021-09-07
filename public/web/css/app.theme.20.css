@@ -1,6 +1,12 @@
 /*! fancyBox v2.1.5 fancyapps.com | fancyapps.com/fancybox/#license */
 /* colorcode- #7CACC2 */
 /* hover - coloer #2682af */
+.row-revers {
+  flex-direction: row-reverse;
+}
+.about_imggrid .row{
+  margin-bottom: 25px;
+}
 .fancybox-wrap,
 .fancybox-skin,
 .fancybox-outer,
@@ -30588,7 +30594,7 @@ li:hover > .mega-dropdown-item::before {
 }
 
 .header-eight .bg-header-bar {
-  background-color: #f5f5f5;
+  background-color: #fff;
 }
 
 .header-eight .header-maxi .container {
