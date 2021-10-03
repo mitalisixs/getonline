@@ -398,6 +398,7 @@ class ProductsController extends Controller
          $title = array('pageTitle' => Lang::get('website.Product Detail'));
          $result = array();
          $result['commonContent'] = $this->index->commonContent();
+        // dd($result["commonContent"]);
          $final_theme = $this->theme->theme();
          //min_price
          if (!empty($request->min_price)) {

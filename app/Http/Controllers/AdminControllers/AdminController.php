@@ -199,6 +199,7 @@ class AdminController extends Controller
 
 
 		$result['commonContent'] = $this->Setting->commonContent();
+	
 		//dd($result['commonContent']["setting"]["show_upload_logo"]);
 
 		return view("admin.dashboard",$title)->with('result', $result);
@@ -760,6 +761,12 @@ class AdminController extends Controller
 			$currency_update =isset(  $roles[0]->currency_update)? $roles[0]->currency_update:'0';
 			$currency_delete = isset($roles[0]->currency_delete) ?$roles[0]->currency_delete :'0';
 
+			$check_for_pincode_view = isset( $roles[0]->check_for_pincode_view)? $roles[0]->check_for_pincode_view:'0';
+			$check_for_pincode_create =isset( $roles[0]->check_for_pincode_create)? $roles[0]->check_for_pincode_create:'0';
+			$check_for_pincode_update =isset( $roles[0]->check_for_pincode_update)? $roles[0]->check_for_pincode_update:'0';
+			$check_for_pincode_delete = isset( $roles[0]->check_for_pincode_delete)? $roles[0]->check_for_pincode_delete:'0';
+			
+
 			$profile_view = $roles[0]->profile_view;
 			$profile_update = $roles[0]->profile_update;
 
@@ -854,6 +861,12 @@ class AdminController extends Controller
 			$currency_create ='0';
 			$currency_update ='0';
 			$currency_delete = '0';
+
+			$check_for_pincode_view = '0';
+			$check_for_pincode_create ='0';
+			$check_for_pincode_update ='0';
+			$check_for_pincode_delete = '0';
+			
 
 
 			$profile_view = '0';
@@ -1027,7 +1040,15 @@ class AdminController extends Controller
 					'2'=>array('name'=>'currency_update','value'=>$currency_update),
 					'3'=>array('name'=>'currency_delete','value'=>$currency_delete)
 					);
-			
+		
+		$result2[23]['link_name'] = 'Check for Pincode';
+		$result2[23]['permissions'] = array(
+					'0'=>array('name'=>'check_for_pincode_view','value'=>$check_for_pincode_view),
+					'1'=>array('name'=>'check_for_pincode_create','value'=>$check_for_pincode_create),
+					'2'=>array('name'=>'check_for_pincode_update','value'=>$check_for_pincode_update),
+					'3'=>array('name'=>'check_for_pincode_delete','value'=>$check_for_pincode_delete)
+					);
+		
 		$result['data'] = $result2;
 		$result['commonContent'] = $this->Setting->commonContent();
 		return view("admin.admins.roles.addrole",$title)->with('result', $result);
@@ -1036,7 +1057,7 @@ class AdminController extends Controller
 
 	//addnewroles
 	public function addnewroles(Request $request){
-
+		
 		$user_types_id = $request->user_types_id;
 		DB::table('manage_role')->where('user_types_id',$user_types_id)->delete();
 
@@ -1133,7 +1154,13 @@ class AdminController extends Controller
 						'currency_create' => $request->currency_create,
 						'currency_update' => $request->currency_update,
 						'currency_delete' => $request->currency_delete,
-						
+
+						'check_for_pincode_view' => $request->check_for_pincode_view,
+						'check_for_pincode_create' => $request->check_for_pincode_create,
+						'check_for_pincode_update' => $request->check_for_pincode_update,
+						'check_for_pincode_delete' => $request->check_for_pincode_delete,
+
+
 						]);
 
 		$message = Lang::get("labels.Roles has been added successfully");

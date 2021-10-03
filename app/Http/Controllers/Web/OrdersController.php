@@ -24,6 +24,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Lang;
 use Session;
+use App\Models\Core\Pincode;
+
 
 //email
 
@@ -37,7 +39,8 @@ class OrdersController extends Controller
         Currency $currency,
         Cart $cart,
         Shipping $shipping,
-        Order $order
+        Order $order,
+        Pincode $pincodes
     ) {
         $this->index = $index;
         $this->languages = $languages;
@@ -47,6 +50,7 @@ class OrdersController extends Controller
         $this->shipping = $shipping;
         $this->order = $order;
         $this->theme = new ThemeController();
+        $this->pincodes = $pincodes;
     }
 
     //test stripe
@@ -67,7 +71,7 @@ class OrdersController extends Controller
     //checkout
     public function checkout(Request $request)
     {
-
+        
         $title = array('pageTitle' => Lang::get('website.Checkout'));
         $final_theme = $this->theme->theme();
         $result = $all_addresses = array();
@@ -182,6 +186,7 @@ class OrdersController extends Controller
     //checkout
     public function checkout_shipping_address(Request $request)
     {
+        
         $title = array('pageTitle' => Lang::get('website.Checkout'));
         $result = array();
         $result['commonContent'] = $this->index->commonContent();
@@ -209,11 +214,13 @@ class OrdersController extends Controller
             }else{
                 $address_id =$request->shipping_address_id;
             }
+
             $shipping_address = $this->shipping->getShippingAddress($address_id);
            $data =  $shipping_address[0];
         }else{
             $data =  $request->all();
         }
+        
         foreach ($data as $key => $value) 
         {
             //billing address
@@ -225,7 +232,7 @@ class OrdersController extends Controller
                 $billing_data['billing_company'] = $value;
             } else if ($key == 'street') {
                 $billing_data['billing_street'] = $value;
-            } else if ($key == 'countries_id') {
+            } else if ($key == 'cou~Axntries_id') {
                 $billing_data['billing_countries_id'] = $value;
             } else if ($key == 'zone_id') {
                 $billing_data['billing_zone_id'] = $value;
@@ -248,6 +255,15 @@ class OrdersController extends Controller
 
         $address = (object) $data;
         session(['shipping_address' => $address]);
+        $cartResponse = $this->pincodes->checkexistPincode($data->postcode);
+        if(!$cartResponse){
+            $msg="Sorry we are not deliver on this Pincode";
+             $type="success";
+             session(['step' => '0']);
+             return redirect()->back()->withErrors("Sorry we do not deliver on this pincode");
+     
+        }
+       
 
         return redirect()->back();
     }

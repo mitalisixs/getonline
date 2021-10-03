@@ -346,7 +346,7 @@
             @endforeach
           </div>
           @endif
-        
+          
       
          @if(!empty($result['detail']['product_data'][0]->flash_start_date))
           <div class="countdown pro-timer" data-toggle="tooltip" data-placement="bottom" title="@lang('website.Countdown Timer')" id="counter_{{$result['detail']['product_data'][0]->products_id}}" >                               
@@ -389,7 +389,19 @@
                   @endif               
         
           </div>
-          
+         
+          @if($result["commonContent"]["settings"]["check_for_pincode"]==1)
+            <div class="input-group">
+              <div class="col-md-4" style="padding-left: 0px;">
+              <input type="text" id="pincode" name="pincode" class="form-control" value="" placeholder="Check for Pincode"/>
+              <span id="pincode_message"></span>
+            </div>  
+              <div class="col-md-4" style="padding-left: 0px;">
+                <button type="button" class="btn btn-secondary " onclick="check_pincode()">Check</button>
+              </div>
+            </div>
+        
+          @endif
         </form>
 
           <div class="pro-sub-buttons">
@@ -561,7 +573,14 @@
 @endif
 
 </section>
-
+<style>
+  #pincode_message .error{
+    color:red;
+  }
+  #pincode_message .success{
+    color:green;
+  }
+</style>
   <script>
 
     jQuery(document).ready(function(e) {

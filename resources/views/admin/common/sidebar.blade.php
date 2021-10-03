@@ -56,6 +56,18 @@
           <i class="fa fa-circle-o"></i> {{ trans('labels.currency') }}
         </a>
       </li>   
+      <?php } ?> 
+      <?php /* Mitali - manage_check_for_pincode_view */ ?>
+      <?php
+      
+        if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->check_for_pincode_view == 1){
+      ?>
+
+      <li class="treeview {{ Request::is('admin/pincodes/display') ? 'active' : '' }} {{ Request::is('admin/pincodes/add') ? 'active' : '' }} {{ Request::is('admin/pincodes/edit/*') ? 'active' : '' }} {{ Request::is('admin/pincodes/filter') ? 'active' : '' }}">
+        <a href="{{ URL::to('admin/pincodes/display')}}">
+          <i class="fa fa-circle-o"></i> {{ trans('labels.manage Check for Pincode') }}
+        </a>
+      </li>   
       <?php } ?>    
       <?php
         if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->customers_view == 1){

@@ -140,3 +140,4 @@ Route::group(['namespace' => 'Web','middleware' => $middleware], function () {
 	   return "Route cache file removed";
    });
    Route::get('/flush-data', 'Web\IndexController@flushData');
+   Route::post('check_pincode', 'Web\CustomersController@check_pincode');
