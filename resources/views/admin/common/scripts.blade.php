@@ -2437,7 +2437,7 @@ $(document).on('change','.product-type', function(){
 			$('#attribute').show();
 			var has_val = $('#has-attribute').val();
 			if(has_val==0){
-				$('#attribute-btn').hide();
+		//		$('#attribute-btn').hide();
 			}else{
 				$('#attribute-btn').show();
 			}

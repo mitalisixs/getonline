@@ -134,14 +134,14 @@
 
                                                                 <!-- /.users-list -->
                                                             </div>
-                                                           @if(count($result['products'])> 0)
+                                                           {{-- @if(count($result['products'])> 0)
                                                                 @if(count($result['attributes'])>0 and $result['products'][0]->products_type==1 or $result['products'][0]->products_type==0)
-                                                                <!-- /.box-body -->
+                                                                <!-- /.box-body --> --}}
                                                                 <div class="box-footer text-center">
                                                                     <button type="submit" id="attribute-btn" class="btn btn-primary pull-right">{{ trans('labels.Add Stock') }}</button>
                                                                 </div>
-                                                                @endif
-                                                            @endif
+                                                                {{-- @endif
+                                                            @endif --}}
 
                                                             {!! Form::close() !!}
                                                             <!-- /.box-footer -->
