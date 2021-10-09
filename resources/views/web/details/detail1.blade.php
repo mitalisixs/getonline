@@ -377,9 +377,11 @@
                           <button class="btn btn-lg swipe-to-top  btn-danger " type="button">@lang('website.Out of Stock')</button>
                         @else
                             <button class="btn btn-secondary btn-lg swipe-to-top add-to-Cart"  type="button" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Add to Cart')</button>
+                            <button class="btn btn-secondary btn-lg swipe-to-top buy-now-btn"  type="button" products_id="{{$result['detail']['product_data'][0]->products_id}}">Buy Now</button>
                         @endif
                     @else
                           <button class="btn btn-secondary btn-lg swipe-to-top  add-to-Cart stock-cart" hidden type="button" products_id="{{$result['detail']['product_data'][0]->products_id}}">@lang('website.Add to Cart')</button>
+                          <button class="btn btn-secondary btn-lg swipe-to-top buy-now-btn stock-cart"  type="button" hidden products_id="{{$result['detail']['product_data'][0]->products_id}}">Buy Now</button>
                           <button class="btn btn-danger btn btn-lg swipe-to-top  stock-out-cart" hidden type="button">@lang('website.Out of Stock')</button>
                     @endif
                   @endif

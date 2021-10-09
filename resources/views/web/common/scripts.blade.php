@@ -577,6 +577,31 @@ jQuery(document).on('click', '.add-to-Cart', function(e){
 		 }
  });
 });
+jQuery(document).on('click', '.buy-now-btn', function(e){
+	var formData = jQuery("#add-Product-form").serialize();
+	
+ var url = jQuery('#checkout_url').val();
+ var message;
+ jQuery.ajax({
+	 url: '{{ URL::to("/addToCart")}}',
+	 headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+
+	 type: "POST",
+	 data: formData,
+
+	 success: function (res) {
+		if(res['status'] == 'exceed'){
+		   notificationWishlist("@lang('website.Ops! Product is available in stock But Not Active For Sale. Please contact to the admin')");
+      	}else {
+			 notificationWishlist("@lang('website.Product Added Successfully Thanks.Continue Shopping')");
+			 window.location.href =  '{{ URL::to("/viewcart")}}';
+
+
+		 }
+
+	}
+ });
+});
 
 
 jQuery(document).ready(function() {
