@@ -959,8 +959,19 @@ class Products extends Model
             ->orderBy('sort_order', 'ASC')
             ->get();
             //dd($products_images);
-            $imageHtml = view("web.details.image_couraser",compact('products_images'))->render();
-            $result['imageHtml'] = $imageHtml;
+            $imageHtml ='';
+            if(count($products_images)>0){
+                $imageHtml = view("web.details.image_couraser",compact('products_images'))->render();
+             }else{
+                $products_images = DB::table('products_images')
+                ->LeftJoin('image_categories', 'products_images.image', '=', 'image_categories.image_id')
+                ->select('image_categories.path as image_path', 'image_categories.image_type')
+                ->where('products_id', '=', $products_id)
+                ->orderBy('sort_order', 'ASC')
+                ->get();
+                $imageHtml = view("web.details.image_couraser",compact('products_images'))->render();
+             }
+             $result['imageHtml'] = $imageHtml;
 
 
       

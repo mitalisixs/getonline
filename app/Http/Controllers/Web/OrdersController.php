@@ -232,7 +232,7 @@ class OrdersController extends Controller
                 $billing_data['billing_company'] = $value;
             } else if ($key == 'street') {
                 $billing_data['billing_street'] = $value;
-            } else if ($key == 'cou~Axntries_id') {
+            } else if ($key == 'countries_id') {
                 $billing_data['billing_countries_id'] = $value;
             } else if ($key == 'zone_id') {
                 $billing_data['billing_zone_id'] = $value;

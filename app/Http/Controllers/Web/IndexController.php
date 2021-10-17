@@ -536,7 +536,7 @@ class IndexController extends Controller
         $tableNames= ["address_book","categories","categories_description","customers","customers_basket","customers_basket_attributes",
                         "customers_info","images","image_categories","inventory","inventory_detail","liked_products","manufacturers",
                         "manufacturers_info","news","news_categories","news_categories_description","news_to_news_categories","orders",
-                        "orders_products","orders_products_attributes","orders_status","orders_status_description","orders_total","products","products_attributes","products_attribute_images",
+                        "orders_products","orders_products_attributes","orders_total","products","products_attributes","products_attribute_images",
                         "products_description","products_images","products_to_categories","reviews","reviews_description","sliders_images","specials",
                         "tax_class","tax_rates","upload_your_design","user_to_address"
                         ];
