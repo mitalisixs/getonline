@@ -868,6 +868,7 @@ class Products extends Model
         return ($result);
 
     }
+    
     //currentstock
     public function productQuantity($data)
     {
