@@ -220,7 +220,7 @@ class OrdersController extends Controller
         }else{
             $data =  $request->all();
         }
-        
+       
         foreach ($data as $key => $value) 
         {
             //billing address
@@ -255,7 +255,8 @@ class OrdersController extends Controller
 
         $address = (object) $data;
         session(['shipping_address' => $address]);
-        $cartResponse = $this->pincodes->checkexistPincode($data->postcode);
+      
+        $cartResponse = $this->pincodes->checkexistPincode($address->postcode);
         if(!$cartResponse){
             $msg="Sorry we are not deliver on this Pincode";
              $type="success";
