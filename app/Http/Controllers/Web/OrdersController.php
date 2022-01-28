@@ -255,14 +255,15 @@ class OrdersController extends Controller
 
         $address = (object) $data;
         session(['shipping_address' => $address]);
-        $cartResponse = $this->pincodes->checkexistPincode($data->postcode);
+
+/*        $cartResponse = $this->pincodes->checkexistPincode($address->postcode);
         if(!$cartResponse){
             $msg="Sorry we are not deliver on this Pincode";
              $type="success";
              session(['step' => '0']);
              return redirect()->back()->withErrors("Sorry we do not deliver on this pincode");
      
-        }
+        }*/
        
 
         return redirect()->back();
