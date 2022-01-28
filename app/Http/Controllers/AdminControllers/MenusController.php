@@ -60,7 +60,7 @@ class MenusController extends Controller
         $language_id =  1;
         $title = array('pageTitle' => Lang::get("labels.EditPage"));
         $result = Menus::editmenu($id);  
-        $result['categories'] = $this->Categories->getterParent($language_id);
+        $result['categories'] = $this->Categories->allcategories($language_id);
         $result['products'] = $this->Products->getter($language_id);
         $result['pages'] = Pages::gatter();
         $result['commonContent'] = $this->Setting->commonContent();
