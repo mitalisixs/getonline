@@ -778,6 +778,7 @@ class AdminController extends Controller
 			
 			$reviews_view = $roles[0]->reviews_view;
 			$reviews_update = $roles[0]->reviews_update;
+			$home_page_settings = $roles[0]->home_page_settings;
 
 		}else{
 			$dashboard_view = '0';
@@ -880,6 +881,7 @@ class AdminController extends Controller
 
 			$reviews_view = 0;
 			$reviews_update = 0;
+			$home_page_settings = 0;
 		}
 
 
@@ -1048,6 +1050,12 @@ class AdminController extends Controller
 					'2'=>array('name'=>'check_for_pincode_update','value'=>$check_for_pincode_update),
 					'3'=>array('name'=>'check_for_pincode_delete','value'=>$check_for_pincode_delete)
 					);
+
+		$result2[24]['link_name'] = 'Sub Admin Access';
+		$result2[24]['permissions'] = array(
+					'0'=>array('name'=>'home_page_settings','value'=>$home_page_settings),
+				
+				);
 		
 		$result['data'] = $result2;
 		$result['commonContent'] = $this->Setting->commonContent();
@@ -1159,6 +1167,7 @@ class AdminController extends Controller
 						'check_for_pincode_create' => $request->check_for_pincode_create,
 						'check_for_pincode_update' => $request->check_for_pincode_update,
 						'check_for_pincode_delete' => $request->check_for_pincode_delete,
+						'home_page_settings'=> $request->home_page_settings,
 
 
 						]);

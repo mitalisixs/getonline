@@ -2028,26 +2028,32 @@ function destroy_product_slider() {
 }
 
 function apply_product_slider(){
-	jQuery('.slider-for').slick({
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		arrows: false,
-		infinite: false,
-		draggable: false,
-		fade: true,
-		asNavFor: '.slider-nav',
-		adaptiveHeight: true
-		});
-		jQuery('.slider-nav').slick({
-		slidesToShow: 3,
-		slidesToScroll: 1,
-		asNavFor: '.slider-for',
-		centerMode: true,
-		centerPadding: '60px',
-		dots: false,
-		arrows: true,
-		focusOnSelect: true
-		}); // Product vertical SLICK
+	
+jQuery('.slider-for').slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: false,
+  infinite: false,
+  draggable: false,
+  fade: true,
+  asNavFor: '.slider-nav',
+  adaptiveHeight: false,
+  variableWidth : false,
+  
+});
+jQuery('.slider-nav').slick({
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  asNavFor: '.slider-for',
+  centerMode: false,
+  infinite: false,
+  centerPadding: '60px',
+  dots: false,
+  arrows: true,
+  focusOnSelect: true,
+  adaptiveHeight: false,
+  variableWidth : false,
+});
 }
 
 </script>

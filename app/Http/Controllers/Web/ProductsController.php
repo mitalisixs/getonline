@@ -192,12 +192,12 @@ class ProductsController extends Controller
             'categories_id' => $categories_id, 'search' => $search,
             'filters' => $filters, 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
 
-        $products = $this->products->products($data);        
+        $products = $this->products->newproducts($data);        
         $result['products'] = $products;
 
         $data = array('limit' => $limit, 'categories_id' => $categories_id);
-        $filters = $this->filters($data);
-        $result['filters'] = $filters;
+     //   $filters = $this->filters($data);
+      //  $result['filters'] = $filters;
 
         $cart = '';
         $result['cartArray'] = $this->products->cartIdArray($cart);
@@ -210,7 +210,7 @@ class ProductsController extends Controller
 
         //liked products
         $result['liked_products'] = $this->products->likedProducts();
-        $result['categories'] = $this->products->categories();
+    //    $result['categories'] = $this->products->categories();
 
         $result['min_price'] = $min_price;
         $result['max_price'] = $max_price;
@@ -287,7 +287,7 @@ class ProductsController extends Controller
         }
 
         $data = array('page_number' => $request->page_number, 'type' => $type, 'limit' => $limit, 'categories_id' => $categories_id, 'search' => $search, 'filters' => $filters, 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
-        $products = $this->products->products($data);
+        $products = $this->products->newproducts($data);
         $result['products'] = $products;
 
         $cart = '';

@@ -31,3 +31,49 @@ ALTER TABLE `pincodes` CHANGE `modify_at` `updated_at` TIMESTAMP NOT NULL DEFAUL
 
 
 
+ALTER TABLE `products_description` ADD INDEX(`products_id`);
+ALTER TABLE `image_categories` ADD INDEX(`image_id`);
+
+ALTER TABLE `specials` ADD INDEX(`products_id`);
+ALTER TABLE `specials` ADD INDEX(`status`);
+ALTER TABLE `specials` ADD INDEX(`expires_date`);
+
+ALTER TABLE `flash_sale` ADD INDEX(`products_id`);
+ALTER TABLE `flash_sale` ADD INDEX(`flash_status`);
+ALTER TABLE `flash_sale` ADD INDEX(`flash_status`);
+
+ALTER TABLE `products` ADD INDEX(`products_price`);
+
+ALTER TABLE `products` ADD INDEX(`products_status`);
+ALTER TABLE `products` ADD INDEX(`is_feature`);
+ALTER TABLE `products_description` ADD INDEX(`language_id`);
+ALTER TABLE `products` ADD INDEX(`products_ordered`);
+ALTER TABLE `products` ADD INDEX(`products_liked`);
+ALTER TABLE `image_categories` ADD INDEX(`image_type`);
+ALTER TABLE `products_to_categories` ADD INDEX(`categories_id`);
+ALTER TABLE `products_to_categories` ADD INDEX(`products_id`);
+
+ALTER TABLE `categories_description` ADD INDEX(`categories_id`);
+
+ALTER TABLE `categories_description` ADD INDEX(`categories_name`);
+
+ALTER TABLE `categories_description` ADD INDEX(`language_id`);
+
+ALTER TABLE `categories` ADD INDEX(`categories_status`);
+
+ALTER TABLE `inventory` ADD INDEX(`products_id`);
+ALTER TABLE `inventory` ADD INDEX(`stock_type`);
+
+ALTER TABLE `liked_products` ADD INDEX(`liked_products_id`);
+ALTER TABLE `liked_products` ADD INDEX(`liked_customers_id`);
+
+
+
+
+
+
+
+
+
+
+

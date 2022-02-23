@@ -767,7 +767,7 @@ class Products extends Model
 
                 $products_data->categories = $categories;
                 array_push($result, $products_data);
-
+                
                 $options = array();
                 $attr = array();
 
@@ -949,75 +949,35 @@ class Products extends Model
 
             $searchValue = $data['search'];
             
-            $categories->where('products_options.products_options_name', 'LIKE', '%' . $searchValue . '%')->where('products_status', '=', 1);
+       //     $categories->where('products_options.products_options_name', 'LIKE', '%' . $searchValue . '%')->where('products_status', '=', 1);
 
             if (!empty($data['categories_id'])) {
                 $categories->where('products_to_categories.categories_id', '=', $data['categories_id']);
-            }
-
-            if (!empty($data['filters'])) {
-                $temp_key = 0;
-                foreach ($data['filters']['filter_attribute']['option_values'] as $option_id_temp) {
-
-                    if ($temp_key == 0) {
-
-                        $categories->whereIn('products_attributes.options_id', [$data['filters']['options']])
-                            ->where('products_attributes.options_values_id', $option_id_temp);
-                        if (count($data['filters']['filter_attribute']['options']) > 1) {
-
-                            $categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in (' . $data['filters']['options'] . ') and `products_attributes`.`options_values_id` in (' . $data['filters']['option_value'] . '))'), '>=', $data['filters']['options_count']);
-                        }
-
-                    } else {
-                        $categories->orwhereIn('products_attributes.options_id', [$data['filters']['options']])
-                            ->where('products_attributes.options_values_id', $option_id_temp);
-
-                        if (count($data['filters']['filter_attribute']['options']) > 1) {
-                            $categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in (' . $data['filters']['options'] . ') and `products_attributes`.`options_values_id` in (' . $data['filters']['option_value'] . '))'), '>=', $data['filters']['options_count']);
-                        }
-
-                    }
-                    $temp_key++;
-                }
-
             }
 
             if (!empty($max_price)) {
                 $categories->whereBetween('products.products_price', [$min_price, $max_price]);
             }
-            $categories->whereNotIn('products.products_id', function ($query) use ($currentDate) {
+         /*   $categories->whereNotIn('products.products_id', function ($query) use ($currentDate) {
                 $query->select('flash_sale.products_id')->from('flash_sale')->where('flash_sale.flash_status', '=', '1');
-            });
-            $categories->orWhere('products_options_values.products_options_values_name', 'LIKE', '%' . $searchValue . '%')->where('products_status', '=', 1);
+            });*/
+         //   $categories->orWhere('products_options_values.products_options_values_name', 'LIKE', '%' . $searchValue . '%')->where('products_status', '=', 1);
             if (!empty($data['categories_id'])) {
                 $categories->where('products_to_categories.categories_id', '=', $data['categories_id']);
             }
 
-            if (!empty($data['filters'])) {
-                $temp_key = 0;
-                foreach ($data['filters']['filter_attribute']['option_values'] as $option_id_temp) {
 
-                    if ($temp_key == 0) {
+            if (!empty($max_price)) {
+                $categories->whereBetween('products.products_price', [$min_price, $max_price]);
+            }
 
-                        $categories->whereIn('products_attributes.options_id', [$data['filters']['options']])
-                            ->where('products_attributes.options_values_id', $option_id_temp);
-                        if (count($data['filters']['filter_attribute']['options']) > 1) {
+        /*    $categories->whereNotIn('products.products_id', function ($query) use ($currentDate) {
+                $query->select('flash_sale.products_id')->from('flash_sale')->where('flash_sale.flash_status', '=', '1');
+            }); */
 
-                            $categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in (' . $data['filters']['options'] . ') and `products_attributes`.`options_values_id` in (' . $data['filters']['option_value'] . '))'), '>=', $data['filters']['options_count']);
-                        }
-
-                    } else {
-                        $categories->orwhereIn('products_attributes.options_id', [$data['filters']['options']])
-                            ->where('products_attributes.options_values_id', $option_id_temp);
-
-                        if (count($data['filters']['filter_attribute']['options']) > 1) {
-                            $categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in (' . $data['filters']['options'] . ') and `products_attributes`.`options_values_id` in (' . $data['filters']['option_value'] . '))'), '>=', $data['filters']['options_count']);
-                        }
-
-                    }
-                    $temp_key++;
-                }
-
+           
+            if (!empty($data['categories_id'])) {
+                $categories->where('products_to_categories.categories_id', '=', $data['categories_id']);
             }
 
             if (!empty($max_price)) {
@@ -1027,80 +987,14 @@ class Products extends Model
             $categories->whereNotIn('products.products_id', function ($query) use ($currentDate) {
                 $query->select('flash_sale.products_id')->from('flash_sale')->where('flash_sale.flash_status', '=', '1');
             });
+            $categories->WhereRaw('products_name LIKE "%' . $searchValue . '%" OR products_model LIKE "%' . $searchValue . '%" ');
 
-            $categories->orWhere('products_name', 'LIKE', '%' . $searchValue . '%')->where('products_status', '=', 1);
-
-            if (!empty($data['categories_id'])) {
-                $categories->where('products_to_categories.categories_id', '=', $data['categories_id']);
-            }
-
-            if (!empty($data['filters'])) {
-                $temp_key = 0;
-                foreach ($data['filters']['filter_attribute']['option_values'] as $option_id_temp) {
-
-                    if ($temp_key == 0) {
-
-                        $categories->whereIn('products_attributes.options_id', [$data['filters']['options']])
-                            ->where('products_attributes.options_values_id', $option_id_temp);
-                        if (count($data['filters']['filter_attribute']['options']) > 1) {
-
-                            $categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in (' . $data['filters']['options'] . ') and `products_attributes`.`options_values_id` in (' . $data['filters']['option_value'] . '))'), '>=', $data['filters']['options_count']);
-                        }
-
-                    } else {
-                        $categories->orwhereIn('products_attributes.options_id', [$data['filters']['options']])
-                            ->where('products_attributes.options_values_id', $option_id_temp);
-
-                        if (count($data['filters']['filter_attribute']['options']) > 1) {
-                            $categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in (' . $data['filters']['options'] . ') and `products_attributes`.`options_values_id` in (' . $data['filters']['option_value'] . '))'), '>=', $data['filters']['options_count']);
-                        }
-
-                    }
-                    $temp_key++;
-                }
-
-            }
-
-            if (!empty($max_price)) {
-                $categories->whereBetween('products.products_price', [$min_price, $max_price]);
-            }
-
-            $categories->whereNotIn('products.products_id', function ($query) use ($currentDate) {
-                $query->select('flash_sale.products_id')->from('flash_sale')->where('flash_sale.flash_status', '=', '1');
-            });
-
-            $categories->orWhere('products_model', 'LIKE', '%' . $searchValue . '%')->where('products_status', '=', 1);
+            $categories->where('products_status', '=', 1);
 
             if (!empty($data['categories_id'])) {
                 $categories->where('products_to_categories.categories_id', '=', $data['categories_id']);
             }
-
-            if (!empty($data['filters'])) {
-                $temp_key = 0;
-                foreach ($data['filters']['filter_attribute']['option_values'] as $option_id_temp) {
-
-                    if ($temp_key == 0) {
-
-                        $categories->whereIn('products_attributes.options_id', [$data['filters']['options']])
-                            ->where('products_attributes.options_values_id', $option_id_temp);
-                        if (count($data['filters']['filter_attribute']['options']) > 1) {
-
-                            $categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in (' . $data['filters']['options'] . ') and `products_attributes`.`options_values_id` in (' . $data['filters']['option_value'] . '))'), '>=', $data['filters']['options_count']);
-                        }
-
-                    } else {
-                        $categories->orwhereIn('products_attributes.options_id', [$data['filters']['options']])
-                            ->where('products_attributes.options_values_id', $option_id_temp);
-
-                        if (count($data['filters']['filter_attribute']['options']) > 1) {
-                            $categories->where(DB::raw('(select count(*) from `products_attributes` where `products_attributes`.`products_id` = `products`.`products_id` and `products_attributes`.`options_id` in (' . $data['filters']['options'] . ') and `products_attributes`.`options_values_id` in (' . $data['filters']['option_value'] . '))'), '>=', $data['filters']['options_count']);
-                        }
-
-                    }
-                    $temp_key++;
-                }
-
-            }
+            
             $categories->whereNotIn('products.products_id', function ($query) use ($currentDate) {
                 $query->select('flash_sale.products_id')->from('flash_sale')->where('flash_sale.flash_status', '=', '1');
             });
