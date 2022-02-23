@@ -319,7 +319,7 @@
             
               <div class="attributes col-12 col-md-4 box">
                   <label class="">{{ $attributes_data['option']['name'] }}</label>
-                  <div class="select-control">
+                  <div class="">
                   <select name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity()" class="currentstock form-control attributeid_<?=$index++?>" attributeid = "{{ $attributes_data['option']['id'] }}">
                     <option value="">Select {{ $attributes_data['option']['name'] }}</option>
                     @if(!empty($result['cart']))
