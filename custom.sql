@@ -67,7 +67,15 @@ ALTER TABLE `inventory` ADD INDEX(`stock_type`);
 ALTER TABLE `liked_products` ADD INDEX(`liked_products_id`);
 ALTER TABLE `liked_products` ADD INDEX(`liked_customers_id`);
 
+ALTER TABLE `alert_settings` ADD `create_customer_message` TINYINT NOT NULL AFTER `create_customer_notification`;
+ALTER TABLE `alert_settings` ADD `message` TINYINT NOT NULL AFTER `order_status_notification`;
+ALTER TABLE `alert_settings` ADD `new_product_message` TINYINT NOT NULL AFTER `new_product_notification`;
+ALTER TABLE `alert_settings` ADD `forgot_message` TINYINT NOT NULL AFTER `forgot_notification`;
+ALTER TABLE `alert_settings` ADD `news_message` TINYINT NOT NULL AFTER `news_notification`;
+ALTER TABLE `alert_settings` ADD `contact_us_message` TINYINT NOT NULL AFTER `contact_us_notification`;
+ALTER TABLE `alert_settings` ADD `order_message` TINYINT NOT NULL AFTER `order_notification`;
 
+ALTER TABLE `products_options_values` ADD `image_path` VARCHAR(255) NULL AFTER `products_options_values_name`, ADD `description` TEXT NULL AFTER `products_options_values_name`;
 
 
 
