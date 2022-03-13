@@ -1872,7 +1872,7 @@ jQuery(document).ready(function() {
 			data: formData,
 			dataType: "json",
 			success: function (res) {
-				$("#fabricdiv_modal_body").prepend(res.fabricHtml);
+				$("#fabricdiv_modal_body").html(res.fabricHtml);
 				$("#fabricModal").modal("show");
 			}
 		
