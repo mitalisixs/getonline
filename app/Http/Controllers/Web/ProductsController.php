@@ -506,5 +506,13 @@ class ProductsController extends Controller
         $result = $this->products->productQuantity($data);
         print_r(json_encode($result));
     }
+    public function getFabric(Request $request){
+        $data = array();
+        $data['products_id'] = $request->products_id;
+        $data['attributes'] = $request->attributeid;
+        $result = $this->products->productFabric($request);
+        print_r(json_encode($result));
+
+    }
 
 }

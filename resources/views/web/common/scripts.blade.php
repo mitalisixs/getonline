@@ -401,7 +401,7 @@ jQuery(document).on('click','#allow-cookies', function(e){
 
 //ajax call for add option value
 function getQuantity(){
-	
+//	alert("test");
 	var attributeid = [];
 	var i = 0;
 	
@@ -1416,27 +1416,27 @@ function categoriesLoad(){
 
 jQuery( document ).ready( function () {
 	jQuery('#loader').hide();
-	 OneSignal.push(function () {
-	  OneSignal.registerForPushNotifications();
-	  OneSignal.on('subscriptionChange', function (isSubscribed) {
-	   if (isSubscribed) {
-		OneSignal.getUserId(function (userId) {
-		 device_id = userId;
-		 //ajax request
-		 jQuery.ajax({
-			 headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
-			url: '{{ URL::to("/subscribeNotification")}}',
-			type: "POST",
-			data: '&device_id='+device_id,
-			success: function (res) {},
-		});
+	//  OneSignal.push(function () {
+	//   OneSignal.registerForPushNotifications();
+	//   OneSignal.on('subscriptionChange', function (isSubscribed) {
+	//    if (isSubscribed) {
+	// 	OneSignal.getUserId(function (userId) {
+	// 	 device_id = userId;
+	// 	 //ajax request
+	// 	 jQuery.ajax({
+	// 		 headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+	// 		url: '{{ URL::to("/subscribeNotification")}}',
+	// 		type: "POST",
+	// 		data: '&device_id='+device_id,
+	// 		success: function (res) {},
+	// 	});
 
-		 //$scope.oneSignalCookie();
-		});
-	   }
-	  });
+	// 	 //$scope.oneSignalCookie();
+	// 	});
+	//    }
+	//   });
 
-	 });
+	//  });
 
 	//load google map
 @if(Request::path() == 'contact-us')
@@ -1849,6 +1849,81 @@ function showPreview(objFileInput) {
 }
 
 jQuery(document).ready(function() {
+	
+	jQuery(document).on('click', '.select_fabric_button', function(e){
+		$(this).attr("disabled","disabled");
+		var optionId = $(this).attr("option_id");
+		var fabricValue = $(this).attr("rel");
+		$(".currentstock[attributeid='"+optionId+"']").val(fabricValue);
+		$(".currentstock[attributeid='"+optionId+"']").trigger("change");
+		$("#fabricModal").modal("hide");
+
+
+	});
+	jQuery(document).on('click', '.is_fabric', function(e){
+
+	//	alert("ffff");
+		e.preventDefault();
+		var formData = jQuery('#add-Product-form').serialize();
+		jQuery.ajax({
+			headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+			url: '{{ URL::to("getFabric")}}',
+			type: "POST",
+			data: formData,
+			dataType: "json",
+			success: function (res) {
+				$("#fabricdiv_modal_body").prepend(res.fabricHtml);
+				$("#fabricModal").modal("show");
+			}
+		
+		});
+	});
+	jQuery(document).on('keyup', '#search_fabrics', function(e){
+		var fabric_product_id = $("#fabric_product_id").val();
+		var fabric_option_id = $("#fabric_option_id").val();
+		var searchText = $(this).val();
+//	alert("ffff");
+	e.preventDefault();
+	jQuery.ajax({
+		headers: {'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+		url: '{{ URL::to("getFabric")}}',
+		type: "POST",
+		data: {"products_id":fabric_product_id,"option_id": fabric_option_id,"searchText":searchText},
+		dataType: "json",
+		success: function (res) {
+			$("#fabricdiv_modal_body .order-item-list").html(res.fabricHtml);
+		//	$("#fabricModal").modal("show");
+		}
+	
+	});
+});
+	$(document).on("click", ".more-details", function() {
+		var id = $(this).attr("rel");
+		//alert($(".text[rel='"+id+"']").text());
+
+		if ($(".text[rel='"+id+"']").text() == "More") {
+			$(this).addClass("x-active");
+			//alert("gggg");
+			$(".text[rel='"+id+"']").text("Less");
+			$(".fa-plus[rel='"+id+"']").hide();
+			$(".fa-minus[rel='"+id+"']").show();
+
+		} else {
+			//alert("aaaaaa");
+			$(this).removeClass("x-active");
+			$(".text[rel='"+id+"']").text("More");
+			$(".fa-plus[rel='"+id+"']").show();
+			$(".fa-minus[rel='"+id+"']").hide();
+
+		}
+		
+		
+			
+
+
+	});
+
+	
   /******************************
       BOTTOM SCROLL TOP BUTTON
    ******************************/
@@ -1937,7 +2012,7 @@ function cartPrice(){
 
 //ajax call for add option value
 function getQuantity(){
-
+	
 	var attributeid = [];
 	var i = 0;
 	

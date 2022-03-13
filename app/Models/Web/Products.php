@@ -1258,6 +1258,40 @@ class Products extends Model
         return $result;
     }
 
+     //currentstock
+     public function productFabric($data)
+     {
+         $view ="web.details.fabric_details";
+        $imageHtml = '';
+             $options = DB::table('products_attributes')->where('options_id', $data->option_id)->where('products_id', $data->products_id)->pluck('options_values_id');
+            $option_values = DB::table('products_options_values')
+                ->leftJoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
+                ->leftJoin('products_attributes', 'products_attributes.options_values_id', '=', 'products_options_values.products_options_values_id')
+                ->select('products_options_values.*', 'products_options_values_descriptions.options_values_name as products_options_values_name','products_attributes.options_values_price')
+                ->where('products_options_values_descriptions.language_id', '=', Session::get('language_id'))
+                ->where('products_attributes.products_id', '=', $data->products_id)
+                ->whereIn('products_options_values.products_options_values_id',$options);
+            if($data->has('searchText') ){
+                $option_values =$option_values->where("products_options_values_descriptions.options_values_name","like",'%'.$data->searchText.'%');
+                $view  ="web.details.fabric_details_partials";
+            }        
+       // dd($view);
+           $option_values =$option_values->get();
+           $paramms = $data->all();
+           
+            $imageHtml = view($view,compact('option_values','paramms'))->render();
+            $result['fabricHtml'] = $imageHtml;
+        
+           return $result;
+
+                         
+                        
+       
+ 
+ 
+       
+     }
+
     public static function getquantity($request)
     {
         $inventory_ref_id = '';

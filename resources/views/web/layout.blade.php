@@ -131,7 +131,7 @@
        </div>
        @endif
 
-
+       </div>
       <div class="mobile-overlay"></div>
       <!-- Product Modal -->
 
@@ -155,6 +155,20 @@
           </div>
         </div>
     </div>
+    
+    <div class="modal right fade" id="fabricModal" tabindex="-1" role="dialog" aria-hidden="false">
+       
+       <div class="modal-dialog  modal-lg fabricdiv  right" role="document">
+         <div class="modal-content">
+             <div class="modal-body" id="fabricdiv_modal_body">
+
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+              </button>
+             </div>
+
+         </div>
+       </div>
 
       <!-- Include js plugin -->
        @include('web.common.scripts')

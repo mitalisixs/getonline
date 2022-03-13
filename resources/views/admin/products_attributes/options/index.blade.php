@@ -1,6 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
+    <script src="{!! asset('admin/plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>
 
     <div class="content-wrapper">
 
@@ -26,6 +27,7 @@
                     <div class="box">
                         <div class="box-header">
                             <h3 class="box-title"> {{ trans('labels.Options Value for') }} @foreach($result['options'] as $key=>$option) <strong>{{$option->options_name}}</strong> @if(count($result['options']) != $key+1)<span> / </span> @endif  @endforeach</h3>
+                            <a href="{{ URL::to('admin/products/attributes/display')}}" type="button" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> {{ trans('labels.attributes') }}</a>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -58,22 +60,44 @@
                                             </div>
                                         </div>
                                     @endforeach
-
-                                    <div class="">
-                                        <a href="{{ URL::to('admin/products/attributes/display')}}" type="button" class="btn btn-default pull-left"><i class="fa fa-angle-left"></i> {{ trans('labels.attributes') }}</a>
-                                        <button type="submit" class="btn btn-primary pull-right">{{ trans('labels.Add Values') }}</button>
+                                    @if(strtolower($option->options_name) =="fabric" )
+                                    <div class="form-group">
+                                            <label for="name" class="col-sm-2 col-md-4 control-label">Description</label>
+                                            <div class="col-sm-10 col-md-8">
+                                                <textarea name="option_description" class="form-control" id="editor1"></textarea>
+                                            </div>
+                                        </div>       
+                                    
+                                    <div class="form-group">
+                                         <label for="name" class="col-sm-2 col-md-4 control-label">Image</label>
+                                         <div class="col-sm-10 col-md-8">
+                                            <input type="file" name="option_image" />
+                                         </div>
                                     </div>
+                                    @endif
+                                    
+                                    <br /><br />
+                                    <button type="reset" class="btn btn-primary pull-left">Reset</button>
+                                        <button type="submit" class="btn btn-primary pull-left" style="margin-left: 4px;">{{ trans('labels.Add Values') }}</button>
+                                      
+                                    </div>
+
 
                                     <!-- /.box-footer -->
                                     {!! Form::close() !!}
 
                                 </div>
-                                <div class="col-md-6">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
                                             <th>{{ trans('labels.ID') }}</th>
                                             <th>{{ trans('labels.Values') }}</th>
+                                            @if(strtolower($option->options_name) =="fabric" )
+                                            <th>Image</th>
+                                            @endif
                                             <th>{{ trans('labels.Action') }}</th>
                                         </tr>
                                         </thead>
@@ -97,6 +121,9 @@
                                                             </p>
                                                         @endforeach
                                                     </td>
+                                                    @if(strtolower($option->options_name) =="fabric" )
+                                                    <td><img width="200px" height="300px"src="{{asset($data->image_path)}}" alt="..."></td>
+                                                    @endif
                                                     <td><a data-toggle="tooltip" data-placement="bottom" title="" href="{{ URL::to('admin/products/attributes/options/values/edit')}}/{{$data->products_options_values_id}}" class="badge bg-light-blue" data-original-title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                                         <a href="javascript:void(0)" value_id="{{$data->products_options_values_id}}" option_id="{{$result['options'][0]->products_options_id}}" data-toggle="tooltip" data-placement="bottom" title="" class="badge bg-red delete-value" data-original-title="Delete Value"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                     </td>
@@ -188,5 +215,20 @@
         <!-- /.content -->
 
     </div>
+    <script type="text/javascript">
+    jQuery(function() {
+        CKEDITOR.replace( 'editor1', {
+            fullPage: true,
+            allowedContent: true,
+            extraPlugins: 'wysiwygarea'
+        });
+
+
+
+        //bootstrap WYSIHTML5 - text editor
+     //   jQuery("#editor1").wysihtml5();
+
+    });
+    </script>
 
 @endsection
