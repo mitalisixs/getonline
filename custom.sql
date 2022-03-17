@@ -77,6 +77,7 @@ ALTER TABLE `alert_settings` ADD `order_message` TINYINT NOT NULL AFTER `order_n
 
 ALTER TABLE `products_options_values` ADD `image_path` VARCHAR(255) NULL AFTER `products_options_values_name`, ADD `description` TEXT NULL AFTER `products_options_values_name`;
 
+ALTER TABLE `inventory_detail` ADD `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`);
 
 
 
