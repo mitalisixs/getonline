@@ -10,9 +10,11 @@
                 <h3 class="h3 item-name" itemprop="name">{{$value->products_options_values_name}}</h3>
                 
               
-            @if(strlen($value->description) > 100)
-            <div class="description" itemprop="description">  <?php echo stripslashes(substr($value->description,0,100));?></div>
+          
+            <div class="description" itemprop="description">  <?php echo $value->short_description;?></div>
+
                 <article class="b-collapsible more-details" rel="{{ $value->products_options_values_id}}">
+                    @if($value->description != "")
                     <h3 class="subtitle subtitle-without-space">
                       <button class="trigger x-trigger-small" aria-label="More" type="button" aria-expanded="false">
                         <span class="fa fa-plus "  rel="{{ $value->products_options_values_id}}"></span>
@@ -21,17 +23,16 @@
                       </button>
                     </h3>
                     <div class="content hide"  rel="{{ $value->products_options_values_id}}">
-                    <?php echo stripslashes(substr($value->description,100,strlen($value->description))); ?>
+                    @endif
+                    <?php echo stripslashes($value->description); ?>
                     </div>
                 </article>
-            @else
-            <div class="description" itemprop="description"> <?=stripslashes($value->description)?></div>
-            @endif
+         
 
                 
                 <div class="price-select-wrapper">
                     <h3 class="h4 price-per-unit">&#8377;&nbsp;{{$value->options_values_price}}/Meter</h3>
-                    <button type="button" class="btn white-button select_fabric_button" option_id="{{$paramms['option_id'][0]}}"  aria-label="Select" rel="{{ $value->products_options_values_id}}">Select</button>
+                    <button type="button" class="btn white-button select_fabric_button" option_id="4"  aria-label="Select" rel="{{ $value->products_options_values_id}}">Select</button>
                     <!-- <button type="button" class="btn black-button" aria-label="Select" disabled="">Selected</button> -->
                     <!-- <a class="learn-more" title="Learn more" aria-label="Learn more" href="/en/recycled-canvas">Learn more</a> -->
                 </div>

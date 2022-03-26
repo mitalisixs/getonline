@@ -195,6 +195,7 @@ class ProductsAttribute extends Model
                   'products_options_values_name' => $requ_products_options_values_name,
                   'products_options_id' => $request->products_options_id,
                   "description"=>isset($request->option_description)?$request->option_description:'',
+                  "short_description"=>isset($request->option_description)?$request->short_description:'',
                   'image_path' => $path
               ]);
             $i++;
@@ -268,6 +269,11 @@ class ProductsAttribute extends Model
       $edit = DB::table('products_options_values')->where('products_options_values_id', $request->products_options_values_id)->first();
       if(isset($request->option_description)){
         DB::table('products_options_values')->where('products_options_values_id', $request->products_options_values_id)->update(['description' => $request->option_description]);
+
+     
+      }
+      if(isset($request->short_description)){
+        DB::table('products_options_values')->where('products_options_values_id', $request->products_options_values_id)->update(['short_description' => $request->short_description]);
 
      
       }

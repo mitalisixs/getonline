@@ -62,6 +62,12 @@
 
                                             @if(strtolower($result['options']->products_options_name) =="fabric" )
                                             <div class="form-group">
+                                                <label for="name" class="col-sm-2 col-md-3 control-label">Short Description</label>
+                                                <div class="col-sm-10 col-md-8">
+                                                    <textarea name="short_description" class="form-control">{{$result['editoptions'][0]->short_description}}</textarea>
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
                                                     <label for="name" class="col-sm-2 col-md-3 control-label">Description</label>
                                                     <div class="col-sm-10 col-md-4">
                                                         <textarea name="option_description" id="editor1" class="form-control">{{$result['editoptions'][0]->description}}</textarea>

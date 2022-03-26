@@ -12,7 +12,7 @@
          </div>
       </article>
       <input type="hidden" name="fabric_product_id" id="fabric_product_id" value='{{$paramms["products_id"]}}'/>
-      <input type="hidden" name="fabric_option_id" id="fabric_option_id" value='{{$paramms["option_id"][0]}}'/>
+      <input type="hidden" name="fabric_option_id" id="fabric_option_id" value='4'/>
       
       <ul class="order-item-list">
       @include('web.details.fabric_details_partials') 

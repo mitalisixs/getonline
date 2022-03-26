@@ -1261,6 +1261,7 @@ class Products extends Model
      //currentstock
      public function productFabric($data)
      {
+        $data->option_id = 4;
          $view ="web.details.fabric_details";
         $imageHtml = '';
              $options = DB::table('products_attributes')->where('options_id', $data->option_id)->where('products_id', $data->products_id)->pluck('options_values_id');

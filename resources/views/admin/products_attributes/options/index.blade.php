@@ -61,6 +61,13 @@
                                         </div>
                                     @endforeach
                                     @if(strtolower($option->options_name) =="fabric" )
+                                    
+                                    <div class="form-group">
+                                            <label for="name" class="col-sm-2 col-md-4 control-label">Short Description</label>
+                                            <div class="col-sm-10 col-md-8">
+                                                <textarea name="short_description" class="form-control"></textarea>
+                                            </div>
+                                        </div> 
                                     <div class="form-group">
                                             <label for="name" class="col-sm-2 col-md-4 control-label">Description</label>
                                             <div class="col-sm-10 col-md-8">
