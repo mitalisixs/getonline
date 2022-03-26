@@ -73,13 +73,17 @@
                                                                 <div class="form-group">
                                                                     <label for="name" class="col-sm-2 col-md-4 control-label">{{ trans('labels.Products') }}<span style="color:red;">*</span> </label>
                                                                     <div class="col-sm-10 col-md-8">
-                                                                        <select class="form-control field-validate product-type" name="products_id">
+                                                                        <!-- <select class="form-control field-validate product-type" name="products_id">
                                                                             <option value="">{{ trans('labels.Choose Product') }}</option>
                                                                             @foreach ($result['products'] as $pro)
                                                                             <option value="{{$pro->products_id}}">{{$pro->products_name}}</option>
                                                                             @endforeach
-                                                                        </select><span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
-                                                                            {{ trans('labels.Product Type Text') }}.</span>
+                                                                        </select> -->
+                                                                        <input type="text" id="product_name" name="products_name" class="form-control field-validate product-type">
+                                                                        <input type="hidden" id="products_id" name="products_id" class="form-control field-validate ">
+
+                                                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                                            Please choose Product.</span>
                                                                     </div>
                                                                 </div>
                                                                 <div id="attribute" style="display:none">

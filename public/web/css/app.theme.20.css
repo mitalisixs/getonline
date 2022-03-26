@@ -20563,14 +20563,14 @@ nav[aria-label=breadcrumb] .breadcrumb .active::before {
 .ratings > input:checked ~ label,
 .ratings:not(:checked) > label:hover,
 .ratings:not(:checked) > label:hover ~ label {
-  color: #7CACC2;
+  color: #ffa41c;
 }
 
 .ratings > input:checked + label:hover,
 .ratings > input:checked ~ label:hover,
 .ratings > label:hover input:checked label,
 .ratings > input:checked label:hover label {
-  color: #7CACC2;
+  color: #ffa41c;
 }
 
 .disabled-ratings > label:before {
@@ -20587,7 +20587,7 @@ nav[aria-label=breadcrumb] .breadcrumb .active::before {
 }
 
 .disabled-ratings label.active {
-  color: #7CACC2;
+  color: #ffa41c;
 }
 
 .bodyrtl .disabled-ratings > label {
@@ -44180,7 +44180,8 @@ a.carousel-control-next.btn-secondary.swipe-to-top:focus {
 }
 
 .b-substrate-item.x-fabrics-modal .substrate-image-wrapper {
-	margin-bottom: 0
+	margin-bottom: 0;
+	
 }
 
 .b-substrate-item.x-fabrics-modal .substrate-description {
@@ -44718,7 +44719,6 @@ a.carousel-control-next.btn-secondary.swipe-to-top:focus {
 .b-add-to-cart,
 .black-button,
 .blue-button,
-.btn,
 .green-button,
 .grey-button,
 .image-overlay-button,
@@ -44844,4 +44844,15 @@ button[disabled] {
 	pointer-events: none
 }
 
-
+.buy-now-btn, .product-hover .btn-secondary{
+  background-color: #ffa41c;
+  border-color: #ffa41c;
+}
+.buy-now-btn:hover,.buy-now-btn:focus, .buy-now-btn:active, .product-hover .btn-secondary:hover ,.product-hover .btn-secondary:focus ,.product-hover .btn-secondary:active{
+  background-color: #d38309;
+  border-color: #d38309;
+  transform:none;
+  }
+  .pro-counter .btn{
+	  border-radius : 10px;
+  }

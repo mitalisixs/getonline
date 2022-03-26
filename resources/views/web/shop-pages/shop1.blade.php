@@ -18,7 +18,14 @@
         </div>
       </nav>
   </div> 
-  
+  @if(app('request')->has("category"))
+      @if(isset($result["category_data"]) && !empty($result["category_data"]->imgpath))
+      <div class="container-fuild">
+        <img src="{{asset('').$result['category_data']->imgpath}}" width="100%"/>
+      </div>
+      @endif
+
+  @endif
    
       
     <section class="pro-content">

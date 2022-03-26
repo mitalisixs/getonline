@@ -50,6 +50,11 @@
 <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{!! asset('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') !!}"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+
+
+
+
 
 <script type="text/javascript">
 
@@ -132,6 +137,37 @@ $("img").click(function() {
 
 
 $(document).ready(function(){
+
+    $( "#product_name" ).autocomplete({
+    
+            source: function(request, response) {
+                $.ajax({
+					url: '{{route("product_autocomplete")}}',
+					data: {
+							term : request.term
+					},
+					dataType: "json",
+					success: function(data){
+					var resp = $.map(data,function(obj){
+						return {
+						label: obj.products_name,
+						id: obj.products_id
+					}
+					}); 
+		
+					response(resp);
+					}
+				});
+       		 },select: function(event, ui) {
+				var e = ui.item;
+				$("#products_id").val(e.id);
+				change_product(e.id);
+			},
+
+        minLength: 2
+    });
+
+
 	$("#header_img").hover(function(){
 		$(".hover_option").css("display","none");
 		$(".header_options").slideDown("fast");
@@ -2399,8 +2435,8 @@ function prodcust_type(){
 }
 
 
-$(document).on('change','.product-type', function(){
-    var product_id = $(this).val();
+ function change_product(product_id){
+   // var product_id = $(this).val();
 
 	$.ajax({
 		url: '{{ URL::to("admin/products/inventory/ajax_min_max")}}'+'/'+product_id,
@@ -2445,7 +2481,7 @@ $(document).on('change','.product-type', function(){
 	});
 
 
-});
+}
 
 
 function cancelOrder() {
@@ -2468,15 +2504,15 @@ $( "#registration" ).on('click','#submit',function( event ) {
   var param =  $( "#parameter" ).val();
   var select = $( "#FilterBy" ).val();
 
-        if( (select == null) || (param == "")) {
-            $( "#contact-form12" ).text( "fill the credentials!" ).css({'color':'red'}).show().fadeOut( 10000 );
-            $( "#parameter" ).css({'border-color':'red'});
-            $( "select" ).css({'border-color':'red'});
-            event.preventDefault();
-        }else {
-          // $( "#contact-form12" ).text( "fill the credentials!" ).css({'padding-left':'10px','margin-right':'20px','padding-bottom':'2px', 'color':'red'}).show().fadeOut( 10000 );
-          //     event.preventDefault();
-        }
+        // if( (select == null) || (param == "")) {
+        //     $( "#contact-form12" ).text( "fill the credentials!" ).css({'color':'red'}).show().fadeOut( 10000 );
+        //     $( "#parameter" ).css({'border-color':'red'});
+        //     $( "select" ).css({'border-color':'red'});
+        //     event.preventDefault();
+        // }else {
+        //   // $( "#contact-form12" ).text( "fill the credentials!" ).css({'padding-left':'10px','margin-right':'20px','padding-bottom':'2px', 'color':'red'}).show().fadeOut( 10000 );
+        //   //     event.preventDefault();
+        // }
 });
 
 
@@ -2874,6 +2910,7 @@ $(document).on('submit','#geniusform',function(e){
 		});
 	});
 
+	
 	
 
 

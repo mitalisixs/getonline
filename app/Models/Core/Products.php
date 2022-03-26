@@ -70,6 +70,9 @@ class Products extends Model
             ->where('products_description.language_id', '=', $language_id)
             ->where('categories_description.language_id', '=', $language_id);
 
+       
+            +
+            
         if (isset($_REQUEST['categories_id']) and !empty($_REQUEST['categories_id'])) {
             if (!empty(session('categories_id'))) {
                 $cat_array = explode(',', session('categories_id'));
@@ -78,9 +81,7 @@ class Products extends Model
 
             $data->where('products_to_categories.categories_id', '=', $_REQUEST['categories_id']);
 
-            if (isset($_REQUEST['product']) and !empty($_REQUEST['product'])) {
-                $data->where('products_name', 'like', '%' . $_REQUEST['product'] . '%');
-            }
+            
 
             $products = $data->orderBy('products.products_id', 'DESC')
             ->where('categories_status', '1')->paginate($commonsetting['pagination']);
