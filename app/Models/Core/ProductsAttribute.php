@@ -357,11 +357,14 @@ class ProductsAttribute extends Model
           }
       }
     }
-
-
-
-
-
-
-
+    public function updateprices($request){
+      $value_id = $request->products_options_values_id;
+      DB::table('products_options_values')
+          ->where('products_options_values_id','=',$value_id)
+          ->update(['prices' =>  $request->prices]);
+      DB::table('products_attributes')
+      ->where('options_values_id','=',$value_id)
+      ->update(['options_values_price' =>  $request->prices]);
+  
+    }
 }

@@ -9,10 +9,10 @@
 
         <section class="content-header">
 
-            <h1> {{ trans('labels.Options Value') }} <small>{{ trans('labels.Options Value') }}...</small> </h1>
+            <h1>Manage Prices <small>Manage Prices...</small> </h1>
             <ol class="breadcrumb">
                 <li><a href="{{ URL::to('admin/dashboard/this_month')}}"><i class="fa fa-dashboard"></i> {{ trans('labels.breadcrumb_dashboard') }}</a></li>
-                <li class="active">{{ trans('labels.Options Value') }}</li>
+                <li class="active">Manage Prices</li>
             </ol>
         </section>
 
@@ -28,7 +28,6 @@
                         <div class="box-header">
                             <h3 class="box-title"> {{ trans('labels.Options Value for') }} @foreach($result['options'] as $key=>$option) <strong>{{$option->options_name}}</strong> @if(count($result['options']) != $key+1)<span> / </span> @endif  @endforeach</h3>
                             <a href="{{ URL::to('admin/products/attributes/display')}}" type="button" class="btn btn-default pull-right"><i class="fa fa-angle-left"></i> {{ trans('labels.attributes') }}</a>
-                            <a href="{{ URL::to('admin/products/attributes/options/values/prices')}}/{{ $result['options'][0]->products_options_id}}"  type="button" class="btn btn-default pull-right">Manage Prices</a>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -45,57 +44,7 @@
                                 </div>
 
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    {!! Form::open(array('url' =>'admin/products/attributes/options/values/insert', 'method'=>'post', 'class' => 'form-horizontal form-validate', 'enctype'=>'multipart/form-data')) !!}
-                                    {!! Form::hidden('products_options_id', $result['options'][0]->products_options_id , array('class'=>'form-control', 'id'=>'products_options_values_id')) !!}
-
-                                    <h4>{{ trans('labels.Add Option Value') }}</h4>
-                                    @foreach($result['languages'] as $languages)
-                                        <div class="form-group">
-                                            <label for="name" class="col-sm-2 col-md-4 control-label">{{ trans('labels.Option Value') }} ({{ $languages->name }})</label>
-                                            <div class="col-sm-10 col-md-8">
-                                                <input type="text" name="ValuesName_<?=$languages->languages_id?>" class="form-control field-validate">
-                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.Option Value Text') }} ({{ $languages->name }}).</span>
-                                                <span class="help-block hidden">{{ trans('labels.Option Value Text') }}</span>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    @if(strtolower($option->options_name) =="fabric" )
-                                    
-                                    <div class="form-group">
-                                            <label for="name" class="col-sm-2 col-md-4 control-label">Short Description</label>
-                                            <div class="col-sm-10 col-md-8">
-                                                <textarea name="short_description" class="form-control"></textarea>
-                                            </div>
-                                        </div> 
-                                    <div class="form-group">
-                                            <label for="name" class="col-sm-2 col-md-4 control-label">Description</label>
-                                            <div class="col-sm-10 col-md-8">
-                                                <textarea name="option_description" class="form-control" id="editor1"></textarea>
-                                            </div>
-                                        </div>       
-                                    
-                                    <div class="form-group">
-                                         <label for="name" class="col-sm-2 col-md-4 control-label">Image</label>
-                                         <div class="col-sm-10 col-md-8">
-                                            <input type="file" name="option_image" />
-                                         </div>
-                                    </div>
-                                    @endif
-                                    
-                                    <br /><br />
-                                    <button type="reset" class="btn btn-primary pull-left">Reset</button>
-                                        <button type="submit" class="btn btn-primary pull-left" style="margin-left: 4px;">{{ trans('labels.Add Values') }}</button>
-                                      
-                                    </div>
-
-
-                                    <!-- /.box-footer -->
-                                    {!! Form::close() !!}
-
-                                </div>
-                            </div>
+                            
                             <div class="row">
                                 <div class="col-md-12">
                                     <table id="example1" class="table table-bordered table-striped">
@@ -103,9 +52,7 @@
                                         <tr>
                                             <th>{{ trans('labels.ID') }}</th>
                                             <th>{{ trans('labels.Values') }}</th>
-                                            @if(strtolower($option->options_name) =="fabric" )
-                                            <th>Image</th>
-                                            @endif
+                                            <th>Prices</th>
                                             <th>{{ trans('labels.Action') }}</th>
                                         </tr>
                                         </thead>
@@ -129,12 +76,18 @@
                                                             </p>
                                                         @endforeach
                                                     </td>
-                                                    @if(strtolower($option->options_name) =="fabric" )
-                                                    <td><img width="200px" height="300px"src="{{asset($data->image_path)}}" alt="..."></td>
-                                                    @endif
-                                                    <td><a data-toggle="tooltip" data-placement="bottom" title="" href="{{ URL::to('admin/products/attributes/options/values/edit')}}/{{$data->products_options_values_id}}" class="badge bg-light-blue" data-original-title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                        <a href="javascript:void(0)" value_id="{{$data->products_options_values_id}}" option_id="{{$result['options'][0]->products_options_id}}" data-toggle="tooltip" data-placement="bottom" title="" class="badge bg-red delete-value" data-original-title="Delete Value"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                    {!! Form::open(array('url' =>'admin/products/attributes/options/values/price/update', 'method'=>'post', 'class' => 'form-horizontal form-validate', 'enctype'=>'multipart/form-data')) !!}
+
+                                                    {!! Form::hidden('products_options_values_id',$data->products_options_values_id , array('class'=>'form-control products_options_values_id',"rel"=>$data->products_options_values_id)) !!}
+
+                                                    <td>
+                                                       <input type="text" name="prices" class="form-control" value="{{isset($data->prices)?$data->prices:''}}" placeholder="Price"/>
                                                     </td>
+                                                    
+                                                    <td>
+                                                    <button type="submit" class="btn btn-primary pull-left" style="margin-left: 4px;">Submit</button>
+                                                    </td>
+                                                    {!! Form:: close() !!}
                                                 </tr>
 
                                             @endforeach

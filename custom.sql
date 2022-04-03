@@ -80,6 +80,7 @@ ALTER TABLE `products_options_values` ADD `image_path` VARCHAR(255) NULL AFTER `
 ALTER TABLE `inventory_detail` ADD `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`);
 
 
+ALTER TABLE `products_options_values` ADD `prices` DOUBLE NULL AFTER `short_description`;
 
 
 
