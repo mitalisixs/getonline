@@ -158,6 +158,17 @@ Route::group(['middleware' => ['installer']], function () {
 
         
     });
+    Route::group(['prefix' => 'admin/pincodes', 'middleware' => 'auth', 'namespace' => 'AdminControllers'], function () {
+        Route::get('/display', 'PincodeController@display')->middleware('view_general_setting');
+        Route::get('/add', 'PincodeController@add')->middleware('edit_general_setting');
+        Route::post('/add', 'PincodeController@insert')->middleware('edit_general_setting');
+        Route::get('/edit/{id}', 'PincodeController@edit')->middleware('edit_general_setting');
+        Route::get('/edit/warning/{id}', 'PincodeController@warningedit')->middleware('edit_general_setting');
+        Route::post('/update', 'PincodeController@update')->middleware('edit_general_setting');
+        Route::post('/delete', 'PincodeController@delete')->middleware('edit_general_setting');
+
+        
+    });
 
     Route::group(['prefix' => 'admin/products', 'middleware' => 'auth', 'namespace' => 'AdminControllers'], function () {
        /* Mitali - bulk-upload */

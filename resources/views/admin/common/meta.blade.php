@@ -20,6 +20,9 @@
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css" />
 
+  <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+
+
   <!-- Select2 -->
   <link rel="stylesheet" href="{!! asset('admin/plugins/select2/select2.min.css') !!} ">
 

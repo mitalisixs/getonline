@@ -1,5 +1,11 @@
 @extends('admin.layout')
 @section('content')
+<script src="{!! asset('admin/plugins/jQuery/jQuery-2.2.0.min.js') !!}"></script>
+<!-- CK Editor -->
+<script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="{!! asset('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') !!}"></script>
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -53,6 +59,30 @@
                                                     </div>
                                                 </div>
                                             @endforeach
+
+                                            @if(strtolower($result['options']->products_options_name) =="fabric" )
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-2 col-md-3 control-label">Short Description</label>
+                                                <div class="col-sm-10 col-md-8">
+                                                    <textarea name="short_description" class="form-control">{{$result['editoptions'][0]->short_description}}</textarea>
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
+                                                    <label for="name" class="col-sm-2 col-md-3 control-label">Description</label>
+                                                    <div class="col-sm-10 col-md-4">
+                                                        <textarea name="option_description" id="editor1" class="form-control">{{$result['editoptions'][0]->description}}</textarea>
+                                                    </div>
+                                                </div>    
+                                            
+                                            
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-2 col-md-3 control-label">Image</label>
+                                                <div class="col-sm-10 col-md-4">
+                                                    <input type="file" name="option_image" />
+                                                    <img width="200px" height="300px"src="{{asset($result['editoptions'][0]->image_path)}}" alt="..."/>
+                                                </div>
+                                            </div>
+                                            @endif
                                         <!-- /.box-body -->
                                             <div class="box-footer text-center">
                                                 <button type="submit" class="btn btn-primary">{{ trans('labels.Submit') }}</button>
@@ -83,4 +113,17 @@
         </section>
         <!-- /.content -->
     </div>
+    <script type="text/javascript">
+    jQuery(function() {
+        CKEDITOR.replace( 'editor1', {
+            fullPage: true,
+            allowedContent: true,
+            extraPlugins: 'wysiwygarea'
+        });
+        //bootstrap WYSIHTML5 - text editor
+    //    jQuery("#editor1").wysihtml5();
+
+    });
+    </script>
+
 @endsection

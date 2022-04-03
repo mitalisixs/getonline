@@ -76,6 +76,8 @@ Route::group(['namespace' => 'Web','middleware' => $middleware], function () {
 		Route::get('/product-detail/{slug}', 'ProductsController@productDetail');
 		Route::post('/filterProducts', 'ProductsController@filterProducts');
 		Route::post('/getquantity', 'ProductsController@getquantity');
+		Route::post('/getFabric', 'ProductsController@getFabric');
+		Route::get('/product_autocomplete', 'ProductsController@autocomplete')->name('product_autocomplete');
 
 		Route::get('/guest_checkout', 'OrdersController@guest_checkout');
 		Route::get('/checkout', 'OrdersController@checkout')->middleware('Customer');
@@ -140,3 +142,4 @@ Route::group(['namespace' => 'Web','middleware' => $middleware], function () {
 	   return "Route cache file removed";
    });
    Route::get('/flush-data', 'Web\IndexController@flushData');
+   Route::post('check_pincode', 'Web\CustomersController@check_pincode');

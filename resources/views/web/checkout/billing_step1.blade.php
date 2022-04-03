@@ -31,7 +31,7 @@
                 <option value=""  >@lang('website.Select Country')</option>
                 @if(!empty($result['countries']))
                   @foreach($result['countries'] as $countries)
-                      <option value="{{$countries->countries_id}}" @if(!empty(session('billing_address'))) @if(session('billing_address')->billing_countries_id == $countries->countries_id) selected @endif @endif >{{$countries->countries_name}}</option>
+                      <option value="{{$countries->countries_id}}" @if(!empty(session('billing_address')) && isset(session('billing_address')->billing_countries_id)) @if(session('billing_address')->billing_countries_id == $countries->countries_id) selected @endif @endif >{{$countries->countries_name}}</option>
                   @endforeach
                 @endif
                 </select>

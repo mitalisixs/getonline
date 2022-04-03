@@ -1567,6 +1567,12 @@ return [
 	'manage currency_create'=>'Currency Create',
 	'manage currency_update'=>'Currency Update',
 	'manage currency_delete'=>'Currency Delete',
+	'manage currency_delete'=>'Currency Delete',
+	'manage check_for_pincode_view'=>'Check for Pincode View',
+	'manage check_for_pincode_create'=>'Check for Pincode Create',
+	'manage check_for_pincode_update'=>'Check for Pincode Update',
+	'manage check_for_pincode_delete'=>'Check for Pincode Delete',
+	'manage Check for Pincode'=>'Check for Pincode',
 	
 	'manage profile_view'=>'Profile View',
 	'manage profile_update'=>'Profile Update',
@@ -2284,6 +2290,11 @@ return [
 	'Style19'=>'Style 19',
 	'Style20'=>'Style 20',
 	'Style21'=>'Style 21',
-	
+
+	'Pincodes'=>'PincodeS',
+	'AddNewPincode'=>'Add Pincode',
+	'Add Pincode'=>'Add Pincode',
+	'AddPincode'=>'Add Pincode',
+	'ListingAllPincodes'=>'Listing All The PincodeS',
 
 ];

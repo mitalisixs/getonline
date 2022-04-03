@@ -737,6 +737,7 @@ class Products extends Model
                     ->LeftJoin('image_categories', 'products_images.image', '=', 'image_categories.image_id')
                     ->select('image_categories.path as image_path', 'image_categories.image_type')
                     ->where('products_id', '=', $products_id)
+					->where('image_type', 'ACTUAL')
                     ->orderBy('sort_order', 'ASC')
                     ->get();
 
@@ -766,7 +767,7 @@ class Products extends Model
 
                 $products_data->categories = $categories;
                 array_push($result, $products_data);
-
+                
                 $options = array();
                 $attr = array();
 
@@ -845,7 +846,279 @@ class Products extends Model
 
         return ($responseData);
     }
+    
+    //products
+    public function newproducts($data)
+    {
+        
 
+        if (empty($data['page_number']) or $data['page_number'] == 0) {
+            $skip = $data['page_number'] . '0';
+        } else {
+            $skip = $data['limit'] * $data['page_number'];
+        }
+
+        $min_price = $data['min_price'];
+        $max_price = $data['max_price'];
+        $take = $data['limit'];
+        $currentDate = time();
+        $type = $data['type'];
+
+        if ($type == "atoz") {
+            $sortby = "products_name";
+            $order = "ASC";
+        } elseif ($type == "ztoa") {
+            $sortby = "products_name";
+            $order = "DESC";
+        } elseif ($type == "hightolow") {
+            $sortby = "products_price";
+            $order = "DESC";
+        } elseif ($type == "lowtohigh") {
+            $sortby = "products_price";
+            $order = "ASC";
+        } elseif ($type == "topseller") {
+            $sortby = "products_ordered";
+            $order = "DESC";
+        } elseif ($type == "mostliked") {
+            $sortby = "products_liked";
+            $order = "DESC";
+
+        } elseif ($type == "special") {
+            $sortby = "specials.products_id";
+            $order = "desc";
+        } elseif ($type == "flashsale") { //flashsale products
+            $sortby = "flash_sale.flash_start_date";
+            $order = "asc";
+        } else {
+            $sortby = "products.products_id";
+            $order = "desc";
+        }
+
+    
+        $categories = DB::table('products')
+            ->leftJoin('products_description', 'products_description.products_id', '=', 'products.products_id')
+            ->LeftJoin('image_categories', 'products.products_image', '=', 'image_categories.image_id');
+            
+
+        if (!empty($data['categories_id'])) {
+            $categories->LeftJoin('products_to_categories', 'products.products_id', '=', 'products_to_categories.products_id')
+                ->leftJoin('categories', 'categories.categories_id', '=', 'products_to_categories.categories_id')
+                ->LeftJoin('categories_description', 'categories_description.categories_id', '=', 'products_to_categories.categories_id');
+        }
+
+        //parameter special
+        elseif ($type == "special") {
+            $categories->LeftJoin('specials', 'specials.products_id', '=', 'products.products_id')
+                ->select('products.*', 'image_categories.path as image_path', 'products_description.*', 'specials.specials_new_products_price as discount_price', 'specials.specials_new_products_price as discount_price');
+        } elseif ($type == "flashsale") {
+            //flash sale
+            $categories->LeftJoin('flash_sale', 'flash_sale.products_id', '=', 'products.products_id')
+                ->select(DB::raw(time() . ' as server_time'), 'products.*', 'image_categories.path as image_path', 'products_description.*',  'flash_sale.flash_start_date', 'flash_sale.flash_expires_date', 'flash_sale.flash_sale_products_price as flash_price');
+
+        } elseif ($type == "compare") {
+            //flash sale
+            $categories->LeftJoin('flash_sale', 'flash_sale.products_id', '=', 'products.products_id')
+                ->select(DB::raw(time() . ' as server_time'), 'products.*', 'image_categories.path as image_path', 'products_description.*',  'flash_sale.flash_start_date', 'flash_sale.flash_expires_date', 'flash_sale.flash_sale_products_price as discount_price');
+
+        } else {
+            $categories->LeftJoin('specials', function ($join) use ($currentDate) {
+                $join->on('specials.products_id', '=', 'products.products_id')->where('status', '=', '1')->where('expires_date', '>', $currentDate);
+            })->select('products.*', 'image_categories.path as image_path', 'products_description.*',   'specials.specials_new_products_price as discount_price');
+        }
+
+        if ($type == "special") { //deals special products
+            $categories->where('specials.status', '=', '1')->where('expires_date', '>', $currentDate);
+        }
+
+        if ($type == "flashsale") { //flashsale
+            $categories->where('flash_sale.flash_status', '=', '1')->where('flash_expires_date', '>', $currentDate);
+
+        } elseif ($type != "compare") {
+            $categories->whereNotIn('products.products_id', function ($query) use ($currentDate) {
+                $query->select('flash_sale.products_id')->from('flash_sale')->where('flash_sale.flash_status', '=', '1');
+            });
+
+        }
+
+        //for min and maximum price
+        if (!empty($max_price)) {
+            $categories->whereBetween('products.products_price', [$min_price, $max_price]);
+        }
+
+         if (!empty($data['search'])) {
+
+            $searchValue = $data['search'];
+            
+       //     $categories->where('products_options.products_options_name', 'LIKE', '%' . $searchValue . '%')->where('products_status', '=', 1);
+
+            if (!empty($data['categories_id'])) {
+                $categories->where('products_to_categories.categories_id', '=', $data['categories_id']);
+            }
+
+            if (!empty($max_price)) {
+                $categories->whereBetween('products.products_price', [$min_price, $max_price]);
+            }
+         /*   $categories->whereNotIn('products.products_id', function ($query) use ($currentDate) {
+                $query->select('flash_sale.products_id')->from('flash_sale')->where('flash_sale.flash_status', '=', '1');
+            });*/
+         //   $categories->orWhere('products_options_values.products_options_values_name', 'LIKE', '%' . $searchValue . '%')->where('products_status', '=', 1);
+            if (!empty($data['categories_id'])) {
+                $categories->where('products_to_categories.categories_id', '=', $data['categories_id']);
+            }
+
+
+            if (!empty($max_price)) {
+                $categories->whereBetween('products.products_price', [$min_price, $max_price]);
+            }
+
+        /*    $categories->whereNotIn('products.products_id', function ($query) use ($currentDate) {
+                $query->select('flash_sale.products_id')->from('flash_sale')->where('flash_sale.flash_status', '=', '1');
+            }); */
+
+           
+            if (!empty($data['categories_id'])) {
+                $categories->where('products_to_categories.categories_id', '=', $data['categories_id']);
+            }
+
+            if (!empty($max_price)) {
+                $categories->whereBetween('products.products_price', [$min_price, $max_price]);
+            }
+
+            $categories->whereNotIn('products.products_id', function ($query) use ($currentDate) {
+                $query->select('flash_sale.products_id')->from('flash_sale')->where('flash_sale.flash_status', '=', '1');
+            });
+            $categories->WhereRaw('products_name LIKE "%' . $searchValue . '%" OR products_model LIKE "%' . $searchValue . '%" ');
+
+            $categories->where('products_status', '=', 1);
+
+            if (!empty($data['categories_id'])) {
+                $categories->where('products_to_categories.categories_id', '=', $data['categories_id']);
+            }
+            
+            $categories->whereNotIn('products.products_id', function ($query) use ($currentDate) {
+                $query->select('flash_sale.products_id')->from('flash_sale')->where('flash_sale.flash_status', '=', '1');
+            });
+        }
+      
+        //wishlist customer id
+        if ($type == "wishlist") {
+            $categories->where('liked_customers_id', '=', session('customers_id'));
+        }
+
+        //wishlist customer id
+        if ($type == "is_feature") {
+            $categories->where('products.is_feature', '=', 1);
+        }
+
+        $categories->where('products_description.language_id', '=', Session::get('language_id'))->where('products_status', '=', 1);
+
+        
+        if ($type == "topseller") {
+            $categories->where('products.products_ordered', '>', 0);
+        }
+        if ($type == "mostliked") {
+            $categories->where('products.products_liked', '>', 0);
+        }
+
+        $categories->orderBy($sortby, $order)->groupBy('products.products_id');
+
+        //count
+        $total_record = $categories->get();
+        $products = $categories->skip($skip)->take($take)->get();
+
+        $result = array();
+        $result2 = array();
+
+        //check if record exist
+        if (count($products) > 0) {
+
+            $index = 0;
+            foreach ($products as $products_data) {
+
+              
+                $products_id = $products_data->products_id;
+
+                //products_image
+                $default_images = DB::table('image_categories')
+                    ->where('image_id', '=', $products_data->products_image)
+                    ->where('image_type', 'MEDIUM')
+                    ->first();
+
+                if ($default_images) {
+                    $products_data->image_path = $default_images->path;
+                } else {
+                    $default_images = DB::table('image_categories')
+                        ->where('image_id', '=', $products_data->products_image)
+                        ->where('image_type', 'LARGE')
+                        ->first();
+
+                    if ($default_images) {
+                        $products_data->image_path = $default_images->path;
+                    } else {
+                        $default_images = DB::table('image_categories')
+                            ->where('image_id', '=', $products_data->products_image)
+                            ->where('image_type', 'ACTUAL')
+                            ->first();
+                        
+                        $products_data->image_path = isset($default_images->path)?$default_images->path:'';
+                    }
+
+                }
+
+                $products_data->default_thumb = isset($products_data->default_images)?$products_data->default_images:'';
+
+                //categories
+                $categories = DB::table('products_to_categories')
+                    ->leftjoin('categories', 'categories.categories_id', 'products_to_categories.categories_id')
+                    ->leftjoin('categories_description', 'categories_description.categories_id', 'products_to_categories.categories_id')
+                    ->select('categories.categories_id', 'categories_description.categories_name', 'categories.categories_image', 'categories.categories_icon', 'categories.parent_id', 'categories.categories_slug', 'categories.categories_status')
+                    ->where('products_id', '=', $products_id)
+                    ->where('categories_description.language_id', '=', Session::get('language_id'))
+                    ->where('categories.categories_status', 1)
+                    ->orderby('parent_id', 'ASC')->get();
+
+                $products_data->categories = $categories;
+                array_push($result, $products_data);
+
+                $options = array();
+                $attr = array();
+
+                $stocks = 0;
+                $stockOut = 0;
+                if ($products_data->products_type == '0') {
+                    $stocks = DB::table('inventory')->where('products_id', $products_data->products_id)->where('stock_type', 'in')->sum('stock');
+                    $stockOut = DB::table('inventory')->where('products_id', $products_data->products_id)->where('stock_type', 'out')->sum('stock');
+                }
+
+                $result[$index]->defaultStock = $stocks - $stockOut;
+
+                //like product
+                if (!empty(session('customers_id'))) {
+                    $liked_customers_id = session('customers_id');
+                    $categories = DB::table('liked_products')->where('liked_products_id', '=', $products_id)->where('liked_customers_id', '=', $liked_customers_id)->get();
+
+                    if (count($categories) > 0) {
+                        $result[$index]->isLiked = '1';
+                    } else {
+                        $result[$index]->isLiked = '0';
+                    }
+                } else {
+                    $result[$index]->isLiked = '0';
+                }
+
+                
+                    $result[$index]->attributes = array();
+                
+                $index++;
+            }
+            $responseData = array('success' => '1', 'product_data' => $result, 'message' => Lang::get('website.Returned all products'), 'total_record' => count($total_record));
+
+        } else {
+            $responseData = array('success' => '0', 'product_data' => $result, 'message' => Lang::get('website.Empty record'), 'total_record' => count($total_record));
+        }
+
+        return ($responseData);
+    }
     public function cartIdArray($requestt)
     {
 
@@ -959,9 +1232,19 @@ class Products extends Model
             ->orderBy('sort_order', 'ASC')
             ->get();
             //dd($products_images);
-            $imageHtml = view("web.details.image_couraser",compact('products_images'))->render();
-            $result['imageHtml'] = $imageHtml;
-
+             if(count($products_images)>0){
+                $imageHtml = view("web.details.image_couraser",compact('products_images'))->render();
+             }else{
+               /* $products_images = DB::table('products_images')
+                ->LeftJoin('image_categories', 'products_images.image', '=', 'image_categories.image_id')
+                ->select('image_categories.path as image_path', 'image_categories.image_type')
+                ->where('products_id', '=', $products_id)
+                ->orderBy('sort_order', 'ASC')
+                ->get();
+                $imageHtml = view("web.details.image_couraser",compact('products_images'))->render();*/
+             }
+             $result['imageHtml'] = $imageHtml;
+			
 
       
 
@@ -974,6 +1257,41 @@ class Products extends Model
 
         return $result;
     }
+
+     //currentstock
+     public function productFabric($data)
+     {
+        $data->option_id = 4;
+         $view ="web.details.fabric_details";
+        $imageHtml = '';
+             $options = DB::table('products_attributes')->where('options_id', $data->option_id)->where('products_id', $data->products_id)->pluck('options_values_id');
+            $option_values = DB::table('products_options_values')
+                ->leftJoin('products_options_values_descriptions', 'products_options_values_descriptions.products_options_values_id', '=', 'products_options_values.products_options_values_id')
+                ->leftJoin('products_attributes', 'products_attributes.options_values_id', '=', 'products_options_values.products_options_values_id')
+                ->select('products_options_values.*', 'products_options_values_descriptions.options_values_name as products_options_values_name','products_attributes.options_values_price')
+                ->where('products_options_values_descriptions.language_id', '=', Session::get('language_id'))
+                ->where('products_attributes.products_id', '=', $data->products_id)
+                ->whereIn('products_options_values.products_options_values_id',$options);
+            if($data->has('searchText') ){
+                $option_values =$option_values->where("products_options_values_descriptions.options_values_name","like",'%'.$data->searchText.'%');
+                $view  ="web.details.fabric_details_partials";
+            }        
+       // dd($view);
+           $option_values =$option_values->get();
+           $paramms = $data->all();
+           
+            $imageHtml = view($view,compact('option_values','paramms'))->render();
+            $result['fabricHtml'] = $imageHtml;
+        
+           return $result;
+
+                         
+                        
+       
+ 
+ 
+       
+     }
 
     public static function getquantity($request)
     {

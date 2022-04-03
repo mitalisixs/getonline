@@ -1,5 +1,9 @@
 <div class="tab-pane fade @if(session('step') == 0) show active @endif" id="pills-shipping" role="tabpanel" aria-labelledby="pills-shipping-tab">
   <form name="signup" enctype="multipart/form-data" class="form-validate"  action="{{ URL::to('/checkout_shipping_address')}}" method="post">
+    @if($errors->any())
+    <h4 style="color: red;">{{$errors->first()}}</h4>
+    @endif
+
     <input type="hidden" required name="_token" id="csrf-token" value="{{ Session::token() }}" />
     <?php $form_validate="field-validate"; ?>
     @if(isset($all_addresses) &&  count($all_addresses)>0)

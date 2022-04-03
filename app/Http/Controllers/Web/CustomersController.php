@@ -19,6 +19,7 @@ use Session;
 use Socialite;
 use Validator;
 use Hash;
+use App\Models\Core\Pincode;
 
 class CustomersController extends Controller
 {
@@ -29,7 +30,8 @@ class CustomersController extends Controller
         Products $products,
         Currency $currency,
         Customer $customer,
-        Cart $cart
+        Cart $cart,
+        Pincode $pincodes
     ) {
         $this->index = $index;
         $this->languages = $languages;
@@ -38,6 +40,7 @@ class CustomersController extends Controller
         $this->customer = $customer;
         $this->cart = $cart;
         $this->theme = new ThemeController();
+        $this->pincodes = $pincodes;
     }
 
     public function signup(Request $request)
@@ -399,5 +402,25 @@ class CustomersController extends Controller
 
         }
     }
+    public function check_pincode(Request $request)
+    {
+        $msg=$type="";
+        if(trim($request->pincode)==""){
+            $msg="Please Enter the Pincode";
+            $type="error";
+        }else{
+            $cartResponse = $this->pincodes->checkexist($request);
+            if($cartResponse){
+                $msg="Delivery available for this Pincode";
+                 $type="success";
+            }else{
+                $msg="Sorry We are not deliver on this pincode yet.";
+                $type="error";
+            }
+
+        }
+        return json_encode(["message"=>$msg,"type"=>$type]);
+    }
+
 
 }

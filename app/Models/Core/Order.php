@@ -4,6 +4,7 @@ namespace App\Models\Core;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\AdminControllers\AlertController;
 
 class Order extends Model
 {
@@ -208,6 +209,9 @@ class Order extends Model
         $data['customers_id'] = $orders[0]->customers_id;
         $data['orders_id'] = $orders_id;
         $data['status'] = $status[0]->orders_status_name;
+      //  $notification = new AlertController();
+       // $send = $notification->sendOrderStatusChangeMessage($orders[0]->customers_id, $orders_id, $status[0]->orders_status_name);
+
 
         return 'success';
     }    

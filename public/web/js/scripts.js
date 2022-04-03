@@ -2840,17 +2840,22 @@ jQuery('.slider-for').slick({
   draggable: false,
   fade: true,
   asNavFor: '.slider-nav',
-  adaptiveHeight: true
+  adaptiveHeight: false,
+  variableWidth : false,
+  
 });
 jQuery('.slider-nav').slick({
   slidesToShow: 3,
   slidesToScroll: 1,
   asNavFor: '.slider-for',
-  centerMode: true,
+  centerMode: false,
+  infinite: false,
   centerPadding: '60px',
   dots: false,
   arrows: true,
-  focusOnSelect: true
+  focusOnSelect: true,
+  adaptiveHeight: false,
+  variableWidth : false,
 }); // Product vertical SLICK
 
 jQuery('.slider-for-vertical').slick({

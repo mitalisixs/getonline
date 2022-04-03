@@ -21,4 +21,23 @@ function myFunction3(product_id) {
   });
 });
 }
+function  check_pincode(){
+  jQuery(function ($) {
+  jQuery.ajax({
+    beforeSend: function (xhr) { // Add this line
+            xhr.setRequestHeader('X-CSRF-Token', $('[name="_csrfToken"]').val());
+     },
+    url: '{{ URL::to("/check_pincode")}}',
+    type: "POST",
+    data: {"pincode":$("#pincode").val(),"_token": "{{ csrf_token() }}"},
+    success: function (res) {
+      var obj = JSON.parse(res);
+      var message = obj.message;
+     
+       $('#pincode_message').html("<div class='"+obj.type+"'>"+obj.message+"</div>");
+      notificationWishlist(message);
+    },
+  });
+});
+}
 </script>

@@ -213,6 +213,7 @@ class CartController extends Controller
     //addToCart
     public function addToCart(Request $request)
     {
+        
         $result = $this->cart->addToCart($request);
         if (!empty($result['status']) && $result['status'] == 'exceed') {
             return $result;

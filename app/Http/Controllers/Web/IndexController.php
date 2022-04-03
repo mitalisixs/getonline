@@ -62,7 +62,7 @@ class IndexController extends Controller
         if (!empty($request->limit)) {
             $limit = $request->limit;
         } else {
-            $limit = 12;
+            $limit = 8;
         }
 
         /**  MINIMUM PRICE **/
@@ -83,8 +83,8 @@ class IndexController extends Controller
         /**                     FETCH NEWEST PRODUCTS                       **/
         /*********************************************************************/
 
-        $data = array('page_number' => '0', 'type' => '', 'limit' => 10, 'min_price' => $min_price, 'max_price' => $max_price);
-        $newest_products = $this->products->products($data);
+        $data = array('page_number' => '0', 'type' => '', 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
+        $newest_products = $this->products->newproducts($data);
         $result['products'] = $newest_products;
         /*********************************************************************/
         /**                     Compare Counts                              **/
@@ -102,31 +102,31 @@ class IndexController extends Controller
 
 //special products
         $data = array('page_number' => '0', 'type' => 'special', 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
-        $special_products = $this->products->products($data);
+        $special_products = $this->products->newproducts($data);
         $result['special'] = $special_products;
 //Flash sale
 
         $data = array('page_number' => '0', 'type' => 'flashsale', 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
-        $flash_sale = $this->products->products($data);
+        $flash_sale = $this->products->newproducts($data);
         $result['flash_sale'] = $flash_sale;
 // //top seller
         $data = array('page_number' => '0', 'type' => 'topseller', 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
-        $top_seller = $this->products->products($data);
+        $top_seller = $this->products->newproducts($data);
         $result['top_seller'] = $top_seller;
 
 //most liked
         $data = array('page_number' => '0', 'type' => 'mostliked', 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
-        $most_liked = $this->products->products($data);
+        $most_liked = $this->products->newproducts($data);
         $result['most_liked'] = $most_liked;
 
 //is feature
         $data = array('page_number' => '0', 'type' => 'is_feature', 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
-        $featured = $this->products->products($data);
+        $featured = $this->products->newproducts($data);
         $result['featured'] = $featured;
 
-        $data = array('page_number' => '0', 'type' => '', 'limit' => '15', 'is_feature' => 1);
+     /*   $data = array('page_number' => '0', 'type' => '', 'limit' => '15', 'is_feature' => 1);
         $news = $this->news->getAllNews($data);
-        $result['news'] = $news;
+        $result['news'] = $news;*/
 //current time
 
         $currentDate = Carbon\Carbon::now();
@@ -536,7 +536,7 @@ class IndexController extends Controller
         $tableNames= ["address_book","categories","categories_description","customers","customers_basket","customers_basket_attributes",
                         "customers_info","images","image_categories","inventory","inventory_detail","liked_products","manufacturers",
                         "manufacturers_info","news","news_categories","news_categories_description","news_to_news_categories","orders",
-                        "orders_products","orders_products_attributes","orders_status","orders_status_description","orders_total","products","products_attributes","products_attribute_images",
+                        "orders_products","orders_products_attributes","orders_total","products","products_attributes","products_attribute_images",
                         "products_description","products_images","products_to_categories","reviews","reviews_description","sliders_images","specials",
                         "tax_class","tax_rates","upload_your_design","user_to_address"
                         ];

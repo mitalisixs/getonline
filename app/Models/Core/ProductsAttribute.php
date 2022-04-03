@@ -182,6 +182,9 @@ class ProductsAttribute extends Model
     public function insertoptionsvalues($request){
       $result = array();
       $languages =  $this->myVarsetting->getLanguages();
+      $path = $this->uploadImage($request);
+      
+
       $i = 0;
       //multiple lanugauge with record
       foreach($languages as $languages_data){
@@ -190,8 +193,12 @@ class ProductsAttribute extends Model
               $requ_products_options_values_name = $request->$products_options_values_name;
               $products_options_values_id = DB::table('products_options_values')->insertGetId([
                   'products_options_values_name' => $requ_products_options_values_name,
-                  'products_options_id' => $request->products_options_id
-              ]);                      $i++;
+                  'products_options_id' => $request->products_options_id,
+                  "description"=>isset($request->option_description)?$request->option_description:'',
+                  "short_description"=>isset($request->option_description)?$request->short_description:'',
+                  'image_path' => $path
+              ]);
+            $i++;
           }
           $requ_products_options_values_name = $request->$products_options_values_name;
           DB::table('products_options_values_descriptions')->insert([
@@ -200,6 +207,33 @@ class ProductsAttribute extends Model
               'language_id' => $languages_data->languages_id
           ]);
          }
+    }
+    public function uploadImage($request){
+        $path = '';
+       
+        if($request->hasFile('option_image')){
+            // Creating a new time instance, we'll use it to name our file and declare the path
+            $time = Carbon::now();
+            $image = $request->file('option_image');
+            $extensions = Setting::imageType();      
+            if ($request->hasFile('option_image') and in_array($request->option_image->extension(), $extensions)) {
+                $size = getimagesize($image);
+                list($width, $height, $type, $attr) = $size;
+                // Getting the extension of the file
+                $extension = $image->getClientOriginalExtension();
+                // Creating the directory, for example, if the date = 18/10/2017, the directory will be 2017/10/
+                $directory = date_format($time, 'Y') . '/' . date_format($time, 'm');
+                // Creating the file name: random string followed by the day, random number and the hour
+                $filename = str_random(5) . date_format($time, 'd') . rand(1, 9) . date_format($time, 'h') . "." . $extension;
+                // This is our upload main function, storing the image in the storage that named 'public'
+                $upload_success = $image->storeAs($directory, $filename, 'public');
+                $path = 'images/media/' . $directory . '/' . $filename;
+
+
+            }                      
+        
+        }
+        return $path;
     }
 
     public function editoptionsvalues($request){
@@ -221,8 +255,10 @@ class ProductsAttribute extends Model
               $description_data[$languages_data->languages_id]['languages_id'] = $languages_data->languages_id;
           }
       }
+      $option = DB::table('products_options')->where('products_options_id', $edit[0]->products_options_id)->first();
       $result['description'] = $description_data;
       $result['editoptions'] = $edit;
+      $result['options'] = $option;
       return $result;
     }
 
@@ -230,7 +266,24 @@ class ProductsAttribute extends Model
     public function updateoptionsvalues($request){
       $products_options_values_id = $request->products_options_values_id;
       $languages =  $this->myVarsetting->getLanguages();
-      foreach($languages as $languages_data){
+      $edit = DB::table('products_options_values')->where('products_options_values_id', $request->products_options_values_id)->first();
+      if(isset($request->option_description)){
+        DB::table('products_options_values')->where('products_options_values_id', $request->products_options_values_id)->update(['description' => $request->option_description]);
+
+     
+      }
+      if(isset($request->short_description)){
+        DB::table('products_options_values')->where('products_options_values_id', $request->products_options_values_id)->update(['short_description' => $request->short_description]);
+
+     
+      }
+      $path = $this->uploadImage($request);
+      if($path!=""){
+        DB::table('products_options_values')->where('products_options_values_id', $request->products_options_values_id)->update(['image_path' => $path]);
+
+      
+      }
+     foreach($languages as $languages_data){
           $options_values_name = 'options_values_name_'.$languages_data->languages_id;
           $checkExist = DB::table('products_options_values_descriptions')->where('products_options_values_id', '=', $products_options_values_id)->where('language_id', '=', $languages_data->languages_id)->get();
           if(count($checkExist)>0){
@@ -304,11 +357,14 @@ class ProductsAttribute extends Model
           }
       }
     }
-
-
-
-
-
-
-
+    public function updateprices($request){
+      $value_id = $request->products_options_values_id;
+      DB::table('products_options_values')
+          ->where('products_options_values_id','=',$value_id)
+          ->update(['prices' =>  $request->prices]);
+      DB::table('products_attributes')
+      ->where('options_values_id','=',$value_id)
+      ->update(['options_values_price' =>  $request->prices]);
+  
+    }
 }

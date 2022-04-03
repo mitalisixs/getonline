@@ -56,6 +56,18 @@
           <i class="fa fa-circle-o"></i> {{ trans('labels.currency') }}
         </a>
       </li>   
+      <?php } ?> 
+      <?php /* Mitali - manage_check_for_pincode_view */ ?>
+      <?php
+      
+        if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->check_for_pincode_view == 1){
+      ?>
+
+      <li class="treeview {{ Request::is('admin/pincodes/display') ? 'active' : '' }} {{ Request::is('admin/pincodes/add') ? 'active' : '' }} {{ Request::is('admin/pincodes/edit/*') ? 'active' : '' }} {{ Request::is('admin/pincodes/filter') ? 'active' : '' }}">
+        <a href="{{ URL::to('admin/pincodes/display')}}">
+          <i class="fa fa-circle-o"></i> {{ trans('labels.manage Check for Pincode') }}
+        </a>
+      </li>   
       <?php } ?>    
       <?php
         if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->customers_view == 1){
@@ -85,7 +97,7 @@
 
             @if ($result['commonContent']['roles']!= null and $result['commonContent']['roles']->products_view == 1)
               <li class="{{ Request::is('admin/products/attributes/display') ? 'active' : '' }}  {{ Request::is('admin/products/attributes/add') ? 'active' : '' }}  {{ Request::is('admin/products/attributes/*') ? 'active' : '' }}" ><a href="{{ URL::to('admin/products/attributes/display' )}}"><i class="fa fa-circle-o"></i> {{ trans('labels.products_attributes') }}</a></li>
-             @if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->currency_view == 1){
+             @if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->currency_view == 1)
               <li class="{{ Request::is('admin/units') ? 'active' : '' }} {{ Request::is('admin/addunit') ? 'active' : '' }} {{ Request::is('admin/editunit/*') ? 'active' : '' }} "><a href="{{ URL::to('admin/units')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.link_units') }}</a></li>
              @endif
   
@@ -254,6 +266,20 @@
             <span> {{ trans('labels.link_site_settings') }}</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
+			 @if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->home_page_settings == 1)
+          <li class="treeview {{ Request::is('admin/topoffer/display') ? 'active' : '' }} {{ Request::is('admin/webPagesSettings/*') ? 'active' : '' }}">
+              <a href="#">
+                <i class="fa fa-picture-o"></i> <span>{{ trans('labels.Theme Setting') }}</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="treeview {{ Request::is('admin/webPagesSettings/1') ? 'active' : '' }} ">
+                    <a href="{{url('admin/webPagesSettings')}}/1">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> {{ trans('labels.Home Page') }} </span>
+                    </a>
+                </li>
+              </ul>
+          </li>
+          @endif
             @if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->theme_setting == 1)
             <li class="treeview {{ Request::is('admin/topoffer/display') ? 'active' : '' }} {{ Request::is('admin/webPagesSettings/*') ? 'active' : '' }}">
               <a href="#">
@@ -333,6 +359,9 @@
             <li class="{{ Request::is('admin/newsletter') ? 'active' : '' }}"><a href="{{ URL::to('admin/newsletter')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.mailchimp') }}</a></li>
             <li class="{{ Request::is('admin/instafeed') ? 'active' : '' }}"><a href="{{ URL::to('admin/instafeed')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.instagramfeed') }}</a></li>
          
+            @endif
+            @if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->home_page_settings == 1)
+              <li class="{{ Request::is('admin/menus') ? 'active' : '' }}  {{ Request::is('admin/addmenus') ? 'active' : '' }}  {{ Request::is('admin/editmenus/*') ? 'active' : '' }}"><a href="{{ URL::to('admin/menus')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.menus') }}</a></li>
             @endif
             <li class="{{ Request::is('admin/webpages') ? 'active' : '' }}  {{ Request::is('admin/addwebpage') ? 'active' : '' }}  {{ Request::is('admin/editwebpage/*') ? 'active' : '' }}"><a href="{{ URL::to('admin/webpages')}}"><i class="fa fa-circle-o"></i> {{ trans('labels.content_pages') }}</a></li>
 
