@@ -15,7 +15,7 @@
                     <input id="attribute_id" type="hidden" class="attributeid_<?=$attribute['option']['id']?>" name="attributeid[]" value=""> {{ $attribute['option']['name']}}</label></li>
             <ul class="list-group">
                 <li class="list-group-item">
-                    @foreach ($attribute['values'] as $value)<label><input name="values_<?=$attribute['option']['id']?>" type="radio" class="currentstock required_one" value="{{ $value['products_attributes_id'] }}"
+                    @foreach ($attribute['values'] as $value)<label><input name="values[{{$attribute['option']['id']}}][]" type="checkbox" class="currentstock required_one" value="{{ $value['products_attributes_id'] }}"
                           attributeid="{{ $attribute['option']['id'] }}"> {{ $value['value'] }}</label> @endforeach</li>
             </ul>
             @endforeach

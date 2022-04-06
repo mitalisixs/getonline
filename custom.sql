@@ -82,7 +82,9 @@ ALTER TABLE `inventory_detail` ADD `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD P
 
 ALTER TABLE `products_options_values` ADD `prices` DOUBLE NULL AFTER `short_description`;
 
-
+ALTER TABLE `inventory_detail` ADD INDEX(`inventory_ref_id`); 
+ALTER TABLE `inventory_detail` ADD INDEX(`products_id`); 
+ALTER TABLE `inventory_detail` ADD INDEX(`attribute_id`); 
 
 
 
