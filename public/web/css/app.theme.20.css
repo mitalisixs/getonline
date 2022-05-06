@@ -44856,3 +44856,7 @@ button[disabled] {
   .pro-counter .btn{
 	  border-radius : 10px;
   }
+
+.modal .modal-dialog .modal-body .pro-description .pro-options .box label{
+  min-width: 50px;
+}

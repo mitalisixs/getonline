@@ -2648,6 +2648,17 @@ $(document).on('click','#selectedICONE', function(){
 });
 
 
+$(document).on('click','#selectedBanner', function(){
+    var image_src = $('.thumbnail.selected').children('img').attr('src');
+	if(image_src != undefined){
+		$('#selectedBannerThumbmail').html('<img src="'+image_src+'" class = "thumbnail" style="max-height: 100px; margin-top: 20px; ">');
+		$('#selectedBannerThumbmail').show();
+		$('#image-Banner').show();
+		$('#imageBanner').removeClass('has-error');
+	//	$('#category_page_image').removeClass('field-validate');
+	}
+});
+
 
 //show modal
 $(document).on('click','.add-image', function(){

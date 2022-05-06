@@ -95,6 +95,14 @@ class Categories extends Model
                             ->orWhere('iconTable.image_type', '=', 'ACTUAL');
                     });
             })
+            ->LeftJoin('image_categories as bannerTable', function ($join) {
+                $join->on('bannerTable.image_id', '=', 'categories.categories_page_image')
+                    ->where(function ($query) {
+                        $query->where('bannerTable.image_type', '=', 'THUMBNAIL')
+                            ->where('bannerTable.image_type', '!=', 'THUMBNAIL')
+                            ->orWhere('bannerTable.image_type', '=', 'ACTUAL');
+                    });
+            })
 
             ->LeftJoin('categories_description as parent_description', function ($join) {
                 $join->on('parent_description.categories_id', '=', 'categories.parent_id')
@@ -103,9 +111,9 @@ class Categories extends Model
                     });
             })
             ->select('categories.categories_id as id', 'categories.categories_image as image',
-            'categories.categories_icon as icon',  'categories.created_at as date_added',
+            'categories.categories_page_image  as categories_page_image','categories.categories_icon as icon',  'categories.created_at as date_added',
             'categories.updated_at as last_modified', 'categories_description.categories_name as name',
-            'categories_description.language_id','categoryTable.path as imgpath','iconTable.path as iconpath', 
+            'categories_description.language_id','bannerTable.path as bannerpath','categoryTable.path as imgpath','iconTable.path as iconpath', 
             'categories.categories_status  as categories_status', 'parent_description.categories_name as parent_name')
          
             ->where('categories_description.language_id', '1')
@@ -240,14 +248,15 @@ class Categories extends Model
         return $categories;
     }
 
-    public function insert($uploadImage,$date_added,$parent_id,$uploadIcon,$categories_status){
+    public function insert($uploadImage,$date_added,$parent_id,$uploadIcon,$categories_status,$uploaBanner){
         $categories = DB::table('categories')->insertGetId([
             'categories_image'   =>   $uploadImage,
             'created_at'		 =>   $date_added,
             'parent_id'		 	 =>   $parent_id,
             'categories_icon'	 =>	  $uploadIcon,
             'categories_slug'    =>   'Null',
-            'categories_status' => $categories_status
+            'categories_status' => $categories_status,
+            'categories_page_image'=> $uploaBanner,
         ]);
         return $categories;
     }
@@ -277,7 +286,7 @@ class Categories extends Model
         return $category;
     }
 
-    public function updaterecord($categories_id,$uploadImage,$uploadIcon,$last_modified,$parent_id,$slug,$categories_status){
+    public function updaterecord($categories_id,$uploadImage,$uploadIcon,$last_modified,$parent_id,$slug,$categories_status,$uploadBanner){
         DB::table('categories')->where('categories_id', $categories_id)->update(
         [
             'categories_image'   =>   $uploadImage,
@@ -285,7 +294,8 @@ class Categories extends Model
             'updated_at'  	     =>   $last_modified,
             'parent_id' 		     =>   $parent_id,
             'categories_slug'    =>   $slug,
-            'categories_status'=>$categories_status
+            'categories_status'=>$categories_status,
+            'categories_page_image'=>$uploadBanner
         ]);
   
         if($categories_status == 0){
@@ -372,8 +382,9 @@ class Categories extends Model
         $editSubCategory = DB::table('categories')
             ->leftJoin('image_categories as categoryTable','categoryTable.image_id', '=', 'categories.categories_image')
             ->leftJoin('image_categories as iconTable','iconTable.image_id', '=', 'categories.categories_icon')
-            ->select('categories.categories_id as id', 'categories.categories_image as image', 'categories.categories_icon as icon',  'categories.created_at as date_added', 'categories.updated_at as last_modified',
-            'categories.categories_slug as slug', 'categories.categories_status  as categories_status', 'categories.parent_id as parent_id','categoryTable.path as imgpath','iconTable.path as iconpath')
+            ->leftJoin('image_categories as bannerTable','bannerTable.image_id', '=', 'categories.categories_page_image')
+            ->select('categories.categories_id as id', 'categories.categories_image as image','categories.categories_page_image as categories_page_image', 'categories.categories_icon as icon',  'categories.created_at as date_added', 'categories.updated_at as last_modified',
+            'categories.categories_slug as slug', 'categories.categories_status  as categories_status', 'categories.parent_id as parent_id','categoryTable.path as imgpath','iconTable.path as iconpath','bannerTable.path as bannerpath')
             ->where('categories.categories_id', $request->id)->get();
         return $editSubCategory;
     }

@@ -52,6 +52,7 @@
                                         <tr>
                                             <th>{{ trans('labels.ID') }}</th>
                                             <th>{{ trans('labels.Values') }}</th>
+                                            <th>Price Prefix</th>
                                             <th>Prices</th>
                                             <th>{{ trans('labels.Action') }}</th>
                                         </tr>
@@ -76,10 +77,13 @@
                                                             </p>
                                                         @endforeach
                                                     </td>
+
                                                     {!! Form::open(array('url' =>'admin/products/attributes/options/values/price/update', 'method'=>'post', 'class' => 'form-horizontal form-validate', 'enctype'=>'multipart/form-data')) !!}
 
                                                     {!! Form::hidden('products_options_values_id',$data->products_options_values_id , array('class'=>'form-control products_options_values_id',"rel"=>$data->products_options_values_id)) !!}
-
+                                                    <td>
+                                                    <input type="text" name="price_prefix" class="form-control" value="{{isset($data->price_prefix)?$data->price_prefix:''}}" placeholder="Prefix (+ or - )"/> 
+                                                    </td>                        
                                                     <td>
                                                        <input type="text" name="prices" class="form-control" value="{{isset($data->prices)?$data->prices:''}}" placeholder="Price"/>
                                                     </td>

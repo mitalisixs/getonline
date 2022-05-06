@@ -30,7 +30,7 @@
                             <div class="col-xs-12">
                                 <div class="box box-info">
                                     <!-- /.box-header -->
-                                    <!-- form start -->
+                                    <!-- form start -->units
                                     <div class="box-body">
                                         @if( count($errors) > 0)
                                         @foreach($errors->all() as $error)
@@ -206,16 +206,21 @@
                                                         </span>
 
                                                     </div>
-                                                    <div class="col-sm-10 col-md-4" style="padding-left: 0;">
-                                                        <select class="form-control" name="products_weight_unit">
-                                                            @if($result['units']) !== null)
-                                                            @foreach($result['units'] as $unit)
-                                                            <option value="{{$unit->units_name}}" @if($result['product'][0]->products_weight_unit==$unit->units_name) selected @endif>{{$unit->units_name}}</option>
-                                                            @endforeach
-                                                            @endif
-                                                        </select>
-                                                    </div>
+                                                    
                                                 </div>
+												<div class="form-group">
+													 <label for="name" class="col-sm-2 col-md-3 control-label">Units</label>
+													 <div class="col-sm-10 col-md-4">
+															<select class="form-control" name="products_weight_unit">
+																<option value="">Select Unit</option>
+																@if($result['units']) !== null)
+																@foreach($result['units'] as $unit)
+																<option value="{{$unit->units_name}}" @if($result['product'][0]->products_weight_unit==$unit->units_name) selected @endif>{{$unit->units_name}}</option>
+																@endforeach
+																@endif
+															</select>
+														</div>
+                                                    </div>
                                             </div>
 
                                             <div class="col-xs-12 col-md-6">

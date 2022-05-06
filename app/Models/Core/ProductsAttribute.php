@@ -358,13 +358,17 @@ class ProductsAttribute extends Model
       }
     }
     public function updateprices($request){
+    
       $value_id = $request->products_options_values_id;
+      $request->price_prefix = ( $request->price_prefix  == "")? "+": $request->price_prefix ;
+
       DB::table('products_options_values')
           ->where('products_options_values_id','=',$value_id)
-          ->update(['prices' =>  $request->prices]);
+          ->update(['prices' =>  $request->prices,"price_prefix"=> $request->price_prefix]);
+      
       DB::table('products_attributes')
       ->where('options_values_id','=',$value_id)
-      ->update(['options_values_price' =>  $request->prices]);
+      ->update(['options_values_price' =>  $request->prices,"price_prefix" =>  $request->price_prefix]);
   
     }
 }
