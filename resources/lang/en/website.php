@@ -897,7 +897,6 @@ return [
 	'swift'=>'Swift',
 	'View Order Detail'=>'View Order Detail',
 	'TAGS'=>'TAGS',
-	'write your message here'=>'write your message here'
-
-	
+	'write your message here'=>'write your message here',
+	"Reached Maximum Quantity"=>"For bulk orders please contact us on +91 95863 65566 or e-mail us at info@devtatvaa.com"
 ];

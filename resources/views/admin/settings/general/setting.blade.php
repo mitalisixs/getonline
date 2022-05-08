@@ -163,6 +163,25 @@
                                                     {{ trans('labels.Min Order Price Text') }}</span>
                                             </div>
                                         </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 col-md-3 control-label">COD charges for value</label>
+                                            <div class="col-sm-10 col-md-4">
+                                                {!! Form::text($result['settings'][138]->name, $result['settings'][138]->value, array('class'=>'form-control', 'id'=>$result['settings'][138]->name)) !!}
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">
+                                                This COD charges will apply if order price is less than 'Free COD On Min Order Price'. For inactive set limit '0'</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 col-md-3 control-label">Free COD On Min Order Price</label>
+                                            <div class="col-sm-10 col-md-4">
+                                                {!! Form::text($result['settings'][139]->name, $result['settings'][139]->value, array('class'=>'form-control', 'id'=>$result['settings'][139]->name)) !!}
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">
+                                                COD will be free if order price exceed this limit. For inactive set limit '0'
+</span>
+                                            </div>
+                                        </div>
 
                                         <hr>
                                         <h4>{{ trans('labels.OurInfo') }}</h4>

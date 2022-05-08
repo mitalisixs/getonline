@@ -491,6 +491,8 @@ function getQuantity(){
 				if(currentVal < maximumVal ){
 					// Increment
 					jQuery('.qty').val(currentVal + 1);
+				}else{
+					notificationWishlist("@lang('website.Reached Maximum Quantity')");
 				}
 			}
 
@@ -765,6 +767,8 @@ jQuery('.qtypluscart').click(function(e){
 				if(currentVal < maximumVal ){
 					// Increment
 					jQuery(this).parents('span').prev('.qty').val(currentVal + 1);
+				}else{
+					notificationWishlist("@lang('website.Reached Maximum Quantity')");
 				}
 			}
 
@@ -1109,7 +1113,7 @@ $('#customers_dob').datepicker({
 
 
 // paymentMethods();
-function paymentMethods(){
+function paymentMethods($reload="false"){
 	jQuery('#loader').show();
 	var payment_method = jQuery(".payment_method:checked").val();
 	jQuery(".payment_btns").hide();
@@ -1121,9 +1125,13 @@ function paymentMethods(){
 		type: "POST",
 		data: '&payment_method='+payment_method,
 		success: function (res) {
-			jQuery('#loader').hide();
+		//	jQuery('#loader').hide();
+			if($reload == "true"){
+				window.location = window.location
+			}
 		},
 	});
+	
 
 	//midtrans transaction
 	//jQuery(document).on('click', '#midtrans_button', function(e){
@@ -1164,6 +1172,8 @@ function paymentMethods(){
 			});
 		}
 		
+		
+
 
 	//});
 
@@ -1445,7 +1455,7 @@ jQuery( document ).ready( function () {
 
 @if(Request::path() == 'checkout')
 	getZonesBilling();
-	paymentMethods();
+	paymentMethods("flase");
 @endif
 
 //$.noConflict();
