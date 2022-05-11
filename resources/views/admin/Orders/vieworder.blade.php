@@ -115,7 +115,7 @@
                     {{  $products->products_name }}<br>
                 </td>
                 <td>
-                    {{  $products->products_model }}
+                    {{  $products->product_sku }}
                 </td>
                 <td>
                 @foreach($products->attribute as $attributes)

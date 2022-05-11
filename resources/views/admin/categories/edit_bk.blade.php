@@ -45,7 +45,6 @@
                                         {!! Form::hidden('id', $result['editSubCategory'][0]->id , array('class'=>'form-control', 'id'=>'id')) !!}
                                         {!! Form::hidden('oldImage', $result['editSubCategory'][0]->image , array('id'=>'oldImage')) !!}
                                         {!! Form::hidden('oldIcon', $result['editSubCategory'][0]->icon , array('id'=>'oldIcon')) !!}
-                                        {!! Form::hidden('oldBanner', $result['editSubCategory'][0]->categories_page_image , array('id'=>'oldBanner')) !!}
 
                                         @if($result['editSubCategory'][0]->id >0 )
                                         <div class="form-group">
@@ -189,59 +188,6 @@
                                                 <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.OldImage') }}</span>
                                                 <br>
                                                 <img src="{{asset($result['editSubCategory'][0]->iconpath)}}" alt="" width=" 100px">
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group" id="imageBanner">
-                                            <label for="name" class="col-sm-2 col-md-3 control-label">Category Page Image</label>
-                                            <div class="col-sm-10 col-md-4">
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="ModalmanufacturedCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" id="closemodal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                                                <h3 class="modal-title text-primary" id="myModalLabel">{{ trans('labels.Choose Image') }} </h3>
-                                                              </div>
-                                                            <div class="modal-body manufacturer-image-embed">
-                                                                @if(isset($allimage))
-                                                                <select class="image-picker show-html field-validate" name="categories_page_image" id="select_img">
-                                                                    <option value=""></option>
-                                                                    @foreach($allimage as $key=>$image)
-                                                                      <option data-img-src="{{asset($image->path)}}" class="imagedetail" data-img-alt="{{$key}}" value="{{$image->id}}"> {{$image->id}} </option>
-                                                                    @endforeach
-                                                                </select>
-                                                                @endif
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                              <a href="{{url('admin/media/add')}}" target="_blank" class="btn btn-primary pull-left" >{{ trans('labels.Add Image') }}</a>
-                                                              <button type="button" class="btn btn-default refresh-image"><i class="fa fa-refresh"></i></button>
-                                                              <button type="button" class="btn btn-primary" id="selectedBanner" data-dismiss="modal">{{ trans('labels.Done') }}</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="imageselected">
-                                                  {!! Form::button("Category Page Image", array('id'=>'category_page_image','class'=>"btn btn-primary", 'data-toggle'=>"modal", 'data-target'=>"#ModalmanufacturedCategory" )) !!}
-                                                  <br>
-                                                  <div id="selectedBannerThumbmail" class="selectedthumbnail col-md-5"> </div>
-                                                  <div class="closimage">
-                                                      <button type="button" class="close pull-left image-close " id="image-Banner"
-                                                        style="display: none; position: absolute;left: 105px; top: 54px; background-color: black; color: white; opacity: 2.2; " aria-label="Close">
-                                                          <span aria-hidden="true">&times;</span>
-                                                      </button>
-                                                  </div>
-                                                </div>
-                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.CategoryIconText') }}</span>
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="name" class="col-sm-2 col-md-3 control-label"></label>
-                                            <div class="col-sm-10 col-md-4">
-                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.OldImage') }}</span>
-                                                <br>
-                                                <img src="{{asset($result['editSubCategory'][0]->bannerpath)}}" alt="" width=" 100px">
 
                                             </div>
                                         </div>
