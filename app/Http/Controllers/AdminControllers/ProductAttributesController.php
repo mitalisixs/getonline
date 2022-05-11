@@ -40,7 +40,6 @@ class ProductAttributesController extends Controller
         $result['commonContent'] = $this->Setting->commonContent();        
         return view("admin.products_attributes.index", $title)->with('result', $result);
     }
-    
 
     public function add(Request $request)
     {

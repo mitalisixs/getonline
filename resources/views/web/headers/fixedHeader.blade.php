@@ -18,7 +18,7 @@
 
                           </div>
                     </div>
-                    <div class="col-12 col-lg-7" style="position: static;">
+                    <div class="col-12 col-lg-10" style="position: static;">
                       <nav id="navbar_header_9" class="navbar navbar-expand-lg  bg-nav-bar">
                   
                         <div class="navbar-collapse">

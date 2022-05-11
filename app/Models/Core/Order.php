@@ -4,7 +4,6 @@ namespace App\Models\Core;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\AdminControllers\AlertController;
 
 class Order extends Model
 {
@@ -69,7 +68,7 @@ class Order extends Model
                                 ->orWhere('image_categories.image_type', '=', 'ACTUAL');
                         });
                 })
-                ->select('orders_products.*', 'image_categories.path as image')
+                ->select('orders_products.*', 'image_categories.path as image','products.product_sku')
                 ->where('orders_products.orders_id', '=', $orders_id)->get();
             $i = 0;
             $total_price = 0;
@@ -209,9 +208,6 @@ class Order extends Model
         $data['customers_id'] = $orders[0]->customers_id;
         $data['orders_id'] = $orders_id;
         $data['status'] = $status[0]->orders_status_name;
-      //  $notification = new AlertController();
-       // $send = $notification->sendOrderStatusChangeMessage($orders[0]->customers_id, $orders_id, $status[0]->orders_status_name);
-
 
         return 'success';
     }    

@@ -1,6 +1,3 @@
 /storage/framework/sessions/
-/storage/framework/views.
+/storage/framework/views/
 /storage/logs.
-/public/assets/temp_files
-/public/images
-

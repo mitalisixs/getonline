@@ -74,7 +74,7 @@
                        <a href="{{url('shipping-address')}}" class="main-manu btn btn-primary">@lang('website.Shipping Address')</a>
                        <a href="{{url('logout')}}" class="main-manu btn btn-primary">@lang('website.Logout')</a>
                       <?php }else{ ?>
-                        <div class="nav-link">@lang('website.Welcome')!</div>
+
                          <a href="{{ URL::to('/login')}}" class="main-manu btn btn-primary"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;@lang('website.Login/Register')</a>
                        <?php } ?>
                   </nav>

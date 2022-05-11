@@ -35,6 +35,8 @@
                           <option value="3" @if(request()->get('sliderType') == 3) selected @endif>@lang('labels.Right Slider with Thumbs (770x400)') </option>
                           <option value="4" @if(request()->get('sliderType') == 4) selected @endif>@lang('labels.Right Slider with Navigation (770x400)')  </option>
                           <option value="5" @if(request()->get('sliderType') == 5) selected @endif>@lang('labels.Left Slider with Thumbs (770x400)')</option>
+	                      <option value="6" @if(request()->get('sliderType') == 6) selected @endif> Middle Full Screen Slider (1600x420)</option>
+						  <option value="7" @if(request()->get('sliderType') == 7) selected @endif>Bottom Full Screen Slider (1600x420)</option>
 
                       </select>
                       {{-- <button class="btn btn-primary " id="submit" type="submit"><span class="glyphicon glyphicon-search"></span></button> --}}
@@ -92,6 +94,10 @@
                               @lang('labels.Right Slider with Navigation (770x400)')
                               @elseif($sliders->carousel_id == 5)
                               @lang('labels.Left Slider with Thumbs (770x400)')
+							   @elseif($sliders->carousel_id == 6)
+                              Middle Full Screen Slider (1600x420)
+							   @elseif($sliders->carousel_id == 7)
+                              Bottom Full Screen Slider (1600x420)
                               @endif</td>
 
 

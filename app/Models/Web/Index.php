@@ -567,7 +567,7 @@ class Index extends Model
                     }
 
                     $ul .= '<li class="nav-item dropdown "><a class="nav-link  ' . $dropright . '" ' . $link . ' >
-                ' . $parents->name . '
+                ' . ucfirst(strtolower($parents->name)) . '
                 </a>';
 
                     if (isset($parents->childs)) {
@@ -614,7 +614,7 @@ class Index extends Model
 
             $contents .= '
                 <a class="dropdown-item" ' . $link . '>
-                    ' .$child->name . '
+                    ' .ucfirst(strtolower($child->name)) . '
                 </a>
             ';
             if (isset($child->childs)) {
@@ -690,7 +690,7 @@ class Index extends Model
                     }
 
                     $ul .= '<a class="main-manu btn btn-primary"'  . $dropright . ' ' . $link  .' >
-                ' . $parents->name;
+                ' .ucfirst(strtolower($parents->name));
                     if (isset($parents->childs)) {
                         $ul .= '<span><i class="fas fa-chevron-down"></i></span>
                             <span><i class="fas fa-chevron-up"></i></span>';
@@ -714,14 +714,14 @@ class Index extends Model
         }
     }
 
-    private function childMenuMobile($childs, $i)
+    private function childMenuMobile($childs, $i,$subchild="")
     {
         $contents = '';
         foreach ($childs as $key => $child) {
 
             if (isset($child->childs)) {
                 $i++;
-                $dropright = 'data-toggle="collapse" href="#shoppages'.$i.'" role="button" aria-expanded="false" aria-controls="shoppages'.$i.'"';
+                $dropright = 'data-toggle="collapse" href="#shoppageschild'.$i.'" role="button" aria-expanded="false" aria-controls="shoppageschild'.$i.'"';
             } else {
                 $dropright = '';
             }
@@ -742,8 +742,8 @@ class Index extends Model
             } elseif ($child->type == 5) {
                 $link = ' href="' . url('') . $child->link . '"';
             }
-            $contents .= '<a class="main-manu btn btn-primary"'  . $dropright . ' ' . $link  .' >
-            ' . $child->name;
+            $contents .= '<a class="main-manu btn btn-primary '.$subchild.' "'  . $dropright . ' ' . $link  .' >
+            ' . ucfirst(strtolower($child->name));
                 if (isset($child->childs)) {
                     $contents .= '<span><i class="fas fa-chevron-down"></i></span>
                         <span><i class="fas fa-chevron-up"></i></span>';
@@ -752,11 +752,13 @@ class Index extends Model
 
             if (isset($child->childs)) {
 
-                $contents .= '<div class="sub-manu collapse multi-collapse" id="shoppages'.$i.'">
+                $contents .= '<div class="sub-manu collapse multi-collapse" id="shoppageschild'.$i.'">
                         <ul class="unorder-list"><li class="">';
-                        $contents .= $this->childMenuMobile($child->childs, $i);
+                        $contents .= $this->childMenuMobile($child->childs, $i,"sub_child_menu");
                         $contents .= '</li></ul>
                         </div>';
+						$i++;
+
             } 
 
         }

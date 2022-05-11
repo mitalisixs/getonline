@@ -126,7 +126,7 @@ class OrdersController extends Controller
 
             $orders_products = DB::table('orders_products')
                 ->join('products', 'products.products_id', '=', 'orders_products.products_id')
-                ->select('orders_products.*', 'products.products_image as image')
+                ->select('orders_products.*', 'products.products_image as image','products.product_sku')
                 ->where('orders_products.orders_id', '=', $orders_id)->get();
             $i = 0;
             $total_price = 0;

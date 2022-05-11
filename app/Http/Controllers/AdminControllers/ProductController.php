@@ -484,211 +484,433 @@ class ProductController extends Controller
         $result['commonContent'] = $this->Setting->commonContent();
         return view("admin.products.productcsv")->with('result', $result);
     }
+ public function importSubmit(Request $request)
 
-    public function importSubmit(Request $request)
     {
+
        
+
         // $products= $this->products->get();
+
         // foreach ($products as $product){
+
         //     $pro=Products::where('products_id',$product->products_id)->first();
+
         //     $pro->product_sku = Str::random(30);
+
         //     $pro->save();
 
+
+
         // }
+
 		
+
         $log = "";
+
         //--- Validation Section
+
         $rules = [
+
             'csvfile'      => 'required|mimes:csv,txt',
+
         ];
+
+
 
         $validator = Validator::make($request->all(), $rules);
 
+
+
         if ($validator->fails()) {
+
             return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
+
         }
+
 		$csvData = file_get_contents($request->file('csvfile'));
+
 		$lines = explode(PHP_EOL, $csvData);
+
 		$array = array();
+
 		$lines = array_map("utf8_encode", $lines); //added
 
+
+
 		foreach ($lines as $line) {
-			
-			$array[] = str_getcsv($line);
-		}
-		
-	
-    /*    $filename = '';
-        if ($file = $request->file('csvfile'))
-        {
-            $filename = time().'-'.$file->getClientOriginalName();
-            $file->move('assets/temp_files',$filename);
-        }
 
 			
+
+			$array[] = str_getcsv($line);
+
+		}
+
+		
+
+	
+
+    /*    $filename = '';
+
+        if ($file = $request->file('csvfile'))
+
+        {
+
+            $filename = time().'-'.$file->getClientOriginalName();
+
+            $file->move('assets/temp_files',$filename);
+
+        }
+
+
+
+			
+
+
 
         //$filename = $request->file('csvfile')->getClientOriginalName();
+
         //return response()->json($filename);
+
         $datas = "";
 
+
+
         $file = fopen(public_path('assets/temp_files/'.$filename),"r");*/
+
         $i = 1;
+
 		
+
     //    while (($line = fgetcsv($file)) !== FALSE) {
+
 		//dd($array);
+
       
+
    //     echo "<pre>";print_r($subCategoriesArray);echo "</pre>";exit;
+
         //
+
 	
+
             unset($array[0]);
+
 		  foreach ($array as $line) {
+
+		      \Log::info("---------main loop---------------------");
+
+		   
+
               $input = [];
+
               $line = $this->sanitize($line);
+
 			  $pID= $sId =$cID=0;
+
+			  
+
                 if( count($line)>9 && ($line[0]!="" || $line[0]!=null))
+
                 {
+
 					
+
                     if (!Products::where('product_sku',$line[0])->exists()){
-					
+
+                        \Log::info("------------------------------");	
+
+			            \Log::info($line);		
+
                         $data = new Products;
 
+
+
                         $input['products_type'] = '0';
+
                         $input['product_sku'] = $line[0];
 
+
+
                         $line[1]=trim(strtolower($line[1]));
+
                         $line[2]=trim(strtolower($line[2]));
+
                         $line[3]=trim(strtolower($line[3]));
+
                         
+
                         $subCategoriesArray=[];
+
                         $subCategories = $this->category->allcategories(1)->toArray();
+
+                        \Log::info("---------subCategories---------------------");	
+
+                         \Log::info($subCategories);	
+
                         foreach($subCategories as $cat){
+
                             $cat=(array) $cat;
+
                             $subCategoriesArray[strtolower($cat['slug']).'_'.$cat['parent_id']]=$cat;
+
                         }
+
+
 
                         //	dd($subCategories);
+
       			        //	dd($subCategoriesArray);
+
 					 //   echo "--------------------$i------------------------------"."<br/>";
+
 					//    echo "<pre>";print_r($subCategoriesArray);echo "</pre>";
+
                         $uploadImage=540;
+
 						if($line[1]!=""){
+
+						     \Log::info("---------$line[1]---------------------");
+
 							$lin1_slug = $this->myVarsetting->slugify($line[1]);
+
 							
+
 							if(isset($subCategoriesArray[$lin1_slug.'_'.'0']) && $subCategoriesArray[$lin1_slug.'_'.'0']["parent_id"]==0 ){
+
+							      \Log::info("--------find---------------------");
+
 								
-								$id= $subCategoriesArray[$line[1].'_'.'0']['id'];
+
+								$id= $subCategoriesArray[$lin1_slug.'_'.'0']['id'];
+
 								$input['categories'][]= $id;
+
 								#echo "in parent category--->".$id."------".$line[1]."</br>";
+
 								
+
 							}else{
+
+							     \Log::info("--------not find---------------------");
+
+
 
 								$id = $this->mycategory->insertData(["categoryName_1"=>$line[1],"categoryName"=>$line[1],"parent_id"=>0,"image_id"=>$uploadImage,"image_icone"=>$uploadImage,"categories_status"=>1,"insert_api"=>1]);
+
 								$input['categories'][] = $id;
-								$subCategoriesArray[$line[1].'_'.'0']=["id"=>$id,"parent_id"=>0];
+
+								$subCategoriesArray[$lin1_slug.'_'.'0']=["id"=>$id,"parent_id"=>0];
+
 							  //  $subCategoriesArray[$line[1].'_'.'0']=$cat;
+
 								#echo "not parent category--->".$id."------".$line[1]."</br>";
 
+
+
 							}
+
 						}
+
 						$pID=$id;
+
                     //    echo "<pre>pid---->";print_r($pID);echo "</pre>";
+
 						if($line[2]!=""){
+
 							
+
 							$lin1_slug2 = $this->myVarsetting->slugify($line[2]);
+
 							//echo "<pre>sid check---->";print_r($lin1_slug2."_".$pID);echo "</pre>";
+
 							if(isset($subCategoriesArray[$lin1_slug2."_".$pID] ) && $subCategoriesArray[$lin1_slug2."_".$pID]["parent_id"]==$pID ){
+
 								$sId= $subCategoriesArray[$lin1_slug2."_".$pID]['id'];
+
 								$input['categories'][]= $sId;
+
 								#echo "in sub category--->".$sId."------".$line[2]."</br>";
+
 							}else{
+
+
 
 								$sId = $this->mycategory->insertData(["categoryName_1"=>$line[2],"categoryName"=>$line[2],"parent_id"=>$pID,"image_id"=>$uploadImage,"image_icone"=>$uploadImage,"categories_status"=>1,"insert_api"=>1]);
+
 								$input['categories'][] = $sId;
-								$subCategoriesArray[$line[2]."_".$pID]=["id"=>$sId,"parent_id"=>$pID];
+
+								$subCategoriesArray[$lin1_slug2."_".$pID]=["id"=>$sId,"parent_id"=>$pID];
+
 								#echo "not in sub category--->".$sId."------".$line[2]."</br>";
+
 							}
+
 						}
+
                         //	dd($line);
+
 						if($line[3]!=""){
+
 							$lin1_slug3 = $this->myVarsetting->slugify($line[3]);
+
 						//	echo "<pre>sid check---->";print_r($lin1_slug3."_".$sId);echo "</pre>";
+
 							if(isset($subCategoriesArray[$lin1_slug3."_".$sId]) && $subCategoriesArray[$lin1_slug3."_".$sId]["parent_id"]==$sId ){
+
 								$cId= $subCategoriesArray[$lin1_slug3."_".$sId]['id'];
+
 								$input['categories'][]=  $cId;
+
 								#echo "in child category--->".$cId."------".$line[3]."</br>";
+
 							}else{
+
 								$cId = $this->mycategory->insertData(["categoryName_1"=>$line[3],"categoryName"=>$line[3],"parent_id"=>$sId,"image_id"=>$uploadImage,"image_icone"=>$uploadImage,"categories_status"=>1,"insert_api"=>1]);
+
 								$input['categories'][] = $cId;
-								$subCategoriesArray[$line[3]."_".$sId]=["id"=>$cId,"parent_id"=>$sId];
+
+								$subCategoriesArray[$lin1_slug3."_".$sId]=["id"=>$cId,"parent_id"=>$sId];
+
 								#echo "not in child category--->".$cId."------".$line[3]."</br>";
+
 							}
+
 						}
+
 					
+
                         
+
 					
+
                         $image_id=1;
+
                         
+
                         if($line[5]!=""){
+
 							//dd("test");
+
                             $image_id = $this->myimages->uploadImageFromUrl($line[5]);
+
                         
+
                         }
+
 					
+
                         $input['products_name_1'] = $line[4];
+
                         $input['products_description_1'] = $line[6];
+
                         $input['products_price'] =  $line[7];
+
                         $input['products_min_order'] =  $line[9];
+
                         $input['products_max_stock'] =  $line[10];
+
                         $input['products_model'] = $line[11];
+
                         $input['products_weight']= $line[12];
+
                         $input['products_status']= $line[13];
+
                         $input['is_feature']= $line[14];
+
                         $input["image_id"]=$image_id;
+
                     
+
                         $input["tax_class_id"]='';
+
                         $input["expires_date"]='';
+
                         $input['products_video_link']= '';
+
                         $input["manufacturers_id"]='';
+
                         $input["products_weight_unit"]='';
+
                         $input["products_left_banner_1"]='';
+
                         $input["products_right_banner_1"]='';
+
                         $input["products_weight_unit"]='';
+
                         $input["products_url_1"]='';
+
                         $input["isSpecial"]='';
+
                         $input["isFlash"]='';
+
                         $input["products_quantity"]= $line[8];
+
                         
+
                       //  echo "<pre>";print_r($input);echo "</pre>";
+
                         //dd($input);
+
                         $product_id = $this->products->insertWithArray($input);
+
 		                $this->products->insertProductImages(json_decode(json_encode(["products_id"=>$product_id,"image_id"=>$image_id,"htmlcontent"=>"bulkupload"])));
 
+
+
                         $inventory_ref_id = DB::table('inventory')->insertGetId([
+
                             'products_id' => $product_id,
+
                             'reference_code' => "bulk_upload",
+
                             'stock' => $line[8],
+
                             'admin_id' => auth()->user()->id,
+
                             //'created_at' => $date_added,
+
                             'purchase_price' => $line[7],
+
                             'stock_type' =>   'in'
+
                     
+
                         ]);
 
+
+
                         #echo "<pre>";print_r($line);echo "</pre>";
+
                     }else{
+
                         $log .= "<br>Row No: ".$i." - Duplicate Product Code!<br>";
+
                     }
+
                 
+
                  }
 
+
+
        
+
         }
+
         #echo "<pre>";print_r($subCategoriesArray);echo "</pre>";exit;
+
      //   fclose($file);
+
 		//--- Redirect Section
+
         $msg = 'Bulk Product File Imported Successfully.<a href="'.route('admin-prod-index').'">View Product Lists.</a>'.$log;
+
         return response()->json($msg);
+
     }
+
+
 
     public function sanitize($line){
         $map = [
