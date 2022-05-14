@@ -24,6 +24,7 @@ class CategoriesController extends Controller
   public function display(){
     $title = array('pageTitle' => Lang::get("labels.SubCategories"));
     $categories = $this->Categories->paginator();
+  
     $result['commonContent'] = $this->Setting->commonContent();
     return view("admin.categories.index",$title)->with('categories', $categories)->with('result', $result);
   }
@@ -108,9 +109,12 @@ class CategoriesController extends Controller
 
         $uploadImage = $request->image_id;
         $uploadIcon  = $request->image_icone;
+        $uploaBanner  = isset($request->categories_page_image)?$request->categories_page_image:0;
+
+
         $categories_status  = $request->categories_status;
 
-        $categories_id = $this->Categories->insert($uploadImage,$date_added,$parent_id,$uploadIcon,$categories_status);
+        $categories_id = $this->Categories->insert($uploadImage,$date_added,$parent_id,$uploadIcon,$categories_status,$uploaBanner);
         $slug_flag = false;
 
         //multiple lanugauge with record
@@ -291,8 +295,13 @@ class CategoriesController extends Controller
      }	else{
          $uploadIcon = $request->oldIcon;
      }
-
-     $updateCategory = $this->Categories->updaterecord($categories_id,$uploadImage,$uploadIcon,$last_modified,$parent_id,$slug,$categories_status);
+     if($request->categories_page_image !==null){
+      $uploadBanner= $request->categories_page_image;
+     }else{
+      $uploadBanner = $request->oldBanner;
+     }
+     
+    $updateCategory = $this->Categories->updaterecord($categories_id,$uploadImage,$uploadIcon,$last_modified,$parent_id,$slug,$categories_status,$uploadBanner);
 
      foreach($languages as $languages_data){
        $categories_name = 'category_name_'.$languages_data->languages_id;

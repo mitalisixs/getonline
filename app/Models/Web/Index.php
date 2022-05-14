@@ -306,7 +306,16 @@ class Index extends Model
             ->orderby('banner_name', 'ASC')
             ->get();
 
+        $units = DB::table('units')
+        ->leftJoin('units_descriptions', 'units_descriptions.unit_id', '=', 'units.unit_id')
+        ->where('is_active', '1')
+        ->where('languages_id', '1')
+        ->pluck("units_name",'units.unit_id')->toArray();
+
+        $result['units'] = $units;
+
         $result['homepagebanners'] = $homepagebanners;
+        
         return $result;
     }
 
@@ -690,7 +699,7 @@ class Index extends Model
                     }
 
                     $ul .= '<a class="main-manu btn btn-primary"'  . $dropright . ' ' . $link  .' >
-                ' . $parents->name;
+                ' . ucfirst($parents->name);
                     if (isset($parents->childs)) {
                         $ul .= '<span><i class="fas fa-chevron-down"></i></span>
                             <span><i class="fas fa-chevron-up"></i></span>';

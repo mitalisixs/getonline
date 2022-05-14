@@ -35,6 +35,16 @@ class Setting extends Model
             ->get();
         return $units;
     }
+    public static function getUnitsArray()
+    {
+
+        $units = DB::table('units')
+            ->leftJoin('units_descriptions', 'units_descriptions.unit_id', '=', 'units.unit_id')
+            ->where('is_active', '1')
+            ->where('languages_id', '1')
+            ->pluck("units_name",'units.unit_id');
+        return $units;
+    }
 
     public function getunits($language_id)
     {

@@ -79,6 +79,8 @@
   <div class="header-maxi bg-header-bar">
     <div class="container">
       <div class="row align-items-center">
+        <div class="col-12 col-sm-12 col-lg-4">
+        </div>
         <div class="col-12 col-sm-12 col-lg-3">
           <a href="{{ URL::to('/')}}" class="logo" data-toggle="tooltip" data-placement="bottom" title="@lang('website.logo')">
             @if($result['commonContent']['settings']['sitename_logo']=='name')
@@ -90,7 +92,8 @@
             @endif
             </a>
         </div>
-        <div class="col-6 col-sm-6 col-md-4 col-lg-9">
+       
+        <div class="col-6 col-sm-6 col-md-4 col-lg-5">
           <ul class="pro-header-right-options">
             <li class="phone-header">
               <a href="#">
@@ -104,6 +107,11 @@
             <li class="dropdown head-cart-content">
               @include('web.headers.cartButtons.cartButton8') 
             </li>
+           <li>
+            <i class="fa fa-tag fa-stack-1x fa-inverse"></i>
+                  <a class="btn btn-secondary" href="{{url('shop?type=special')}}"> 
+                    <span class="block">Sale<span></a>
+                </li>
           </ul>
         </div>
       </div>

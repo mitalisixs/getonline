@@ -258,6 +258,11 @@
                 echo $cates;
                 ?>
                 </div>
+                <?php if($result['detail']['product_data'][0]->products_weight_unit != "") { ?>
+                  <div class="pro-single-info"><b>Unit  :</b>
+                  <?php echo  isset($result["commonContent"]["units"][$result['detail']['product_data'][0]->products_weight_unit])?$result["commonContent"]["units"][$result['detail']['product_data'][0]->products_weight_unit]:$result['detail']['product_data'][0]->products_weight_unit; ?>
+                  </div>
+                <?php } ?>
               
               <div class="pro-single-info"><b>@lang('website.Available') :</b>
 

@@ -1400,6 +1400,7 @@ class Products extends Model
   }
 
   public function addnewstock($request){
+   
     $products_id = $request->products_id;
     $language_id     =   1;
     $product = DB::table('products')
@@ -1428,26 +1429,44 @@ class Products extends Model
             $product =  $product->get();
     $products = $product;
     $date_added	= date('Y-m-d h:i:s');
-    $inventory_ref_id = DB::table('inventory')->insertGetId([
-        'products_id' => $products_id,
-        'reference_code' => $request->reference_code,
-        'stock' => $request->stock,
-        'admin_id' => auth()->user()->id,
-        'created_at' => $date_added,
-        'purchase_price' => $request->purchase_price,
-        'stock_type'  			=>   'in'
-
-    ]);
+   
     if($products[0]->products_type==1){
-        foreach($request->attributeid as $attribute){
-            if(!empty($attribute)){
-              DB::table('inventory_detail')->insert([
-                  'inventory_ref_id' => $inventory_ref_id,
-                  'products_id' => $products_id,
-                  'attribute_id' => $attribute,
-              ]);
+       $combinations = $this->array_cartesian_product($request->values);
+       foreach($combinations as $combination){
+            $inventory_ref_id = DB::table('inventory')->insertGetId([
+                'products_id' => $products_id,
+                'reference_code' => $request->reference_code,
+                'stock' => $request->stock,
+                'admin_id' => auth()->user()->id,
+                'created_at' => $date_added,
+                'purchase_price' => $request->purchase_price,
+                'stock_type'  			=>   'in'
+        
+            ]);
+            foreach($combination as $attribute){
+                if(!empty($attribute)){
+                  DB::table('inventory_detail')->insert([
+                      'inventory_ref_id' => $inventory_ref_id,
+                      'products_id' => $products_id,
+                      'attribute_id' => $attribute,
+                  ]);
+                }
             }
-        }
+
+       }
+
+        
+    }else{
+        $inventory_ref_id = DB::table('inventory')->insertGetId([
+            'products_id' => $products_id,
+            'reference_code' => $request->reference_code,
+            'stock' => $request->stock,
+            'admin_id' => auth()->user()->id,
+            'created_at' => $date_added,
+            'purchase_price' => $request->purchase_price,
+            'stock_type'  			=>   'in'
+    
+        ]);
     }
 
   }
@@ -2166,5 +2185,42 @@ class Products extends Model
         ])
         ->delete();
   }
+  public function get_combinations($arrays) {
+    $result = array(array());
+    foreach ($arrays as $property => $property_values) {
+        $tmp = array();
+        foreach ($result as $result_item) {
+            foreach ($property_values as $property_key => $property_value) {
+                $tmp[] = $result_item + array($property_key => $property_value);
+            }
+        }
+        $result = $tmp;
+    }
+    return $result;
+}
+public function array_cartesian_product($arrays)
+{
+    $result = array();
+    $arrays = array_values($arrays);
+    $sizeIn = sizeof($arrays);
+    $size = $sizeIn > 0 ? 1 : 0;
+    foreach ($arrays as $array)
+        $size = $size * sizeof($array);
+    for ($i = 0; $i < $size; $i ++)
+    {
+        $result[$i] = array();
+        for ($j = 0; $j < $sizeIn; $j ++)
+            array_push($result[$i], current($arrays[$j]));
+        for ($j = ($sizeIn -1); $j >= 0; $j --)
+        {
+            if (next($arrays[$j]))
+                break;
+            elseif (isset ($arrays[$j]))
+                reset($arrays[$j]);
+        }
+    }
+    return $result;
+}
+
 
 }

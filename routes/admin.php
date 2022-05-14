@@ -246,6 +246,9 @@ Route::group(['middleware' => ['installer']], function () {
 
         Route::group(['prefix' => 'options/values'], function () {
             Route::get('/display/{id}', 'ProductAttributesController@displayoptionsvalues')->middleware('view_product');
+            Route::post('/price/update', 'ProductAttributesController@updateprices')->middleware('view_product');
+            Route::get('/prices/{id}', 'ProductAttributesController@displayoptionsprices')->middleware('view_product');
+          
             Route::post('/insert', 'ProductAttributesController@insertoptionsvalues')->middleware('edit_product');
             Route::get('/edit/{id}', 'ProductAttributesController@editoptionsvalues')->middleware('edit_product');
             Route::post('/update', 'ProductAttributesController@updateoptionsvalues')->middleware('edit_product');

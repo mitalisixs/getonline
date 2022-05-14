@@ -83,7 +83,9 @@ ALTER TABLE `inventory_detail` ADD `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD P
 ALTER TABLE `products_options_values` ADD `prices` DOUBLE NULL AFTER `short_description`;
 INSERT INTO `settings` (`id`, `name`, `value`, `created_at`, `updated_at`) VALUES (NULL, 'cod_charge_value', NULL, NULL, NULL), (NULL, 'free_cod_value', NULL, NULL, NULL);
 
-
+ALTER TABLE `inventory_detail` ADD INDEX(`inventory_ref_id`); 
+ALTER TABLE `inventory_detail` ADD INDEX(`products_id`); 
+ALTER TABLE `inventory_detail` ADD INDEX(`attribute_id`); 
 
 
 
