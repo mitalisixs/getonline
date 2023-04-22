@@ -4,9 +4,21 @@
       <div id="quickViewCarousel" class="carousel slide" data-ride="carousel">
           <!-- The slideshow -->
             <div class="carousel-inner">
-              <div class="carousel-item active">                
+              <div class="carousel-item active">  
+                @if(!empty($result['detail']['product_data'][0]->products_video_link))
+                <a class="slider-for__item ex1 fancybox-button iframe">
+                  <iframe width="560" height="315" src="{!! $result['detail']['product_data'][0]->products_video_link !!}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                 
+                </a>
+                @else
                 <img class="img-fluid" src="{{asset('').$result['detail']['product_data'][0]->image_path }}" alt="image">
+                @endif              
+                
               </div>
+              @if(!empty($result['detail']['product_data'][0]->products_video_link))
+              <div class="carousel-item">
+                <img src="{{asset('web/images/miscellaneous/video-thumbnail.jpg')}}"  class="img-fluid"/>
+              </div>
+              @endif
 
               @foreach( $result['detail']['product_data'][0]->images as $key=>$images )
                 @if($images->image_type == 'ACTUAL')
@@ -17,7 +29,7 @@
 
                 @endif
               @endforeach
-
+              
             </div>
             <!-- Left and right controls -->
             <a class="carousel-control-prev btn-secondary swipe-to-top" href="#quickViewCarousel" data-slide="prev">

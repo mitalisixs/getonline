@@ -98,9 +98,8 @@ class AlertController extends Controller
 
 		//setting
 		$setting = $this->setting();
-		$ordersData['app_name'] = $setting[18]->value;
-		$ordersData['orders_data'][0]->admin_email = $setting[70]->value;
-		$ordersData['orders_data'][0]->subject= $setting[79]->value." :  An order has been placed";
+		$ordersData['app_name'] = $setting[19]->value;
+		$ordersData['orders_data'][0]->admin_email = $setting[71]->value;
 
 		if($alertSetting[0]->order_email==1){
 
@@ -108,7 +107,7 @@ class AlertController extends Controller
 			if(!empty($ordersData['orders_data'][0]->admin_email)){
 				try {
 				Mail::send('/mail/orderEmail', ['ordersData' => $ordersData], function($m) use ($ordersData){
-					$m->to($ordersData['orders_data'][0]->admin_email)->subject($ordersData['orders_data'][0]->subject)->getSwiftMessage()
+					$m->to($ordersData['orders_data'][0]->admin_email)->subject(Lang::get("labels.Ecommerce App: An order has been placed"))->getSwiftMessage()
 					->getHeaders()
 					->addTextHeader('x-mailgun-native-send', 'true');
 				});
@@ -123,7 +122,7 @@ class AlertController extends Controller
 				try {
 
 					Mail::send('/mail/orderEmail', ['ordersData' => $ordersData], function($m) use ($ordersData){
-						$m->to($ordersData['orders_data'][0]->email)->subject($ordersData['orders_data'][0]->subject)->getSwiftMessage()
+						$m->to($ordersData['orders_data'][0]->email)->subject(Lang::get("labels.Ecommerce App: An order has been placed"))->getSwiftMessage()
 						->getHeaders()
 						->addTextHeader('x-mailgun-native-send', 'true');
 					});

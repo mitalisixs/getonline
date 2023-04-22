@@ -98,7 +98,11 @@
           </a> --}}
         </div>
       </div>
+      @if(!empty($products->products_video_link))
+      <iframe width="560" height="315" src="{!! $products->products_video_link !!}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      @else
       <img class="img-fluid" src="{{asset('').$products->image_path}}" alt="{{$products->products_name}}">
+      @endif
     </div>
     
     <div class="content">

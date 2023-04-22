@@ -1204,7 +1204,7 @@ return [
 	'NewProductEmailPart2'=>'is addedd with affordable price',
 	'newsNotificationTitle'=>'New News',
 	'newsNotficationMessagePart1'=>'',
-	'fogotPasswordEmailTitle'=>'Ionic Ecommerce Password Recovery',
+	'fogotPasswordEmailTitle'=>'Password Recovery',
 	'WelcometoEcommerce'=>'Welcome to Ecommerce',
 	'forgotNotificationTitle'=>'Forgot Password',
 	'forgotNotificationMessage'=>'Your password has been sent to your email address.',

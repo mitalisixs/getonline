@@ -737,6 +737,7 @@ class Products extends Model
                     ->LeftJoin('image_categories', 'products_images.image', '=', 'image_categories.image_id')
                     ->select('image_categories.path as image_path', 'image_categories.image_type')
                     ->where('products_id', '=', $products_id)
+					->where('image_type', 'ACTUAL')
                     ->orderBy('sort_order', 'ASC')
                     ->get();
 
@@ -868,7 +869,6 @@ class Products extends Model
         return ($result);
 
     }
-    
     //currentstock
     public function productQuantity($data)
     {
@@ -960,20 +960,19 @@ class Products extends Model
             ->orderBy('sort_order', 'ASC')
             ->get();
             //dd($products_images);
-            $imageHtml ='';
-            if(count($products_images)>0){
+             if(count($products_images)>0){
                 $imageHtml = view("web.details.image_couraser",compact('products_images'))->render();
              }else{
-                $products_images = DB::table('products_images')
+               /* $products_images = DB::table('products_images')
                 ->LeftJoin('image_categories', 'products_images.image', '=', 'image_categories.image_id')
                 ->select('image_categories.path as image_path', 'image_categories.image_type')
                 ->where('products_id', '=', $products_id)
                 ->orderBy('sort_order', 'ASC')
                 ->get();
-                $imageHtml = view("web.details.image_couraser",compact('products_images'))->render();
+                $imageHtml = view("web.details.image_couraser",compact('products_images'))->render();*/
              }
              $result['imageHtml'] = $imageHtml;
-
+			
 
       
 

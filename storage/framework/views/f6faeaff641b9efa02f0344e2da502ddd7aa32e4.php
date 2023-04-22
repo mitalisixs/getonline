@@ -144,15 +144,7 @@
                      <?php endif; ?>
                  </div>
                </div>
-                     <?php if(count($result['commonContent']['homeBanners'])>0): ?>
-                      <?php $__currentLoopData = ($result['commonContent']['homeBanners']); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $homeBanners): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                         <?php if($homeBanners->type==7): ?>
-                         <div class="img-main">
-                             <a href="<?php echo e($homeBanners->banners_url); ?>" ><img class="img-fluid" src="<?php echo e(asset('').$homeBanners->path); ?>"></a>
-                         </div>
-                       <?php endif; ?>
-                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                     <?php endif; ?>
+                     
                </form>
                <?php endif; ?>
                <?php endif; ?>

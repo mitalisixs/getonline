@@ -96,7 +96,11 @@
           
         </div>
       </div>
+      <?php if(!empty($products->products_video_link)): ?>
+      <iframe width="560" height="315" src="<?php echo $products->products_video_link; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <?php else: ?>
       <img class="img-fluid" src="<?php echo e(asset('').$products->image_path); ?>" alt="<?php echo e($products->products_name); ?>">
+      <?php endif; ?>
     </div>
     
     <div class="content">

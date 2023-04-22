@@ -143,7 +143,7 @@
                      @endif
                  </div>
                </div>
-                     @if(count($result['commonContent']['homeBanners'])>0)
+                     {{-- @if(count($result['commonContent']['homeBanners'])>0)
                       @foreach(($result['commonContent']['homeBanners']) as $homeBanners)
                          @if($homeBanners->type==7)
                          <div class="img-main">
@@ -151,7 +151,7 @@
                          </div>
                        @endif
                       @endforeach
-                     @endif
+                     @endif --}}
                </form>
                @endif
                @endif

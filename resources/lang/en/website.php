@@ -133,7 +133,7 @@ return [
 
 	'Sale'=>'Sale',
 
-	'Top Selling of the Week'=>'Top Selling of the Week',
+	'Top Selling of the Week'=>'Top Selling product',
 
 	'View Detail'=>'View Detail',
 

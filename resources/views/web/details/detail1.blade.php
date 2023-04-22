@@ -35,7 +35,7 @@
               <div class="slider-for">
                 @if(!empty($result['detail']['product_data'][0]->products_video_link))
                 <a class="slider-for__item ex1 fancybox-button iframe">
-                  {!! $result['detail']['product_data'][0]->products_video_link !!}                 
+                  <iframe width="560" height="315" src="{!! $result['detail']['product_data'][0]->products_video_link !!}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                 
                 </a>
                 @endif
 
@@ -61,7 +61,7 @@
               <div class="slider-nav">
                 @if(!empty($result['detail']['product_data'][0]->products_video_link))
                 <div class="slider-nav__item">
-                  <img src="{{asset('web/images/miscellaneous/video-thumbnail.jpg')}}" alt="Zoom Image"/>
+                  <img src="{{asset('web/images/miscellaneous/video-thumbnail.jpg')}}" height="67" alt="Zoom Image"/>
                 </div>
                 @endif
                 <div class="slider-nav__item">
@@ -240,10 +240,9 @@
               </fieldset>                                          
               <a href="#review" id="review-tabs" data-toggle="pill" role="tab" class="btn-link">{{$result['detail']['product_data'][0]->total_user_rated}} @lang('website.Reviews') </a>
             </div>
-
-          <div class="pro-infos">
-              <div class="pro-single-info"><b>@lang('website.Product ID') :</b>{{$result['detail']['product_data'][0]->products_id}}</div>
-              <div class="pro-single-info"><b>@lang('website.Categroy')  :</b>
+<div class="pro-infos">
+              <div class="pro-single-info"><b>@lang('website.Product ID') : </b>{{$result['detail']['product_data'][0]->products_id}}</div>
+              <div class="pro-single-info"><b>Category :</b>
                 <?php
                 $cates = '';  
                 ?>
@@ -259,13 +258,13 @@
                 ?>
                 </div>
               
-              <div class="pro-single-info"><b>@lang('website.Available') :</b>
+              <div class="pro-single-info"><b>@lang('website.Available') : </b>
 
                 @if($result['detail']['product_data'][0]->products_type == 0)
                   @if($result['detail']['product_data'][0]->defaultStock == 0)
                   <span class="text-secondary">@lang('website.Out of Stock')</span>
                   @else
-                  <span class="text-secondary">@lang('website.In stock')</span>
+                  <span class="text-secondary">@lang('website.In stock') </span>
                   @endif
                 @endif
 
@@ -280,13 +279,14 @@
 
               @if($result['detail']['product_data'][0]->products_min_order>0)
                     @if($result['detail']['product_data'][0]->products_type == 0)
-                  <div class="pro-single-info" id="min_max_setting"><b>@lang('website.Min Order Limit:') :</b><a href="#">{{$result['detail']['product_data'][0]->products_min_order}}</a></div>
+                  <div class="pro-single-info" id="min_max_setting"><b>Min Order Limit : </b><a href="#">{{$result['detail']['product_data'][0]->products_min_order}}</a></div>
                     @elseif($result['detail']['product_data'][0]->products_type == 1)
                       <div class="pro-single-info" id="min_max_setting"></div>
                     @endif
                  
                 @endif
           </div>
+
 
           <form name="attributes" id="add-Product-form" method="post" >
             <input type="hidden" name="products_id" value="{{$result['detail']['product_data'][0]->products_id}}">

@@ -111,10 +111,12 @@ class Order extends Model
         } else {
             $billing_state = 'other';
         }
+		$billing_country = "";
+		if(isset(session('billing_address')->billing_countries_id)){
+			$country = DB::table('countries')->where('countries_id', '=', session('billing_address')->billing_countries_id)->get();
 
-        $country = DB::table('countries')->where('countries_id', '=', session('billing_address')->billing_countries_id)->get();
-
-        $billing_country = $country[0]->countries_name;
+			$billing_country = $country[0]->countries_name;
+		}
 
         $payment_method = session('payment_method');
         $order_information = array();
