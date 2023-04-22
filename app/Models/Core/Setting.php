@@ -238,23 +238,17 @@ class Setting extends Model
         $orders_status = DB::table('alert_settings')->where('alert_id', '=', $request->alert_id)->update([
             'create_customer_email' => $request->create_customer_email,
             'create_customer_notification' => $request->create_customer_notification,
-            'create_customer_message' => $request->create_customer_message,
             'order_status_email' => $request->order_status_email,
             'order_status_notification' => $request->order_status_notification,
-            'order_status_message' => $request->order_status_message,
             'new_product_email' => $request->new_product_email,
             'new_product_notification' => $request->new_product_notification,
-            'new_product_message' => $request->new_product_message,
             'forgot_email' => $request->forgot_email,
             'forgot_notification' => $request->forgot_notification,
-            'forgot_message' => $request->forgot_message,
             'contact_us_email' => $request->email_contact_us,
             'news_email' => $request->news_email,
             'news_notification' => $request->news_notification,
-            'news_message' => $request->news_message,
             'order_email' => $request->order_email,
             'order_notification' => $request->order_notification,
-            'order_message' => $request->order_message,
         ]);
 
         return $orders_status;

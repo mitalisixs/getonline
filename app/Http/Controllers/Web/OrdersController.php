@@ -298,7 +298,6 @@ class OrdersController extends Controller
     //checkout_payment_method
     public function checkout_payment_method(Request $request)
     {
-          
 
         if (session('step') == '2') {
             session(['step' => '3']);
@@ -326,20 +325,7 @@ class OrdersController extends Controller
     //order_detail
     public function paymentComponent(Request $request)
     {
-        //$total_price =  session('total_price');
-        $cod_charges = 0;
-        if($request->payment_method=="cash_on_delivery"){
-           
-            $settingData  = \DB::table('settings')->pluck("value","name");
-            if(!empty($settingData["cod_charge_value"])){
-               $cod_charges = (!empty($settingData["free_cod_value"]) and $settingData["free_cod_value"] >= session('total_price'))? $settingData["cod_charge_value"]:0;
-            }
-       //     $total_price = $total_price +  $cod_charges;     
-        }
-        session(['cod_charges' => $cod_charges]);
-      //  session(['total_price' => $total_price]);
         session(['payment_method' => $request->payment_method]);
-
     }
 
     //generate token
@@ -377,7 +363,6 @@ class OrdersController extends Controller
     public function place_order(Request $request)
     {
         $payment_status = $this->order->place_order($request);
-    
         if ($payment_status == 'success') {
             $message = Lang::get("website.Payment has been processed successfully");
             return redirect('/thankyou');
@@ -722,7 +707,7 @@ class OrdersController extends Controller
         //////////////////////
 
         $payments_setting = $this->order->payments_setting_for_cod();
-      
+
         $cod = array(
             'environment' => 'Live',
             'name' => $payments_setting->name,

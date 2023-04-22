@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Carbon;
 use App\Models\Web\Alert;
-use App\Helpers\Message;
+
 class AlertController extends Controller
 {
 
@@ -51,13 +51,6 @@ class AlertController extends Controller
 		//setting
 		$setting = $this->setting();
 		$existUser[0]->app_name = $setting[18]->value;
-
-
-		if($alertSetting[0]->create_customer_message==1){
-			$message= "Hello, ".$existUser[0]->first_name." ".$existUser[0]->last_name."\n Thank You FOR  Register On Farmercarts 
-			Your Login information:\n Email: ".$existUser[0]->email ;
-			Message::sendMessage($message,"+91".$existUser[0]->phone);
-		}
 
 		if($alertSetting[0]->create_customer_email==1 and !empty($existUser[0]->email)){
 			Mail::send('/mail/createAccount', ['userData' => $existUser], function($m) use ($existUser){
@@ -105,9 +98,8 @@ class AlertController extends Controller
 
 		//setting
 		$setting = $this->setting();
-		$ordersData['app_name'] = $setting[18]->value;
-		$ordersData['orders_data'][0]->admin_email = $setting[70]->value;
-	
+		$ordersData['app_name'] = $setting[19]->value;
+		$ordersData['orders_data'][0]->admin_email = $setting[71]->value;
 
 		if($alertSetting[0]->order_email==1){
 
@@ -168,9 +160,6 @@ class AlertController extends Controller
 			if(!empty($device_id)){
 				$response = $this->$functionName($device_id, $sendData);
 			}
-		}
-		if($alertSetting[0]->order_message==1){
-			$this->sendCreateOrderMessage($ordersData['orders_data'][0]->customers_id,$ordersData['orders_data'][0]->orders_id);
 		}
 	}
 
@@ -329,12 +318,6 @@ class AlertController extends Controller
 
 		//print $response;
 
-
-	}
-	public function sendCreateOrderMessage($customers_id,$order_id){
-		$user = DB::table('users')->where('id', $customers_id)->first();
-		$message= "Hello, ".$user->first_name." ".$user->last_name."\n Thank You For Your order".$order_id ." is booked in Farmercarts.\n"." You can track your order Status at  ".url('/orders') ;
-		Message::sendMessage($message,"+91".$user->phone);
 	}
 
 }

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
-use App\Helpers\Message;
+
  
 class AlertController extends Controller
 {
@@ -224,18 +224,5 @@ class AlertController extends Controller
 		curl_close($ch);
 		
     }
-    public function sendOrderStatusChangeMessage($customers_id,$order_id,$status){
-		$user = DB::table('users')->where('id', $customers_id)->first();
-		$message= "Hello, ".$user->first_name." ".$user->last_name."\n Your order ".$order_id ." is ".$status;
-		Message::sendMessage($message,"+91".$user->phone);
-    }
-    public function sendOrdersDelivery($deliveryboy_id, $orders_id){
-        $ordes=Order::where("orders_id",$orders_id)->first();
-        $user = DB::table('users')->where('id', $ordes->customers_id)->first();
-        $deliveryboy_info=DB::table('users')->where('id', $deliveryboy_id)->first();
-		$message= "Hello, ".$user->first_name." ".$user->last_name."\n Your order ".$orders_id ." is Out for delivery\n Delivery person name : ".$deliveryboy_info->first_name." ".$deliveryboy_info->last_name."
-\n Phone No : ".$deliveryboy_info->phone;
-		Message::sendMessage($message,"+91".$user->phone);
-	}
 
 }

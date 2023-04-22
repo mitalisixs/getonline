@@ -84,7 +84,7 @@ class IndexController extends Controller
         /*********************************************************************/
 
         $data = array('page_number' => '0', 'type' => '', 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
-        $newest_products = $this->products->newproducts($data);
+        $newest_products = $this->products->products($data);
         $result['products'] = $newest_products;
         /*********************************************************************/
         /**                     Compare Counts                              **/
@@ -102,31 +102,31 @@ class IndexController extends Controller
 
 //special products
         $data = array('page_number' => '0', 'type' => 'special', 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
-        $special_products = $this->products->newproducts($data);
+        $special_products = $this->products->products($data);
         $result['special'] = $special_products;
 //Flash sale
 
         $data = array('page_number' => '0', 'type' => 'flashsale', 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
-        $flash_sale = $this->products->newproducts($data);
+        $flash_sale = $this->products->products($data);
         $result['flash_sale'] = $flash_sale;
 // //top seller
         $data = array('page_number' => '0', 'type' => 'topseller', 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
-        $top_seller = $this->products->newproducts($data);
+        $top_seller = $this->products->products($data);
         $result['top_seller'] = $top_seller;
 
 //most liked
         $data = array('page_number' => '0', 'type' => 'mostliked', 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
-        $most_liked = $this->products->newproducts($data);
+        $most_liked = $this->products->products($data);
         $result['most_liked'] = $most_liked;
 
 //is feature
         $data = array('page_number' => '0', 'type' => 'is_feature', 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
-        $featured = $this->products->newproducts($data);
+        $featured = $this->products->products($data);
         $result['featured'] = $featured;
 
-     /*   $data = array('page_number' => '0', 'type' => '', 'limit' => '15', 'is_feature' => 1);
+        $data = array('page_number' => '0', 'type' => '', 'limit' => '15', 'is_feature' => 1);
         $news = $this->news->getAllNews($data);
-        $result['news'] = $news;*/
+        $result['news'] = $news;
 //current time
 
         $currentDate = Carbon\Carbon::now();

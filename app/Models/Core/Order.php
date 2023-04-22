@@ -4,7 +4,6 @@ namespace App\Models\Core;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\AdminControllers\AlertController;
 
 class Order extends Model
 {
@@ -209,9 +208,6 @@ class Order extends Model
         $data['customers_id'] = $orders[0]->customers_id;
         $data['orders_id'] = $orders_id;
         $data['status'] = $status[0]->orders_status_name;
-      //  $notification = new AlertController();
-       // $send = $notification->sendOrderStatusChangeMessage($orders[0]->customers_id, $orders_id, $status[0]->orders_status_name);
-
 
         return 'success';
     }    
@@ -391,7 +387,7 @@ class Order extends Model
 
             ]);
             //dd($product_detail);
-            if ($product_detail->products_type == 1) {
+            if (isset($product_detail) && $product_detail->products_type == 1) {
                 $product_attribute = DB::table('orders_products_attributes')
                     ->where([
                         ['orders_products_id', '=', $products_data->orders_products_id],

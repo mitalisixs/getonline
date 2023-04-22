@@ -40,7 +40,6 @@ class ProductAttributesController extends Controller
         $result['commonContent'] = $this->Setting->commonContent();        
         return view("admin.products_attributes.index", $title)->with('result', $result);
     }
-    
 
     public function add(Request $request)
     {
@@ -88,19 +87,6 @@ class ProductAttributesController extends Controller
         $data['commonContent'] = $this->Setting->commonContent();
         return view("admin.products_attributes.options.index", $title)->with('result', $data);
 
-    }
-    public function displayoptionsprices(Request $request)
-    {
-
-        $title = array('pageTitle' => "Manage Prices");
-        $data = $this->productsattribute->displayoptionsvalues($request);
-        $data['commonContent'] = $this->Setting->commonContent();
-        return view("admin.products_attributes.options.prices", $title)->with('result', $data);
-
-    }
-    public function updateprices(Request $request){
-        $this->productsattribute->updateprices($request);
-        return redirect()->back()->withErrors("Prices Updated Successfully");
     }
 
     public function insertoptionsvalues(Request $request)

@@ -106,13 +106,8 @@ class ProductsController extends Controller
         $categories_status = 1;
         //category
         if (!empty($request->category) and $request->category != 'all') {
-            $result["category_data"]=  DB::table('categories')
-            ->leftJoin('image_categories as categoryTable','categoryTable.image_id', '=', 'categories.categories_image')
-            ->select('categories.categories_id as id', 'categories.categories_image as image',  'categories.created_at as date_added', 'categories.updated_at as last_modified',
-            'categories.categories_slug as slug', 'categories.categories_status  as categories_status', 'categories.parent_id as parent_id','categoryTable.path as imgpath')
-            ->where('categories.categories_slug', $request->category)->where("categoryTable.image_type","ACTUAL")->first();
             $category = $this->products->getCategories($request);
-           
+            
             if(!empty($category) and count($category)>0){
                 $categories_id = $category[0]->categories_id;
                 //for main
@@ -197,12 +192,12 @@ class ProductsController extends Controller
             'categories_id' => $categories_id, 'search' => $search,
             'filters' => $filters, 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
 
-        $products = $this->products->newproducts($data);        
+        $products = $this->products->products($data);        
         $result['products'] = $products;
 
         $data = array('limit' => $limit, 'categories_id' => $categories_id);
-     //   $filters = $this->filters($data);
-      //  $result['filters'] = $filters;
+        $filters = $this->filters($data);
+        $result['filters'] = $filters;
 
         $cart = '';
         $result['cartArray'] = $this->products->cartIdArray($cart);
@@ -215,11 +210,11 @@ class ProductsController extends Controller
 
         //liked products
         $result['liked_products'] = $this->products->likedProducts();
-    //    $result['categories'] = $this->products->categories();
+        $result['categories'] = $this->products->categories();
 
         $result['min_price'] = $min_price;
         $result['max_price'] = $max_price;
-     //   dd($result);
+
         return view("web.shop", ['title' => $title, 'final_theme' => $final_theme])->with('result', $result);
 
     }
@@ -292,7 +287,7 @@ class ProductsController extends Controller
         }
 
         $data = array('page_number' => $request->page_number, 'type' => $type, 'limit' => $limit, 'categories_id' => $categories_id, 'search' => $search, 'filters' => $filters, 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
-        $products = $this->products->newproducts($data);
+        $products = $this->products->products($data);
         $result['products'] = $products;
 
         $cart = '';
@@ -511,25 +506,5 @@ class ProductsController extends Controller
         $result = $this->products->productQuantity($data);
         print_r(json_encode($result));
     }
-    public function getFabric(Request $request){
-        $data = array();
-        $data['products_id'] = $request->products_id;
-        $data['attributes'] = $request->attributeid;
-        $result = $this->products->productFabric($request);
-        print_r(json_encode($result));
-
-    }
-    public function autocomplete(Request $request)
-    {
-        $language_id      =   '1';
-        $res = \DB::table('products')
-        ->leftJoin('products_description', 'products_description.products_id', '=', 'products.products_id')
-        ->select('products.products_id', 'products_description.products_name')
-        ->where('products_description.language_id', '=', $language_id)
-        ->where("products_name","LIKE","%{$request->term}%")
-        ->get();
-        return response()->json($res);
-    }
-
 
 }
