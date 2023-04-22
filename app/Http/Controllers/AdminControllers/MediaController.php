@@ -74,7 +74,7 @@ class MediaController extends Controller
         $image = $request->file('file');
         $extensions = Setting::imageType();dd($request->file->extension());
         if ($request->hasFile('file') and in_array($request->file->extension(), $extensions)) {
-            dd("sss");
+      //      dd("sss");
             // getting size
             $size = getimagesize($image);
             list($width, $height, $type, $attr) = $size;
