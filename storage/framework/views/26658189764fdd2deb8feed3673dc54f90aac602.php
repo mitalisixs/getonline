@@ -60,7 +60,7 @@
       
         <?php if(empty(Cookie::get('cookies_data'))): ?>        
 
-        <div class="alert alert-warning alert-dismissible alert-cookie fade show" role="alert">
+        <div class="alert alert-warning alert-dismissible alert-cookie fade hide" role="alert">
           <div class="container">
               <div class="row align-items-center">
                   <div class="col-12 col-md-8 col-lg-9">

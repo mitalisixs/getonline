@@ -1,0 +1,5 @@
+C:\wamp64\www\getonline\resources\views\admin\products\add.blade.php
+C:\wamp64\www\getonline\resources\views\admin\products\edit.blade.php
+C:\wamp64\www\getonline\public\web\css\app.theme.20.css
+C:\wamp64\www\getonline\resources\views\web\details\detail1.blade.php
+C:\wamp64\www\getonline\resources\views\web\common\product_card_style\1.blade.php

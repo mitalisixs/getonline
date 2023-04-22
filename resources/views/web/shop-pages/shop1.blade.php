@@ -144,6 +144,15 @@
                  </div>
                </div>
                     
+                     {{-- @if(count($result['commonContent']['homeBanners'])>0)
+                      @foreach(($result['commonContent']['homeBanners']) as $homeBanners)
+                         @if($homeBanners->type==7)
+                         <div class="img-main">
+                             <a href="{{ $homeBanners->banners_url}}" ><img class="img-fluid" src="{{asset('').$homeBanners->path}}"></a>
+                         </div>
+                       @endif
+                      @endforeach
+                     @endif --}}
                </form>
                @endif
                @endif

@@ -56,7 +56,20 @@
           <i class="fa fa-circle-o"></i> <?php echo e(trans('labels.currency')); ?>
 
         </a>
-      </li>
+      </li>   
+      <?php } ?> 
+      <?php /* Mitali - manage_check_for_pincode_view */ ?>
+      <?php
+      
+        if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->check_for_pincode_view == 1){
+      ?>
+
+      <li class="treeview <?php echo e(Request::is('admin/pincodes/display') ? 'active' : ''); ?> <?php echo e(Request::is('admin/pincodes/add') ? 'active' : ''); ?> <?php echo e(Request::is('admin/pincodes/edit/*') ? 'active' : ''); ?> <?php echo e(Request::is('admin/pincodes/filter') ? 'active' : ''); ?>">
+        <a href="<?php echo e(URL::to('admin/pincodes/display')); ?>">
+          <i class="fa fa-circle-o"></i> <?php echo e(trans('labels.manage Check for Pincode')); ?>
+
+        </a>
+      </li>   
       <?php } ?>    
       <?php
         if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->customers_view == 1){
@@ -103,8 +116,9 @@
                   <i class="fa fa-circle-o" aria-hidden="true"></i> <span><?php echo e(trans('labels.reviews')); ?></span><?php if($result['commonContent']['new_reviews']>0): ?><span class="label label-success pull-right"><?php echo e($result['commonContent']['new_reviews']); ?> <?php echo e(trans('labels.new')); ?></span><?php endif; ?>
                 </a>
               </li>
+              <?php if($result['commonContent']["setting"]["show_upload_logo"]=="1"){ ?>
               <li class="<?php echo e(Request::is('admin/uploaded-designs') ? 'active' : ''); ?> "><a href="<?php echo e(URL::to('admin/uploaded-designs')); ?>"><i class="fa fa-circle-o"></i> Uploaded Designs</a></li>
-             
+              <?php } ?>
             <?php } ?>
           </ul>
         </li>
@@ -254,6 +268,20 @@
             <span> <?php echo e(trans('labels.link_site_settings')); ?></span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
+			 <?php if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->home_page_settings == 1): ?>
+          <li class="treeview <?php echo e(Request::is('admin/topoffer/display') ? 'active' : ''); ?> <?php echo e(Request::is('admin/webPagesSettings/*') ? 'active' : ''); ?>">
+              <a href="#">
+                <i class="fa fa-picture-o"></i> <span><?php echo e(trans('labels.Theme Setting')); ?></span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="treeview <?php echo e(Request::is('admin/webPagesSettings/1') ? 'active' : ''); ?> ">
+                    <a href="<?php echo e(url('admin/webPagesSettings')); ?>/1">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i> <span> <?php echo e(trans('labels.Home Page')); ?> </span>
+                    </a>
+                </li>
+              </ul>
+          </li>
+          <?php endif; ?>
             <?php if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->theme_setting == 1): ?>
             <li class="treeview <?php echo e(Request::is('admin/topoffer/display') ? 'active' : ''); ?> <?php echo e(Request::is('admin/webPagesSettings/*') ? 'active' : ''); ?>">
               <a href="#">
@@ -333,6 +361,9 @@
             <li class="<?php echo e(Request::is('admin/newsletter') ? 'active' : ''); ?>"><a href="<?php echo e(URL::to('admin/newsletter')); ?>"><i class="fa fa-circle-o"></i> <?php echo e(trans('labels.mailchimp')); ?></a></li>
             <li class="<?php echo e(Request::is('admin/instafeed') ? 'active' : ''); ?>"><a href="<?php echo e(URL::to('admin/instafeed')); ?>"><i class="fa fa-circle-o"></i> <?php echo e(trans('labels.instagramfeed')); ?></a></li>
          
+            <?php endif; ?>
+            <?php if($result['commonContent']['roles']!= null and $result['commonContent']['roles']->home_page_settings == 1): ?>
+              <li class="<?php echo e(Request::is('admin/menus') ? 'active' : ''); ?>  <?php echo e(Request::is('admin/addmenus') ? 'active' : ''); ?>  <?php echo e(Request::is('admin/editmenus/*') ? 'active' : ''); ?>"><a href="<?php echo e(URL::to('admin/menus')); ?>"><i class="fa fa-circle-o"></i> <?php echo e(trans('labels.menus')); ?></a></li>
             <?php endif; ?>
             <li class="<?php echo e(Request::is('admin/webpages') ? 'active' : ''); ?>  <?php echo e(Request::is('admin/addwebpage') ? 'active' : ''); ?>  <?php echo e(Request::is('admin/editwebpage/*') ? 'active' : ''); ?>"><a href="<?php echo e(URL::to('admin/webpages')); ?>"><i class="fa fa-circle-o"></i> <?php echo e(trans('labels.content_pages')); ?></a></li>
 

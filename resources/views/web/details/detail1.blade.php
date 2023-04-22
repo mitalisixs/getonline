@@ -35,7 +35,7 @@
               <div class="slider-for">
                 @if(!empty($result['detail']['product_data'][0]->products_video_link))
                 <a class="slider-for__item ex1 fancybox-button iframe">
-                  {!! $result['detail']['product_data'][0]->products_video_link !!}                 
+                  <iframe width="560" height="315" src="{!! $result['detail']['product_data'][0]->products_video_link !!}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                 
                 </a>
                 @endif
 
@@ -61,7 +61,7 @@
               <div class="slider-nav">
                 @if(!empty($result['detail']['product_data'][0]->products_video_link))
                 <div class="slider-nav__item">
-                  <img src="{{asset('web/images/miscellaneous/video-thumbnail.jpg')}}" alt="Zoom Image"/>
+                  <img src="{{asset('web/images/miscellaneous/video-thumbnail.jpg')}}" height="67" alt="Zoom Image"/>
                 </div>
                 @endif
                 <div class="slider-nav__item">

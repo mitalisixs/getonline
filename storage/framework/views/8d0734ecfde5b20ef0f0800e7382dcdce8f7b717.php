@@ -35,7 +35,7 @@
               <div class="slider-for">
                 <?php if(!empty($result['detail']['product_data'][0]->products_video_link)): ?>
                 <a class="slider-for__item ex1 fancybox-button iframe">
-                  <?php echo $result['detail']['product_data'][0]->products_video_link; ?>                 
+                  <iframe width="560" height="315" src="<?php echo $result['detail']['product_data'][0]->products_video_link; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                 
                 </a>
                 <?php endif; ?>
 
@@ -61,7 +61,7 @@
               <div class="slider-nav">
                 <?php if(!empty($result['detail']['product_data'][0]->products_video_link)): ?>
                 <div class="slider-nav__item">
-                  <img src="<?php echo e(asset('web/images/miscellaneous/video-thumbnail.jpg')); ?>" alt="Zoom Image"/>
+                  <img src="<?php echo e(asset('web/images/miscellaneous/video-thumbnail.jpg')); ?>" height="67" alt="Zoom Image"/>
                 </div>
                 <?php endif; ?>
                 <div class="slider-nav__item">
@@ -240,10 +240,9 @@
               </fieldset>                                          
               <a href="#review" id="review-tabs" data-toggle="pill" role="tab" class="btn-link"><?php echo e($result['detail']['product_data'][0]->total_user_rated); ?> <?php echo app('translator')->get('website.Reviews'); ?> </a>
             </div>
-
-          <div class="pro-infos">
-              <div class="pro-single-info"><b><?php echo app('translator')->get('website.Product ID'); ?> :</b><?php echo e($result['detail']['product_data'][0]->products_id); ?></div>
-              <div class="pro-single-info"><b><?php echo app('translator')->get('website.Categroy'); ?>  :</b>
+<div class="pro-infos">
+              <div class="pro-single-info"><b><?php echo app('translator')->get('website.Product ID'); ?> : </b><?php echo e($result['detail']['product_data'][0]->products_id); ?></div>
+              <div class="pro-single-info"><b>Category :</b>
                 <?php
                 $cates = '';  
                 ?>
@@ -259,13 +258,13 @@
                 ?>
                 </div>
               
-              <div class="pro-single-info"><b><?php echo app('translator')->get('website.Available'); ?> :</b>
+              <div class="pro-single-info"><b><?php echo app('translator')->get('website.Available'); ?> : </b>
 
                 <?php if($result['detail']['product_data'][0]->products_type == 0): ?>
                   <?php if($result['detail']['product_data'][0]->defaultStock == 0): ?>
                   <span class="text-secondary"><?php echo app('translator')->get('website.Out of Stock'); ?></span>
                   <?php else: ?>
-                  <span class="text-secondary"><?php echo app('translator')->get('website.In stock'); ?></span>
+                  <span class="text-secondary"><?php echo app('translator')->get('website.In stock'); ?> </span>
                   <?php endif; ?>
                 <?php endif; ?>
 
@@ -280,13 +279,14 @@
 
               <?php if($result['detail']['product_data'][0]->products_min_order>0): ?>
                     <?php if($result['detail']['product_data'][0]->products_type == 0): ?>
-                  <div class="pro-single-info" id="min_max_setting"><b><?php echo app('translator')->get('website.Min Order Limit:'); ?> :</b><a href="#"><?php echo e($result['detail']['product_data'][0]->products_min_order); ?></a></div>
+                  <div class="pro-single-info" id="min_max_setting"><b>Min Order Limit : </b><a href="#"><?php echo e($result['detail']['product_data'][0]->products_min_order); ?></a></div>
                     <?php elseif($result['detail']['product_data'][0]->products_type == 1): ?>
                       <div class="pro-single-info" id="min_max_setting"></div>
                     <?php endif; ?>
                  
                 <?php endif; ?>
           </div>
+
 
           <form name="attributes" id="add-Product-form" method="post" >
             <input type="hidden" name="products_id" value="<?php echo e($result['detail']['product_data'][0]->products_id); ?>">
@@ -346,7 +346,7 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
           </div>
           <?php endif; ?>
-        
+          
       
          <?php if(!empty($result['detail']['product_data'][0]->flash_start_date)): ?>
           <div class="countdown pro-timer" data-toggle="tooltip" data-placement="bottom" title="<?php echo app('translator')->get('website.Countdown Timer'); ?>" id="counter_<?php echo e($result['detail']['product_data'][0]->products_id); ?>" >                               
@@ -377,9 +377,11 @@
                           <button class="btn btn-lg swipe-to-top  btn-danger " type="button"><?php echo app('translator')->get('website.Out of Stock'); ?></button>
                         <?php else: ?>
                             <button class="btn btn-secondary btn-lg swipe-to-top add-to-Cart"  type="button" products_id="<?php echo e($result['detail']['product_data'][0]->products_id); ?>"><?php echo app('translator')->get('website.Add to Cart'); ?></button>
+                            <button class="btn btn-secondary btn-lg swipe-to-top buy-now-btn"  type="button" products_id="<?php echo e($result['detail']['product_data'][0]->products_id); ?>">Buy Now</button>
                         <?php endif; ?>
                     <?php else: ?>
                           <button class="btn btn-secondary btn-lg swipe-to-top  add-to-Cart stock-cart" hidden type="button" products_id="<?php echo e($result['detail']['product_data'][0]->products_id); ?>"><?php echo app('translator')->get('website.Add to Cart'); ?></button>
+                          <button class="btn btn-secondary btn-lg swipe-to-top buy-now-btn stock-cart"  type="button" hidden products_id="<?php echo e($result['detail']['product_data'][0]->products_id); ?>">Buy Now</button>
                           <button class="btn btn-danger btn btn-lg swipe-to-top  stock-out-cart" hidden type="button"><?php echo app('translator')->get('website.Out of Stock'); ?></button>
                     <?php endif; ?>
                   <?php endif; ?>
@@ -389,7 +391,19 @@
                   <?php endif; ?>               
         
           </div>
-          
+         
+          <?php if($result["commonContent"]["settings"]["check_for_pincode"]==1): ?>
+            <div class="input-group">
+              <div class="col-md-4" style="padding-left: 0px;">
+              <input type="text" id="pincode" name="pincode" class="form-control" value="" placeholder="Check for Pincode"/>
+              <span id="pincode_message"></span>
+            </div>  
+              <div class="col-md-4" style="padding-left: 0px;">
+                <button type="button" class="btn btn-secondary " onclick="check_pincode()">Check</button>
+              </div>
+            </div>
+        
+          <?php endif; ?>
         </form>
 
           <div class="pro-sub-buttons">
@@ -556,7 +570,14 @@
 <?php endif; ?>
 
 </section>
-
+<style>
+  #pincode_message .error{
+    color:red;
+  }
+  #pincode_message .success{
+    color:green;
+  }
+</style>
   <script>
 
     jQuery(document).ready(function(e) {
