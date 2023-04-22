@@ -261,16 +261,6 @@ jQuery(document).ready(function() {
                                                        $total_price = ($price+$tax_rate+($shipping_price*session('currency_value')))-$coupon_discount;
                                                        session(['total_price'=>($total_price)]);
 
-                                                       if(!empty(session('cod_charges'))){
-                                                        $cod_charges = session('currency_value') * session('cod_charges'); 
-                                                        
-                                                      }else{
-                                                        $cod_charges = 0;
-                                                      }
-                                                      $total_price = $total_price +$cod_charges;
-                                                      session(['total_price'=>($total_price)]);
-
-
                                                     ?>
                                </form>
 
@@ -311,7 +301,7 @@ jQuery(document).ready(function() {
                                           @foreach($result['payment_methods'] as $payment_methods)
                                           
                                             @if($payment_methods['active']==1)
-                                                <input id="payment_currency" type="hidden" onClick="paymentMethods('true');" name="payment_currency" value="{{$payment_methods['payment_currency']}}">
+                                                <input id="payment_currency" type="hidden" onClick="paymentMethods();" name="payment_currency" value="{{$payment_methods['payment_currency']}}">
                                               @if($payment_methods['payment_method']=='braintree')
 
                                                   <input id="{{$payment_methods['payment_method']}}_public_key" type="hidden" name="public_key" value="{{$payment_methods['public_key']}}">
@@ -319,7 +309,7 @@ jQuery(document).ready(function() {
                                           
                                           
                                                 <div class="form-check form-check-inline">
-                                                    <input id="{{$payment_methods['payment_method']}}_label" type="radio" onClick="paymentMethods('true');" name="payment_method" class="form-check-input payment_method" value="{{$payment_methods['payment_method']}}" @if(!empty(session('payment_method'))) @if(session('payment_method')==$payment_methods['payment_method']) checked @endif @endif>
+                                                    <input id="{{$payment_methods['payment_method']}}_label" type="radio" onClick="paymentMethods();" name="payment_method" class="form-check-input payment_method" value="{{$payment_methods['payment_method']}}" @if(!empty(session('payment_method'))) @if(session('payment_method')==$payment_methods['payment_method']) checked @endif @endif>
                                                     <label class="form-check-label" for="{{$payment_methods['payment_method']}}_label"><img src="{{asset('web/images/miscellaneous').'/'.$payment_methods['payment_method'].'.png'}}" alt="{{$payment_methods['name']}}"></label>
                                                 </div>
                                               @else
@@ -329,7 +319,7 @@ jQuery(document).ready(function() {
                                                 
                                                   
                                                   <div class="form-check form-check-inline">
-                                                    <input onClick="paymentMethods('true');" id="{{$payment_methods['payment_method']}}_label" type="radio" name="payment_method" class="form-check-input payment_method" value="{{$payment_methods['payment_method']}}" @if(!empty(session('payment_method'))) @if(session('payment_method')==$payment_methods['payment_method']) checked @endif @endif>
+                                                    <input onClick="paymentMethods();" id="{{$payment_methods['payment_method']}}_label" type="radio" name="payment_method" class="form-check-input payment_method" value="{{$payment_methods['payment_method']}}" @if(!empty(session('payment_method'))) @if(session('payment_method')==$payment_methods['payment_method']) checked @endif @endif>
                                                     <label class="form-check-label" for="{{$payment_methods['payment_method']}}_label">
                                                       @if(file_exists( 'web/images/miscellaneous/'.$payment_methods['payment_method'].'.png'))
                                                         <img width="100px" src="{{asset('web/images/miscellaneous/').'/'.$payment_methods['payment_method'].'.png'}}" alt="{{$payment_methods['name']}}">
@@ -534,17 +524,16 @@ jQuery(document).ready(function() {
             <td align="right">{{Session::get('symbol_left')}}{{number_format((float)$coupon_discount, 2, '.', '')+0*session('currency_value')}}{{Session::get('symbol_right')}}</td>
 
           </tr>
-         
+          <tr>
+              <th scope="row">@lang('website.Tax')</th>
+              <td align="right">{{Session::get('symbol_left')}}{{$tax_rate*session('currency_value')}}{{Session::get('symbol_right')}}</td>
+
+            </tr>
             <tr>
                 <th scope="row">@lang('website.Shipping Cost')</th>
                 <td align="right">{{Session::get('symbol_left')}}{{$shipping_price*session('currency_value')}}{{Session::get('symbol_right')}}</td>
 
               </tr>
-              <tr>
-              <th scope="row">COD Charges</th>
-              <td align="right">{{Session::get('symbol_left')}}{{$cod_charges*session('currency_value')}}{{Session::get('symbol_right')}}</td>
-
-            </tr>
           <tr class="item-price">
             <th scope="row">@lang('website.Total')</th>
             <td align="right" >{{Session::get('symbol_left')}}{{number_format((float)$total_price+0, 2, '.', '')+0*session('currency_value')}}{{Session::get('symbol_right')}}</td>

@@ -133,7 +133,7 @@ return [
 
 	'Sale'=>'Sale',
 
-	'Top Selling of the Week'=>'Top Selling of the Week',
+	'Top Selling of the Week'=>'Top Selling Product',
 
 	'View Detail'=>'View Detail',
 
@@ -823,7 +823,7 @@ return [
 	'Thanks For Your Time And Considration For Providing FeedBack For This Product'=>'Thanks For Your Time And Considration For Providing FeedBack For This Product.',
 	'In Order To Give FeedBack You Have Must Login First. Thanks'=>'In Order To Give FeedBack You Have Must Login First. Thanks.',
 	'You Have Already Given The Comment. Thanks'=>'You Have Already Given The Comment. Thanks',
-	'Related Products Text'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi venenatis felis tempus feugiat maximus.',
+	'Related Products Text'=>'',
 	'Best Sellers'=>'Best Sellers',
 	'APPLY'=>'APPLY',
 	'Demo Store 3654123'=>'Demo Store 3654123',
@@ -897,6 +897,7 @@ return [
 	'swift'=>'Swift',
 	'View Order Detail'=>'View Order Detail',
 	'TAGS'=>'TAGS',
-	'write your message here'=>'write your message here',
-	"Reached Maximum Quantity"=>"For bulk orders please contact us on +91 95863 65566 or e-mail us at info@devtatvaa.com"
+	'write your message here'=>'write your message here'
+
+	
 ];

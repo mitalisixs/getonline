@@ -35,8 +35,8 @@
 
 	@endif
 	<?php	/* Mitali - OneSignal */ ?>
-	{{-- <!---- onesignal ------>
-	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script> --}}
+	<!---- onesignal ------>
+	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 	<script>
 		/* Mitali - OneSignal */
 		/*

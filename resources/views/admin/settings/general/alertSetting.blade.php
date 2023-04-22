@@ -76,20 +76,6 @@
                                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.createcustomernotificationtext') }}</span>
                                                 </div>
                                             </div>
-                                            
-                                            <div class="form-group">
-                                                <label for="shippingEnvironment" class="col-sm-2 col-md-3 control-label" style="">Create Customer Welcome (Message)</label>
-                                                <div class="col-sm-10 col-md-4">
-                                                    <label class=" control-label">
-                                                        <input type="radio" name="create_customer_message" value="1" class="flat-red" @if($result['setting'][0]->create_customer_message==1) checked @endif > &nbsp;{{ trans('labels.Yes') }}
-                                                    </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                                    <label class=" control-label">
-                                                        <input type="radio" name="create_customer_message" value="0" class="flat-red" @if($result['setting'][0]->create_customer_message==0) checked @endif >  &nbsp;{{ trans('labels.No') }}
-                                                    </label>
-                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Choose option to send message or not.</span>
-                                                </div>
-                                            </div>
 
                                             <hr>
 
@@ -118,19 +104,6 @@
                                                         <input type="radio" name="order_notification" value="0" class="flat-red" @if($result['setting'][0]->order_notification==0) checked @endif >  &nbsp;{{ trans('labels.No') }}
                                                     </label>
                                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.ordernotificationText') }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="shippingEnvironment" class="col-sm-2 col-md-3 control-label" style="">Order  (Message)</label>
-                                                <div class="col-sm-10 col-md-4">
-                                                    <label class=" control-label">
-                                                        <input type="radio" name="order_message" value="1" class="flat-red" @if($result['setting'][0]->order_message==1) checked @endif > &nbsp;{{ trans('labels.Yes') }}
-                                                    </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                                    <label class=" control-label">
-                                                        <input type="radio" name="order_message" value="0" class="flat-red" @if($result['setting'][0]->order_message==0) checked @endif >  &nbsp;{{ trans('labels.No') }}
-                                                    </label>
-                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Choose option to send message or not.</span>
                                                 </div>
                                             </div>
 
@@ -163,20 +136,6 @@
                                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.orderstatusnotificationtext') }}</span>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="shippingEnvironment" class="col-sm-2 col-md-3 control-label" style="">Order Status  (Message)</label>
-                                                <div class="col-sm-10 col-md-4">
-                                                    <label class=" control-label">
-                                                        <input type="radio" name="order_status_message" value="1" class="flat-red" @if($result['setting'][0]->order_status_message==1) checked @endif > &nbsp;{{ trans('labels.Yes') }}
-                                                    </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                                    <label class=" control-label">
-                                                        <input type="radio" name="order_status_message" value="0" class="flat-red" @if($result['setting'][0]->order_status_message==0) checked @endif >  &nbsp;{{ trans('labels.No') }}
-                                                    </label>
-                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Choose option to send message or not.</span>
-                                                </div>
-                                            </div>
-
 
                                             <hr>
 
@@ -207,19 +166,6 @@
                                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.newproductnotificationtext') }}</span>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="shippingEnvironment" class="col-sm-2 col-md-3 control-label" style="">New Product(Message)</label>
-                                                <div class="col-sm-10 col-md-4">
-                                                    <label class=" control-label">
-                                                        <input type="radio" name="new_product_message" value="1" class="flat-red" @if($result['setting'][0]->new_product_message==1) checked @endif > &nbsp;{{ trans('labels.Yes') }}
-                                                    </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                                    <label class=" control-label">
-                                                        <input type="radio" name="new_product_message" value="0" class="flat-red" @if($result['setting'][0]->new_product_message==0) checked @endif >  &nbsp;{{ trans('labels.No') }}
-                                                    </label>
-                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Choose option to send message or not.</span>
-                                                </div>
-                                            </div>
 
                                             <hr>
 
@@ -248,19 +194,6 @@
                                                         <input type="radio" name="forgot_notification" value="0" class="flat-red" @if($result['setting'][0]->forgot_notification==0) checked @endif >  &nbsp;{{ trans('labels.No') }}
                                                     </label>
                                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.forgotemailnotificationtext') }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="shippingEnvironment" class="col-sm-2 col-md-3 control-label" style="">Forgot Password (Message)</label>
-                                                <div class="col-sm-10 col-md-4">
-                                                    <label class=" control-label">
-                                                        <input type="radio" name="forgot_message" value="1" class="flat-red" @if($result['setting'][0]->forgot_message==1) checked @endif > &nbsp;{{ trans('labels.Yes') }}
-                                                    </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                                    <label class=" control-label">
-                                                        <input type="radio" name="forgot_message" value="0" class="flat-red" @if($result['setting'][0]->forgot_message==0) checked @endif >  &nbsp;{{ trans('labels.No') }}
-                                                    </label>
-                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Choose option to send message or not.</span>
                                                 </div>
                                             </div>
 
@@ -307,19 +240,6 @@
                                                         <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.newsnotificationtext') }}</span>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                <label for="shippingEnvironment" class="col-sm-2 col-md-3 control-label" style="">Adding News  (Message)</label>
-                                                <div class="col-sm-10 col-md-4">
-                                                    <label class=" control-label">
-                                                        <input type="radio" name="news_message" value="1" class="flat-red" @if($result['setting'][0]->news_message==1) checked @endif > &nbsp;{{ trans('labels.Yes') }}
-                                                    </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                                    <label class=" control-label">
-                                                        <input type="radio" name="news_message" value="0" class="flat-red" @if($result['setting'][0]->news_message==0) checked @endif >  &nbsp;{{ trans('labels.No') }}
-                                                    </label>
-                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Choose option to send message or not.</span>
-                                                </div>
-                                            </div>
 
                                             <!-- /.box-body -->
                                             <div class="box-footer text-center">

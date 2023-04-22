@@ -240,10 +240,9 @@
               </fieldset>                                          
               <a href="#review" id="review-tabs" data-toggle="pill" role="tab" class="btn-link">{{$result['detail']['product_data'][0]->total_user_rated}} @lang('website.Reviews') </a>
             </div>
-
-          <div class="pro-infos">
-              <div class="pro-single-info"><b>@lang('website.Product ID') :</b>{{$result['detail']['product_data'][0]->products_id}}</div>
-              <div class="pro-single-info"><b>@lang('website.Categroy')  :</b>
+<div class="pro-infos">
+              <div class="pro-single-info"><b>@lang('website.Product ID') : </b>{{$result['detail']['product_data'][0]->products_id}}</div>
+              <div class="pro-single-info"><b>Category :</b>
                 <?php
                 $cates = '';  
                 ?>
@@ -259,13 +258,13 @@
                 ?>
                 </div>
               
-              <div class="pro-single-info"><b>@lang('website.Available') :</b>
+              <div class="pro-single-info"><b>@lang('website.Available') : </b>
 
                 @if($result['detail']['product_data'][0]->products_type == 0)
                   @if($result['detail']['product_data'][0]->defaultStock == 0)
                   <span class="text-secondary">@lang('website.Out of Stock')</span>
                   @else
-                  <span class="text-secondary">@lang('website.In stock')</span>
+                  <span class="text-secondary">@lang('website.In stock') </span>
                   @endif
                 @endif
 
@@ -280,13 +279,14 @@
 
               @if($result['detail']['product_data'][0]->products_min_order>0)
                     @if($result['detail']['product_data'][0]->products_type == 0)
-                  <div class="pro-single-info" id="min_max_setting"><b>@lang('website.Min Order Limit:') :</b><a href="#">{{$result['detail']['product_data'][0]->products_min_order}}</a></div>
+                  <div class="pro-single-info" id="min_max_setting"><b>Min Order Limit : </b><a href="#">{{$result['detail']['product_data'][0]->products_min_order}}</a></div>
                     @elseif($result['detail']['product_data'][0]->products_type == 1)
                       <div class="pro-single-info" id="min_max_setting"></div>
                     @endif
                  
                 @endif
           </div>
+
 
           <form name="attributes" id="add-Product-form" method="post" >
             <input type="hidden" name="products_id" value="{{$result['detail']['product_data'][0]->products_id}}">
@@ -317,10 +317,10 @@
             <input id="attribute_sign_<?=$index?>" type="hidden" value="">
             <input id="attributeids_<?=$index?>" type="hidden" name="attributeid[]" value="" >
             
-              <div class="attributes col-12 box">
+              <div class="attributes col-12 col-md-4 box">
                   <label class="">{{ $attributes_data['option']['name'] }}</label>
-                  <div class="">
-                  <select name="{{ $attributes_data['option']['id'] }}"  onChange="getQuantity(this)" class="currentstock form-control attributeid_<?=$index++?> {{strtolower($attributes_data['option']['name']) == "fabric"? "is_fabric":""}}" attributeid = "{{ $attributes_data['option']['id'] }}">
+                  <div class="select-control">
+                  <select name="{{ $attributes_data['option']['id'] }}" onChange="getQuantity()" class="currentstock form-control attributeid_<?=$index++?>" attributeid = "{{ $attributes_data['option']['id'] }}">
                     <option value="">Select {{ $attributes_data['option']['name'] }}</option>
                     @if(!empty($result['cart']))
                       @php
@@ -430,115 +430,111 @@
           
           </div>
         </div>
-          
+          <div class="row">
+              <div class="col-12 col-md-12">
+                <div class="nav nav-pills" role="tablist">
+                  <a class="nav-link nav-item  active" href="#description" id="description-tab" data-toggle="pill" role="tab">@lang('website.Descriptions')</a> 
+                  <a class="nav-link nav-item" href="#review" id="review-tab" data-toggle="pill" role="tab" >@lang('website.Reviews')</a>
+                </div> 
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane fade active show" id="description" aria-labelledby="description-tab">
+                    <?=stripslashes($result['detail']['product_data'][0]->products_description)?>                        
+                  </div>  
+                  <div role="tabpanel" class="tab-pane fade " id="review" aria-labelledby="review-tab">
+                    <div class="reviews">
+                      @if(isset($result['detail']['product_data'][0]->reviewed_customers))
+                        <div class="review-bubbles">
+                            <h2>
+                              @lang('website.Customer Reviews')
+                            </h2>                            
+                              @foreach($result['detail']['product_data'][0]->reviewed_customers as $key=>$rev)
+                              <div class="review-bubble-single">
+                                  <div class="review-bubble-bg">
+                                      <div class="pro-rating">
+                                        <fieldset class="disabled-ratings">                                           
+                                          <label class = "full fa @if($rev->reviews_rating >= 5) active @endif" for="star_5" title="@lang('website.awesome_5_stars')"></label>
+                                          <label class = "full fa @if($rev->reviews_rating >= 4) active @endif" for="star_4" title="@lang('website.pretty_good_4_stars')"></label>                                          
+                                          <label class = "full fa @if($rev->reviews_rating >= 3) active @endif" for="star_3" title="@lang('website.pretty_good_3_stars')"></label>                                          
+                                          <label class = "full fa @if($rev->reviews_rating >= 2) active @endif" for="star_2" title="@lang('website.meh_2_stars')"></label>
+                                           <label class = "full fa @if($rev->reviews_rating >= 1) active @endif" for="star1" title="@lang('website.meh_1_stars')"></label>
+                                        </fieldset>                                          
+                                      </div>
+                                      <h4>{{$rev->customers_name}}</h4>
+                                      <span>{{date("d-M-Y", strtotime($rev->created_at))}}</span>
+                                      <p>{{$rev->reviews_text}}</p>
+                                  </div>
+                                  
+                              </div>
+                              @endforeach                            
+                        </div>
+                        @endif
+                        @if(Auth::guard('customer')->check())
+                        <div class="write-review">
+                          <form id="idForm">
+                            {{csrf_field()}}
+                            <input value="{{$result['detail']['product_data'][0]->products_id}}" type="hidden" name="products_id">
+                          <h2>@lang('website.Write a Review')</h2>
+                          <div class="write-review-box">
+                              <div class="from-group row mb-3">
+                                  <div class="col-12"> <label for="inlineFormInputGroup2">@lang('website.Rating')</label></div>
+                                  <div class="pro-rating col-12">
+
+                                    <fieldset class="ratings">
+                                      
+                                      <input type="radio" id="star5" name="rating" value="5" class="rating"/>
+                                      <label class = "full fa" for="star5" title="@lang('website.awesome_5_stars')"></label>
+
+                                      <input type="radio" id="star4" name="rating" value="4" class="rating"/>
+                                      <label class="full fa" for="star4" title="@lang('website.pretty_good_4_stars')"></label>
+
+                                      <input type="radio" id="star3" name="rating" value="3" class="rating"/>
+                                      <label class = "full fa" for="star3" title="@lang('website.pretty_good_3_stars')"></label>
+
+                                      <input type="radio" id="star2" name="rating" value="2" class="rating"/>
+                                      <label class="full fa" for="star2" title="@lang('website.meh_2_stars')"></label>
+
+                                      <input type="radio" id="star1" name="rating" value="1" class="rating"/>
+                                      <label class = "full fa" for="star1" title="@lang('website.meh_1_stars')"></label> 
+                                    
+                                  </fieldset>                                     
+                                      
+                                  </div>
+                              </div>                              
+                             
+                                <div class="from-group row mb-3">
+                                    <div class="col-12"> <label for="inlineFormInputGroup3">@lang('website.Review')</label></div>
+                                    <div class="input-group col-12">                                      
+                                      <textarea name="reviews_text" id="reviews_text" class="form-control" id="inlineFormInputGroup3" placeholder="@lang('website.Write Your Review')"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="alert alert-danger" hidden id="review-error" role="alert">
+                                 @lang('website.Please enter your review')
+                                </div>
+
+                                <div class="from-group">
+                                    <button type="submit" id="review_button" disabled class="btn btn-secondary swipe-to-top">@lang('website.Submit')</button>                                    
+                                </div>
+                          </div>
+                          
+                        </form>
+                        </div>
+                        @endif
+                    </div>
+
+                      
+                  </div> 
+              </div>
+          </div>      
+      
+        </div>
 
       </div>
     </div>
   </div>
 </section>
 </section>
-<section class="product-content pro-content">
-  <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-12">
-          <div class="nav nav-pills" role="tablist">
-            <a class="nav-link nav-item  active" href="#description" id="description-tab" data-toggle="pill" role="tab">@lang('website.Descriptions')</a> 
-            <a class="nav-link nav-item" href="#review" id="review-tab" data-toggle="pill" role="tab" >@lang('website.Reviews')</a>
-          </div> 
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade active show" id="description" aria-labelledby="description-tab">
-              <?=stripslashes($result['detail']['product_data'][0]->products_description)?>                        
-            </div>  
-            <div role="tabpanel" class="tab-pane fade " id="review" aria-labelledby="review-tab">
-              <div class="reviews">
-                @if(isset($result['detail']['product_data'][0]->reviewed_customers))
-                  <div class="review-bubbles">
-                      <h2>
-                        @lang('website.Customer Reviews')
-                      </h2>                            
-                        @foreach($result['detail']['product_data'][0]->reviewed_customers as $key=>$rev)
-                        <div class="review-bubble-single">
-                            <div class="review-bubble-bg">
-                                <div class="pro-rating">
-                                  <fieldset class="disabled-ratings">                                           
-                                    <label class = "full fa @if($rev->reviews_rating >= 5) active @endif" for="star_5" title="@lang('website.awesome_5_stars')"></label>
-                                    <label class = "full fa @if($rev->reviews_rating >= 4) active @endif" for="star_4" title="@lang('website.pretty_good_4_stars')"></label>                                          
-                                    <label class = "full fa @if($rev->reviews_rating >= 3) active @endif" for="star_3" title="@lang('website.pretty_good_3_stars')"></label>                                          
-                                    <label class = "full fa @if($rev->reviews_rating >= 2) active @endif" for="star_2" title="@lang('website.meh_2_stars')"></label>
-                                    <label class = "full fa @if($rev->reviews_rating >= 1) active @endif" for="star1" title="@lang('website.meh_1_stars')"></label>
-                                  </fieldset>                                          
-                                </div>
-                                <h4>{{$rev->customers_name}}</h4>
-                                <span>{{date("d-M-Y", strtotime($rev->created_at))}}</span>
-                                <p>{{$rev->reviews_text}}</p>
-                            </div>
-                            
-                        </div>
-                        @endforeach                            
-                  </div>
-                  @endif
-                  @if(Auth::guard('customer')->check())
-                  <div class="write-review">
-                    <form id="idForm">
-                      {{csrf_field()}}
-                      <input value="{{$result['detail']['product_data'][0]->products_id}}" type="hidden" name="products_id">
-                    <h2>@lang('website.Write a Review')</h2>
-                    <div class="write-review-box">
-                        <div class="from-group row mb-3">
-                            <div class="col-12"> <label for="inlineFormInputGroup2">@lang('website.Rating')</label></div>
-                            <div class="pro-rating col-12">
 
-                              <fieldset class="ratings">
-                                
-                                <input type="radio" id="star5" name="rating" value="5" class="rating"/>
-                                <label class = "full fa" for="star5" title="@lang('website.awesome_5_stars')"></label>
-
-                                <input type="radio" id="star4" name="rating" value="4" class="rating"/>
-                                <label class="full fa" for="star4" title="@lang('website.pretty_good_4_stars')"></label>
-
-                                <input type="radio" id="star3" name="rating" value="3" class="rating"/>
-                                <label class = "full fa" for="star3" title="@lang('website.pretty_good_3_stars')"></label>
-
-                                <input type="radio" id="star2" name="rating" value="2" class="rating"/>
-                                <label class="full fa" for="star2" title="@lang('website.meh_2_stars')"></label>
-
-                                <input type="radio" id="star1" name="rating" value="1" class="rating"/>
-                                <label class = "full fa" for="star1" title="@lang('website.meh_1_stars')"></label> 
-                              
-                            </fieldset>                                     
-                                
-                            </div>
-                        </div>                              
-                      
-                          <div class="from-group row mb-3">
-                              <div class="col-12"> <label for="inlineFormInputGroup3">@lang('website.Review')</label></div>
-                              <div class="input-group col-12">                                      
-                                <textarea name="reviews_text" id="reviews_text" class="form-control" id="inlineFormInputGroup3" placeholder="@lang('website.Write Your Review')"></textarea>
-                              </div>
-                          </div>
-
-                          <div class="alert alert-danger" hidden id="review-error" role="alert">
-                          @lang('website.Please enter your review')
-                          </div>
-
-                          <div class="from-group">
-                              <button type="submit" id="review_button" disabled class="btn btn-secondary swipe-to-top">@lang('website.Submit')</button>                                    
-                          </div>
-                    </div>
-                    
-                  </form>
-                  </div>
-                  @endif
-              </div>
-
-                
-            </div> 
-        </div>
-    </div>      
-
-  </div>
-  </div>
-</section>
 
 <section class="product-content pro-content">
   <div class="container">

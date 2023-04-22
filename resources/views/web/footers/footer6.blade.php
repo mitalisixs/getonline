@@ -2,7 +2,7 @@
  <footer id="footerSix"  class="footer-area footer-six footer-desktop d-none d-lg-block d-xl-block">
     
     <div class="container-fluid p-0">
-      <div class="search-content">
+      <?php /*<div class="search-content">
           <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 align-self-center">
@@ -24,65 +24,68 @@
                 </div>
             </div>
           </div>
-        </div>
+        </div> */ ?>
   </div>
 
     <div class="container">
-      <div class="row">
+      <div class="row" style="padding-top:30px">
         <div class="col-12 col-lg-3">
-          <div class="single-footer">
-            <h5>@lang('website.About Store')</h5>
-            <div class="row">
-              <div class="col-12 col-lg-8">
-                <hr>
-              </div>
-            </div>
-            <ul class="contact-list  pl-0 mb-0">
-              <li> <i class="fas fa-map-marker"></i><span>{{$result['commonContent']['setting'][4]->value}} {{$result['commonContent']['setting'][5]->value}} {{$result['commonContent']['setting'][6]->value}}, {{$result['commonContent']['setting'][7]->value}} {{$result['commonContent']['setting'][8]->value}}</span> </li>
-              <li> <i class="fas fa-phone"></i><span dir="ltr">({{$result['commonContent']['setting'][11]->value}})</span> </li>
-              <li> <i class="fas fa-envelope"></i><span> <a href="mailto:{{$result['commonContent']['setting'][3]->value}}">{{$result['commonContent']['setting'][3]->value}}</a> </span> </li>
-
-            </ul>
+          <div class="single-footer single-footer-left">
+              <h5>About</h5>
+              <div class="row">
+                  <div class="col-12 col-lg-8">
+                    <hr>
+                  </div>
+                </div>
+              <ul class="links-list pl-0 mb-0">
+                <li> <a href="https://centrifugalproducts.com/page?name=about-us"><i class="fa fa-angle-right"></i>About Us</a> </li>
+				<li> <a href="https://centrifugalproducts.com/page?name=Policy-Policy"><i class="fa fa-angle-right"></i>Policies </a> </li>
+				<li> <a href="https://centrifugalproducts.com/page?name=terms-condition"><i class="fa fa-angle-right"></i>Terms and Conditions</a> </li>
+				<li> <a href="https://centrifugalproducts.com/page?name=faq"><i class="fa fa-angle-right"></i>Frequently Asked Questions</a> </li>
+				  
+              </ul>
           </div>
         </div>
         <div class="col-12 col-md-6 col-lg-3">
           <div class="footer-block">
               <div class="single-footer single-footer-left">
-                <h5>@lang('website.Our Services')</h5>
+                <h5>Shop</h5>
                 <div class="row">
                     <div class="col-12 col-lg-8">
                       <hr>
                     </div>
                   </div>
                 <ul class="links-list pl-0 mb-0">
-                <li> <a href="{{ URL::to('/')}}"><i class="fa fa-angle-right"></i>@lang('website.Home')</a> </li>
-                <li> <a href="{{ URL::to('/shop')}}"><i class="fa fa-angle-right"></i>@lang('website.Shop')</a> </li>
-                <li> <a href="{{ URL::to('/orders')}}"><i class="fa fa-angle-right"></i>@lang('website.Orders')</a> </li>
-                <li> <a href="{{ URL::to('/viewcart')}}"><i class="fa fa-angle-right"></i>@lang('website.Shopping Cart')</a> </li>
-                <li> <a href="{{ URL::to('/wishlist')}}"><i class="fa fa-angle-right"></i>@lang('website.Wishlist')</a> </li>
+                <li> <a href="https://centrifugalproducts.com/shop?category=atta-mill-flour-mill}"><i class="fa fa-angle-right"></i>Atta Mill / Flour Mill</a> </li>
+                <li> <a href="https://centrifugalproducts.com/shop?category=masala-mill-spice-pulverizer"><i class="fa fa-angle-right"></i>Masala Mill/Spice Pulverizer</a> </li>
+                <li> <a href="https://centrifugalproducts.com/shop?category=rice-mill"><i class="fa fa-angle-right"></i>Rice Mill</a> </li>
+                <li> <a href="https://centrifugalproducts.com/page?name=customize-machine"><i class="fa fa-angle-right"></i>Customized Machine</a> </li>
+				<li> <a href="https://centrifugalproducts.com/shop?category=spare-parts"><i class="fa fa-angle-right"></i>Spare Parts</a> </li>
+                
                 </ul>
               </div>
 
           </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-3">
-          <div class="single-footer single-footer-right">
-            <h5>@lang('website.Information')</h5>
-            <div class="row">
-                <div class="col-12 col-lg-8">
-                  <hr>
+	  <div class="col-12 col-md-6 col-lg-3">
+        <div class="footer-block">
+            <div class="single-footer single-footer-left">
+              <h5>Quick Links </h5>
+              <div class="row">
+                  <div class="col-12 col-lg-8">
+                    <hr>
+                  </div>
                 </div>
-              </div>
-            <ul class="links-list pl-0 mb-0">
-              @if(count($result['commonContent']['pages']))
-                  @foreach($result['commonContent']['pages'] as $page)
-                      <li> <a href="{{ URL::to('/page?name='.$page->slug)}}"><i class="fa fa-angle-right"></i>{{$page->name}}</a> </li>
-                  @endforeach
-              @endif
-                  <li> <a href="{{ URL::to('/contact')}}"><i class="fa fa-angle-right"></i>@lang('website.Contact Us')</a> </li>
-            </ul>
-          </div>
+              <ul class="links-list pl-0 mb-0">
+                <li> <a href="https://centrifugalproducts.com/profile"><i class="fa fa-angle-right"></i>My Account</a> </li>
+				<li> <a href="https://centrifugalproducts.com/orders"><i class="fa fa-angle-right"></i>My Order</a> </li>
+				<li> <a href="https://centrifugalproducts.com/page?name=bulk-orders"><i class="fa fa-angle-right"></i>Bulk Order</a> </li>	
+              
+              </ul>
+            </div>
+
         </div>
+      </div>
 
         <div class="col-12 col-lg-3">
           <div class="single-footer">
@@ -126,26 +129,7 @@
                             <a href="#" class="fab fa-facebook-f"></a>
                           @endif
                       </li>
-                      <li>
-                      @if(!empty($result['commonContent']['setting'][52]->value))
-                          <a href="{{$result['commonContent']['setting'][52]->value}}" class="fab fa-twitter" target="_blank"></a>
-                      @else
-                          <a href="#" class="fab fa-twitter"></a>
-                      @endif</li>
-                      <li>
-                      @if(!empty($result['commonContent']['setting'][51]->value))
-                          <a href="{{$result['commonContent']['setting'][51]->value}}"  target="_blank"><i class="fab fa-google"></i></a>
-                      @else
-                          <a href="#"><i class="fab fa-google"></i></a>
-                      @endif
-                      </li>
-                      <li>
-                      @if(!empty($result['commonContent']['setting'][53]->value))
-                          <a href="{{$result['commonContent']['setting'][53]->value}}" class="fab fa-linkedin-in" target="_blank"></a>
-                      @else
-                          <a href="#" class="fab fa-linkedin-in"></a>
-                      @endif
-                      </li>
+                     
                   </ul>
                   {{-- <div class="footer-image">
                     <img class="img-fluid" src="{{asset('web/images/miscellaneous/payments.png')}}">
