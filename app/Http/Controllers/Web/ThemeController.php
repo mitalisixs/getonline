@@ -54,6 +54,10 @@ class ThemeController extends Controller
             'login'=>$login,
             'transitions'=>$transitions,
             'product_section_order' => $product_section_order,
+	//		'middle_full_screen_slider'=>$this->setCarousal(6),	
+		//	'bottom_full_screen_slider'=>$this->setCarousal(7),
+			'middle_full_screen_slider'=>$this->setCarousal(6,"middle_full_screen_slider"),	
+			'bottom_full_screen_slider'=>$this->setCarousal(7,"bottom_full_screen_slider"),
         );
 
         return ($final_theme);
@@ -133,7 +137,7 @@ class ThemeController extends Controller
         return $header;
     }
 
-    private function setCarousal($carousel_id)
+    private function setCarousal($carousel_id,$id="carouselExampleIndicators1")
     {
         $languages = new Languages();
         $products = new Products();
@@ -145,6 +149,7 @@ class ThemeController extends Controller
         $slides = $index->slidesByCarousel($currentDate, $carousel_id);
         $cates = $products->productCategories1();
         $result['cat'] = $cates;
+		$result['id']=$id;
 
         $result['slides'] = $slides;
         if ($carousel_id == 1) {
@@ -156,7 +161,11 @@ class ThemeController extends Controller
         } elseif ($carousel_id == 4) {
 
             $carousel = (string) View::make('web.carousels.boot-carousel-content-with-navigation', ['result' => $result])->render();
-        } else {
+        } elseif ($carousel_id == 6) {  
+			$carousel = (string) View::make('web.carousels.boot-carousel-content-full-screen', ['result' => $result])->render();  
+		}elseif ($carousel_id == 7) {      
+			$carousel = (string) View::make('web.carousels.boot-carousel-content-full-screen', ['result' => $result])->render();  
+		}else {
             $carousel = (string) View::make('web.carousels.boot-carousel-content-with-right-banner', ['result' => $result])->render();
         }
         return $carousel;

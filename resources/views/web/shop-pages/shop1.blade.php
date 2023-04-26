@@ -273,7 +273,7 @@
                               <input id="total_record" type="hidden" value="{{$result['products']['total_record']}}">
                               <label for="staticEmail" class="col-form-label"> @lang('website.Showing')&nbsp;<span class="showing_record">{{$result['limit']}}</span>&nbsp;@lang('website.of')&nbsp;<span class="showing_total_record">{{$result['products']['total_record']}}</span> &nbsp;@lang('website.results')</label>
                               
-                            <div class=" justify-content-end col-6">
+                            <div class=" justify-content-end">
                               
                            <?php
                                     if(!empty(app('request')->input('limit'))){
@@ -290,7 +290,14 @@
                             </div>
                     </div>
                     @else
-                    <h3>@lang('website.No Record Found!')</h3>
+						<?php      if(isset($_REQUEST['category'])){ ?>
+						<h3>Coming Soon</h3>
+						<?php }else{ ?>
+						<h3>@lang('website.No Record Found!')</h3>
+						<?php } ?>
+							
+
+						
                     @endif
                   </form>
   

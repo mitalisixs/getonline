@@ -39,3 +39,8 @@ INSERT INTO `settings` (`id`, `name`, `value`, `created_at`, `updated_at`) VALUE
 
 
 
+ALTER TABLE `pincodes` CHANGE `modify_at` `updated_at` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00';
+
+ALTER TABLE `products_description` CHANGE `products_name` `products_name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '';
+
+ALTER TABLE `manage_role` ADD `home_page_settings` TINYINT(1) NOT NULL AFTER `check_for_pincode_delete`;

@@ -85,6 +85,8 @@
                                          <option value="3" @if($result['sliders']->carousel_id == 3) selected @endif>@lang('labels.Right Slider with Thumbs (770x400)') </option>
                                          <option value="4" @if($result['sliders']->carousel_id == 4) selected @endif>@lang('labels.Right Slider with Navigation (770x400)')  </option>
                                          <option value="5" @if($result['sliders']->carousel_id == 5) selected @endif>@lang('labels.Left Slider with Thumbs (770x400)')</option>
+										 <option value="6" @if($result['sliders']->carousel_id == 6) selected @endif > Middle Full Screen Slider (1600x420)</option>
+										   <option value="7" @if($result['sliders']->carousel_id == 7) selected @endif >Bottom Full Screen Slider (1600x420)</option>
                                       </select>
                                       <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.SliderTypeText') }}</span>
                                       <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>

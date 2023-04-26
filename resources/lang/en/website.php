@@ -629,7 +629,7 @@ return [
 
 	'Out of Stock'=>'Out of Stock',
 
-	'In stock'=>'InStock',
+	'In stock'=>'In Stock',
 
 	'Low in Stock'=>'Low in Stock',
 
@@ -737,7 +737,7 @@ return [
 	'Are you sure you want to cancel this order?'=>'Are you sure you want to cancel this order?',
 	'Flash Sale'=>'Flash Sale',
 	'UP COMMING'=>'UP COMMING',
-	'Min Order Limit:'=>'Min Order Limit:',
+	'Min Order Limit:'=>'Min Order Limit :',
 	'Return'=>'Return',
 	'Are you sure you want to return this order?'=>'Are you sure you want to return this order?',
 	'return order'=>'Return Order',

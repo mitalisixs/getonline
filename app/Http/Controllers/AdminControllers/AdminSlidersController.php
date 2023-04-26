@@ -125,7 +125,7 @@ class AdminSlidersController extends Controller
             $title = 'Right Slider with Navigation (770x400)';
         }elseif($request->carousel_id == 5){
             $title = 'Left Slider with Thumbs (770x400)';
-        }
+        }elseif($request->carousel_id == 6){            $title = 'Middle Full Screen Slider (1600x420)';        }elseif($request->carousel_id == 7){            $title = 'Bottom Full Screen Slider (1600x420)';        }
 
         DB::table('sliders_images')->insert([
             'sliders_title' => $title,

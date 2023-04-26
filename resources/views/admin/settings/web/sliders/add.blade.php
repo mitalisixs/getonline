@@ -77,6 +77,8 @@
                                            <option value="3">@lang('labels.Right Slider with Thumbs (770x400)') </option>
                                            <option value="4">@lang('labels.Right Slider with Navigation (770x400)')  </option>
                                            <option value="5">@lang('labels.Left Slider with Thumbs (770x400)')</option>
+										   <option value="6"> Middle Full Screen Slider (1600x420)</option>
+										   <option value="7">Bottom Full Screen Slider (1600x420)</option>
                                         </select>
                                         <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">{{ trans('labels.SliderTypeText') }}</span>
                                         <span class="help-block hidden">{{ trans('labels.textRequiredFieldMessage') }}</span>

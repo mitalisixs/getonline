@@ -1,9 +1,5 @@
 <div class="tab-pane fade @if(session('step') == 0) show active @endif" id="pills-shipping" role="tabpanel" aria-labelledby="pills-shipping-tab">
   <form name="signup" enctype="multipart/form-data" class="form-validate"  action="{{ URL::to('/checkout_shipping_address')}}" method="post">
-    @if($errors->any())
-    <h4 style="color: red;">{{$errors->first()}}</h4>
-    @endif
-
     <input type="hidden" required name="_token" id="csrf-token" value="{{ Session::token() }}" />
     <?php $form_validate="field-validate"; ?>
     @if(isset($all_addresses) &&  count($all_addresses)>0)
@@ -106,7 +102,7 @@
             </div>
             <div class="form-group">
               <label for=""> @lang('website.Country')</label>
-              <div class="input-group select-control">
+              
                   <select  class="form-control {{$form_validate}}" id="entry_country_id" onChange="getZones();" name="countries_id" aria-describedby="countryHelp">
                     <option value="" selected>@lang('website.Select Country')</option>
                     @if(!empty($result['countries']))
@@ -115,12 +111,12 @@
                       @endforeach
                     @endif
                     </select>
-              </div>
+             
               <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please select your country')</span>
             </div>
             <div class="form-group">
               <label for=""> @lang('website.State')</label>
-              <div class="input-group select-control">
+             
                   <select  class="form-control {{$form_validate}}" id="entry_zone_id"  name="zone_id" aria-describedby="stateHelp">
                     <option value="">@lang('website.Select State')</option>
                       @if(!empty($result['zones']))
@@ -131,7 +127,7 @@
 
                       <option value="-1" >@lang('website.Other')</option>
                     </select>
-              </div>
+              <span style="color:red;" class="help-block error-content" hidden>@lang('website.Please select your country')</span>
               <small id="stateHelp" class="form-text text-muted"></small>
           </div>
           <div class="form-group">

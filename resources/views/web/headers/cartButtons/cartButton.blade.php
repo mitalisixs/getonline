@@ -7,7 +7,7 @@
   
     <button class="btn dropdown-toggle" type="button" id="headerOneCartButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
     <div class="cart-left">
-      <i class="fas fa-shopping-bag"></i>
+      <img src="{{asset('').'/images/bag.png'}}" width="35px">
       <span class="badge badge-secondary">{{ $qunatity }}</span>
     </div>
   

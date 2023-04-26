@@ -68,7 +68,7 @@ class Order extends Model
                                 ->orWhere('image_categories.image_type', '=', 'ACTUAL');
                         });
                 })
-                ->select('orders_products.*', 'image_categories.path as image')
+                ->select('orders_products.*', 'image_categories.path as image','products.product_sku')
                 ->where('orders_products.orders_id', '=', $orders_id)->get();
             $i = 0;
             $total_price = 0;

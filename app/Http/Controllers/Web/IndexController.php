@@ -62,7 +62,7 @@ class IndexController extends Controller
         if (!empty($request->limit)) {
             $limit = $request->limit;
         } else {
-            $limit = 8;
+            $limit = 12;
         }
 
         /**  MINIMUM PRICE **/
@@ -83,7 +83,7 @@ class IndexController extends Controller
         /**                     FETCH NEWEST PRODUCTS                       **/
         /*********************************************************************/
 
-        $data = array('page_number' => '0', 'type' => '', 'limit' => $limit, 'min_price' => $min_price, 'max_price' => $max_price);
+        $data = array('page_number' => '0', 'type' => '', 'limit' => 10, 'min_price' => $min_price, 'max_price' => $max_price);
         $newest_products = $this->products->products($data);
         $result['products'] = $newest_products;
         /*********************************************************************/

@@ -22,7 +22,13 @@
        ?>
           @include($r)
       <?php
+		 echo $final_theme['middle_full_screen_slider']; 	
+		 ?>
+		 <div style="min-height:60px"></div>
+		 <?php
+		 echo $final_theme['bottom_full_screen_slider']; 	
           }
+		  
           if($product_section_order['order'] == 2 && $product_section_order['status'] == 1){
           $r =   'web.product-sections.' . $product_section_order['file_name'];
        ?>
@@ -40,12 +46,15 @@
        ?>
           @include($r)
       <?php
+			
+	
           }
           if($product_section_order['order'] == 5 && $product_section_order['status'] == 1){
           $r =   'web.product-sections.' . $product_section_order['file_name'];
        ?>
           @include($r)
       <?php
+			
           }
           if($product_section_order['order'] == 6 && $product_section_order['status'] == 1){
           $r =   'web.product-sections.' . $product_section_order['file_name'];
