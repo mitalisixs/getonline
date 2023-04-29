@@ -104,8 +104,8 @@
              
               <div class="">
                   <ul class="contact-info 111 pl-0 mb-0"  >
-                      <li> <i class="fas fa-mobile-alt"></i><span><a href="tel:{{$result['commonContent']['setting'][11]->value}}">{{$result['commonContent']['setting'][11]->value}}</a></span> </li>
-                      <li> <i class="fas fa-map-marker"></i><a style="cursor: default; " href="javascript:void(0)">{{$result['commonContent']['setting'][18]->value}}<br>{{$result['commonContent']['setting'][4]->value}},<br/>{{$result['commonContent']['setting'][5]->value}},<br/>{{$result['commonContent']['setting'][6]->value}},<br/>{{$result['commonContent']['setting'][7]->value}},<br/>{{$result['commonContent']['setting'][8]->value}}</a></span> </li>
+                      <li> <i class="fas fa-mobile-alt"></i><span><a href="tel:{{$result['commonContent']['setting'][11]->value}}">{!!$result['commonContent']['setting'][11]->value!!}</a></span> </li>
+                      <li> <i class="fas fa-map-marker"></i><a style="cursor: default;margin-left:10px; " href="javascript:void(0)">{{$result['commonContent']['setting'][18]->value}}<br>{{$result['commonContent']['setting'][4]->value}},<br/>{{$result['commonContent']['setting'][5]->value}},<br/>{{$result['commonContent']['setting'][6]->value}},<br/>{{$result['commonContent']['setting'][7]->value}},<br/>{{$result['commonContent']['setting'][8]->value}}</a></span> </li>
                       <li> <i class="fas fa-envelope"></i><span> <a href="mailto:{{$result['commonContent']['setting'][3]->value}}">{{$result['commonContent']['setting'][3]->value}}</a> </span> </li>
                       
                     </ul>         
