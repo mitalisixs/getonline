@@ -10,6 +10,12 @@ jQuery(document).ready(function(e) {
 $("body").on("contextmenu", "img", function(e) {
   return false;
 });
+var el = $('body'); 
+console.log(el.html());
+var newHtml = el.html().replace('<a href="</a">', "");
+console.log(newHtml);
+//el.html(newHtml);
+
 
 
 

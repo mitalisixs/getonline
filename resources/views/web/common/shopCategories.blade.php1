@@ -18,7 +18,7 @@
       }
 
       $option .= '
-       <a class=" main-manu"'. $hasChild .'> <img class="img-fuild" src="'.asset($parents->path).'"> '.ucwords(strtolower($parents->categories_name)).'</a>';
+       <a class=" main-manu"'. $hasChild .'> <img class="img-fuild" src="'.asset($parents->path).'"> '.$parents->categories_name.'</a>';
 
         if(isset($parents->childs)){
           $total = '';
@@ -46,7 +46,7 @@
 
     $contents.= '<li class="list-item">
         <a class="list-link" href='.url('shop?category=').$child->slug.' > '.$dash.'
-            <i class="fas fa-angle-right"></i>'.ucwords(strtolower($child->categories_name)).'
+            <i class="fas fa-angle-right"></i>'.$child->categories_name.'
         </a>
       </li>';
 
