@@ -25,6 +25,11 @@
 	left: 0;
 	z-index: 8020;
 }
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+}
 
 .fancybox-skin {
 	position: relative;
@@ -20733,7 +20738,7 @@ nav[aria-label=breadcrumb] .breadcrumb .active::before {
 
 .slider-for .iframe {
   width: 100%;
-
+  height: 440px;
 }
 
 .animation-s1 {
@@ -43534,6 +43539,10 @@ a.carousel-control-next.btn-secondary.swipe-to-top:focus {
 }
 
 @media only screen and (max-width: 767px) {
+    .products-area .col-sm-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
   .bodyrtl .top-bar .form-inline .form-group .form-control {
     padding-left: 25px;
     padding-right: 15px;
@@ -43692,6 +43701,7 @@ a.carousel-control-next.btn-secondary.swipe-to-top:focus {
     margin-left: 0;
     margin-right: 0;
   }
+  
 }
 .google-container {
     position: relative;
@@ -43713,4 +43723,5 @@ a.carousel-control-next.btn-secondary.swipe-to-top:focus {
     border: none;
     overflow: hidden;
 }
+
 

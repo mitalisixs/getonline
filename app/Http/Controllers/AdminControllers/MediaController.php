@@ -72,9 +72,9 @@ class MediaController extends Controller
         $time = Carbon::now();
         // Requesting the file from the form
         $image = $request->file('file');
-        $extensions = Setting::imageType();dd($request->file->extension());
+        $extensions = Setting::imageType();
         if ($request->hasFile('file') and in_array($request->file->extension(), $extensions)) {
-            dd("sss");
+
             // getting size
             $size = getimagesize($image);
             list($width, $height, $type, $attr) = $size;
@@ -118,7 +118,6 @@ class MediaController extends Controller
             }
 
         } else {
-            dd("1111");
             return "Invalid Image";
         }
 

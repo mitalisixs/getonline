@@ -462,10 +462,10 @@ class ProductsController extends Controller
              if (!empty($result['detail']['product_data'][0]->categories) and count($result['detail']['product_data'][0]->categories) > 0) {
                  $i = 0;
                  foreach ($result['detail']['product_data'][0]->categories as $postCategory) {
-                    // if ($i == 0) {
+                     if ($i == 0) {
                          $postCategoryId = $postCategory->categories_id;
-                    //     $i++;
-                    // }
+                         $i++;
+                     }
                  }
              }
  

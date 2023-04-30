@@ -567,7 +567,7 @@ class Index extends Model
                     }
 
                     $ul .= '<li class="nav-item dropdown "><a class="nav-link  ' . $dropright . '" ' . $link . ' >
-                ' .  ucwords(strtolower($parents->name)) . '
+                ' . $parents->name . '
                 </a>';
 
                     if (isset($parents->childs)) {
@@ -614,7 +614,7 @@ class Index extends Model
 
             $contents .= '
                 <a class="dropdown-item" ' . $link . '>
-                    ' .ucwords(strtolower($child->name)). '
+                    ' .$child->name . '
                 </a>
             ';
             if (isset($child->childs)) {
@@ -690,7 +690,7 @@ class Index extends Model
                     }
 
                     $ul .= '<a class="main-manu btn btn-primary"'  . $dropright . ' ' . $link  .' >
-                ' . ucwords(strtolower($parents->name));
+                ' . $parents->name;
                     if (isset($parents->childs)) {
                         $ul .= '<span><i class="fas fa-chevron-down"></i></span>
                             <span><i class="fas fa-chevron-up"></i></span>';
@@ -743,7 +743,7 @@ class Index extends Model
                 $link = ' href="' . url('') . $child->link . '"';
             }
             $contents .= '<a class="main-manu btn btn-primary"'  . $dropright . ' ' . $link  .' >
-            ' .  ucwords(strtolower($child->name));
+            ' . $child->name;
                 if (isset($child->childs)) {
                     $contents .= '<span><i class="fas fa-chevron-down"></i></span>
                         <span><i class="fas fa-chevron-up"></i></span>';
