@@ -9,7 +9,8 @@
           <div class="pro-heading-title">
             <h2> <?php echo app('translator')->get('website.NEW ARRIVAL'); ?>
             </h2>
-            <p><?php echo app('translator')->get('website.Newest Products Detail'); ?>
+            <p>  <?php echo e($result['commonContent']["settings"]["new_arrival_text"]); ?>
+
                </p>
           </div>
         </div>

@@ -98,9 +98,7 @@
                 <?php echo $result['commonContent']["menusRecursive"]; ?>
 
                   
-                <li class="nav-item ">
-                  <a class="btn btn-secondary" href="<?php echo e(url('shop?type=special')); ?>"><?php echo app('translator')->get('website.SPECIAL DEALS'); ?></a>
-                </li> 
+                
 
               </ul>
             </div>

@@ -10,7 +10,8 @@
                 <h2> <?php echo app('translator')->get('website.Flash Sale'); ?>
                 </h2>
                 <p> 
-                  <?php echo app('translator')->get('website.Flash Sale Text'); ?>
+                  <?php echo e($result['commonContent']["settings"]["flash_sale_text"]); ?>
+
                 </div>
           </div>
     

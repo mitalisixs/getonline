@@ -9,7 +9,8 @@
              <h2>  <?php echo app('translator')->get('website.WELCOME TO STORE'); ?>
              </h2>
              <p> 
-               <?php echo app('translator')->get('website.WELCOME TO STORE DETAIL'); ?>
+              <?php echo e($result['commonContent']["settings"]["welcome_store_text"]); ?>
+
               </p>
              </div>
            </div>

@@ -10,7 +10,8 @@
 
             </h2>
             <p>
-              <?php echo app('translator')->get('website.Top Sellings Of the Week Detail'); ?></p>
+              <?php echo e($result['commonContent']["settings"]["top_selling_text"]); ?>
+
           </div>
         </div>
       </div>
