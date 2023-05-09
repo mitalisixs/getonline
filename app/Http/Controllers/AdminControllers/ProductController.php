@@ -576,7 +576,7 @@ class ProductController extends Controller
 							
 							if(isset($subCategoriesArray[$lin1_slug.'_'.'0']) && $subCategoriesArray[$lin1_slug.'_'.'0']["parent_id"]==0 ){
 								
-								$id= $subCategoriesArray[$line[1].'_'.'0']['id'];
+								$id= $subCategoriesArray[$lin1_slug.'_'.'0']['id'];
 								$input['categories'][]= $id;
 								#echo "in parent category--->".$id."------".$line[1]."</br>";
 								
@@ -584,7 +584,7 @@ class ProductController extends Controller
 
 								$id = $this->mycategory->insertData(["categoryName_1"=>$line[1],"categoryName"=>$line[1],"parent_id"=>0,"image_id"=>$uploadImage,"image_icone"=>$uploadImage,"categories_status"=>1,"insert_api"=>1]);
 								$input['categories'][] = $id;
-								$subCategoriesArray[$line[1].'_'.'0']=["id"=>$id,"parent_id"=>0];
+								$subCategoriesArray[$lin1_slug.'_'.'0']=["id"=>$id,"parent_id"=>0];
 							  //  $subCategoriesArray[$line[1].'_'.'0']=$cat;
 								#echo "not parent category--->".$id."------".$line[1]."</br>";
 
@@ -604,7 +604,7 @@ class ProductController extends Controller
 
 								$sId = $this->mycategory->insertData(["categoryName_1"=>$line[2],"categoryName"=>$line[2],"parent_id"=>$pID,"image_id"=>$uploadImage,"image_icone"=>$uploadImage,"categories_status"=>1,"insert_api"=>1]);
 								$input['categories'][] = $sId;
-								$subCategoriesArray[$line[2]."_".$pID]=["id"=>$sId,"parent_id"=>$pID];
+								$subCategoriesArray[$lin1_slug2."_".$pID]=["id"=>$sId,"parent_id"=>$pID];
 								#echo "not in sub category--->".$sId."------".$line[2]."</br>";
 							}
 						}
@@ -619,7 +619,7 @@ class ProductController extends Controller
 							}else{
 								$cId = $this->mycategory->insertData(["categoryName_1"=>$line[3],"categoryName"=>$line[3],"parent_id"=>$sId,"image_id"=>$uploadImage,"image_icone"=>$uploadImage,"categories_status"=>1,"insert_api"=>1]);
 								$input['categories'][] = $cId;
-								$subCategoriesArray[$line[3]."_".$sId]=["id"=>$cId,"parent_id"=>$sId];
+								$subCategoriesArray[$lin1_slug3."_".$sId]=["id"=>$cId,"parent_id"=>$sId];
 								#echo "not in child category--->".$cId."------".$line[3]."</br>";
 							}
 						}
