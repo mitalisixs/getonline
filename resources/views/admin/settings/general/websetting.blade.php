@@ -195,7 +195,7 @@
 
 
                                             <div class="form-group">
-                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.googleLink') }}</label>
+                                                <label for="name" class="col-sm-2 col-md-3 control-label">Instagram URL</label>
                                                 <div class="col-sm-10 col-md-4">
                                                     {!! Form::text($result['settings'][52]->name,  $result['settings'][52]->value, array('class'=>'form-control', 'id'=>$result['settings'][52]->name)) !!}
                                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">{{ trans('labels.googleLinkText') }}</span>
@@ -211,7 +211,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="name" class="col-sm-2 col-md-3 control-label">{{ trans('labels.linkedLink') }}</label>
+                                                <label for="name" class="col-sm-2 col-md-3 control-label">Youtube URL</label>
                                                 <div class="col-sm-10 col-md-4">
                                                     {!! Form::text($result['settings'][54]->name,  $result['settings'][54]->value, array('class'=>'form-control', 'id'=>$result['settings'][54]->name)) !!}
                                                     <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;margin-top: 0;">{{ trans('labels.linkedLinkText') }}</span>

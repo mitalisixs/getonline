@@ -21,6 +21,8 @@
 
 	<!-- Core CSS Files -->
 	<link rel="stylesheet" type="text/css" href="{{asset('web/css').'/'.$result['commonContent']['setting'][81]->value}}.css">
+	<link rel="stylesheet" type="text/css" href="{{asset('web/css')}}/custom.css">
+
 	<script src="{!! asset('web/js/app.js') !!}"></script>
 	@if(Request::path() == 'checkout')
 	<?php /* Mitali - payment */ ?>
