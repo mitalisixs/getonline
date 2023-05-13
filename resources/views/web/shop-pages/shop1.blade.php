@@ -202,7 +202,7 @@
                                           <form class="form-inline justify-content-end" id="load_products_form">
                                             <input type="hidden" value="1" name="page_number" id="page_number">
                                             @if(!empty(app('request')->input('search')))
-                                             <input type="hidden"  name="search" value="{{ app('request')->input('search') }}">
+                                             <input type="hidden"  name="search" id="search-box" value="{{ app('request')->input('search') }}">
                                             @endif
                                             @if(!empty(app('request')->input('category')))
                                              <input type="hidden"  name="category" value="@if(app('request')->input('category')!='all'){{ app('request')->input('category') }} @endif">

@@ -94,16 +94,15 @@
                     @include('web.common.HeaderCategories')
                   <button class="btn btn-secondary swipe-to-top dropdown-toggle header-selection" type="button" id="headerOneCartButton"  
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
-                    data-toggle="tooltip" data-placement="bottom" title="@lang("website.Choose Any Category")"> 
+                    data-toggle="tooltip" data-placement="bottom" title='@lang("website.Choose Any Category")'> 
                     @lang("website.Choose Any Category")
                   </button> 
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="headerOneCartButton">   
                       @php    productCategories(); @endphp                                                                 
                   </div>
                   <div class="search-field-wrap">
-                      <input  type="search" name="search" placeholder="@lang('website.Search entire store here')..." data-toggle="tooltip" data-placement="bottom" title="@lang('website.Search Products')" value="{{ app('request')->input('search') }}">
-                      <button class="btn btn-secondary swipe-to-top" data-toggle="tooltip" 
-                      data-placement="bottom" title="@lang('website.Search Products')">
+                      <input  type="search" name="search" id="search-box" placeholder="@lang('website.Search entire store here')..."  value="{{ app('request')->input('search') }}">
+                      <button class="btn btn-secondary swipe-to-top" >
                       <i class="fa fa-search"></i></button>
                   </div>
                 </div>

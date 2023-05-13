@@ -121,7 +121,7 @@
                 <form class="form-inline" action="{{ URL::to('/shop')}}" method="get">
                   <div class="search-field-module">          
                     <div class="search-field-wrap">
-                        <input  type="text" name="search" placeholder="@lang('website.Search entire store here')..." data-toggle="tooltip" data-placement="bottom" title="@lang('website.Search Products')" value="{{ app('request')->input('search') }}">
+                        <input  type="text" name="search" id="search-box" placeholder="@lang('website.Search entire store here')..." data-toggle="tooltip" data-placement="bottom" title="@lang('website.Search Products')" value="{{ app('request')->input('search') }}">
                         <button class="btn btn-light swipe-to-top" data-toggle="tooltip" 
                         data-placement="bottom" title="@lang('website.Search Products')">
                         <i class="fa fa-search"></i></button>

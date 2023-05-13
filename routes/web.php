@@ -71,9 +71,9 @@ Route::group(['namespace' => 'Web','middleware' => $middleware], function () {
 		Route::get('/news-detail/{slug}', 'NewsController@newsDetail');
 		Route::post('/loadMoreNews', 'NewsController@loadMoreNews');
 		Route::get('/page', 'IndexController@page');
-		Route::get('/shop', 'ProductsController@shop');
+		Route::get('/shop', 'ProductsController@shop')->name('shop');
 		Route::post('/shop', 'ProductsController@shop');
-		Route::get('/product-detail/{slug}', 'ProductsController@productDetail');
+		Route::get('/product-detail/{slug}', 'ProductsController@productDetail')->name('product-detail');
 		Route::post('/filterProducts', 'ProductsController@filterProducts');
 		Route::post('/getquantity', 'ProductsController@getquantity');
 
@@ -141,3 +141,4 @@ Route::group(['namespace' => 'Web','middleware' => $middleware], function () {
    });
    Route::get('/flush-data', 'Web\IndexController@flushData');
    Route::post('check_pincode', 'Web\CustomersController@check_pincode');
+   Route::get('/autocomplete', 'Web\SearchController@autocomplete')->name('autocomplete');

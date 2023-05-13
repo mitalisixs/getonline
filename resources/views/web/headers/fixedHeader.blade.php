@@ -39,7 +39,7 @@
                                   <div class="dropdown-menu" aria-labelledby="dropdownAccountButton">
                                     <form class="form-inline" action="{{ URL::to('/shop')}}" method="get">
                                           <div class="search-field-module">
-                                              <input type="text" class="form-control" id="inlineFormInputGroup0" name="search" placeholder="@lang('website.Search entire store here')...">
+                                              <input type="text" class="form-control" id="inlineFormInputGroup0" name="search" id="search-box" placeholder="@lang('website.Search entire store here')...">
                                               <button class="btn" type="submit">
                                                   <i class="fas fa-search"></i>
                                               </button>

@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script src="{!! asset('web/js/jquery.instagramFeed.min.js') !!}"></script>
 <script type="text/javascript">
@@ -7,6 +9,7 @@
 
 jQuery(document).ready(function(e) {
 
+//alert("dfsdf");	
 $("body").on("contextmenu", "img", function(e) {
   return false;
 });
@@ -15,6 +18,20 @@ console.log(el.html());
 var newHtml = el.html().replace('<a href="</a">', "");
 console.log(newHtml);
 //el.html(newHtml);
+$('#search-box').autocomplete({
+        source: "{{ route('autocomplete') }}",
+        minLength: 2,
+        select: function(event, ui) {
+            // if (ui.item.type === 'product') {
+            //     window.location.href = ui.item.url;
+            // } else if (ui.item.type === 'category') {
+            //     window.location.href = '/shop?category=' + encodeURIComponent(ui.item.value);
+            // }
+			window.location.href = ui.item.url;
+        }
+    });
+
+
 
 
 
