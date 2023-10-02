@@ -48,7 +48,7 @@
       <!-- END NOTIFICATION CONTENT -->
          @yield('content')
 
-
+      
 
       <!-- Footer content -->
       <div class="notifications" id="notificationWishlist"></div>
@@ -137,7 +137,12 @@
 
 
       <a href="web/#" id="back-to-top" class="btn-secondary swipe-to-top" title="@lang('website.back_to_top')">&uarr;</a>
-
+      <div class="custom-share-button">
+        <a href="https://api.whatsapp.com/send?phone={{str_replace(['+', ' '], '', $result['commonContent']['setting'][11]->value)}}" target="_blank">
+            <img src="{{asset('')."images/download.png"}}"  alt="WhatsApp Share" />
+        </a>
+    </div>
+    
 
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
       

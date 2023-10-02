@@ -73,7 +73,7 @@ Route::group(['namespace' => 'Web','middleware' => $middleware], function () {
 		Route::get('/page', 'IndexController@page');
 		Route::get('/shop', 'ProductsController@shop');
 		Route::post('/shop', 'ProductsController@shop');
-		Route::get('/product-detail/{slug}', 'ProductsController@productDetail');
+		Route::get('/product-detail/{slug}', 'ProductsController@productDetail')->name('productDetail');
 		Route::post('/filterProducts', 'ProductsController@filterProducts');
 		Route::post('/getquantity', 'ProductsController@getquantity');
 

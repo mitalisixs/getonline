@@ -165,6 +165,11 @@
                                         class="fab fa-youtube" target="_blank"></a>
                                 @endif
                             </li>
+                            <li>
+                                <a href="https://api.whatsapp.com/send?phone={{$result['commonContent']['setting'][11]->value}}&text=Hi%0A"
+                                        class="fab fa-whatsapp" target="_blank"></a>
+                                
+                            </li>  
                         </ul>
                         {{-- <div class="footer-image">
                     <img class="img-fluid" src="{{asset('web/images/miscellaneous/payments.png')}}">

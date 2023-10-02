@@ -154,6 +154,11 @@
                   
                     @endif
                   </li>
+                  <li>
+                    <a href="https://api.whatsapp.com/send?phone=919879850082&text=Hi%0A"
+                            class="fab fa-whatsapp" target="_blank"></a>
+                    
+                </li>  
                    
                 </ul>
                 {{-- <div class="footer-image">

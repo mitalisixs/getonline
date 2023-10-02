@@ -10,10 +10,25 @@
     @if(!empty($result['commonContent']['setting'][86]->value))
 	<link rel="icon" type="image/png" href="{{asset('').$result['commonContent']['setting'][86]->value}}">
     @endif
-    <meta name="DC.title"  content="<?=stripslashes($result['commonContent']['setting'][73]->value)?>"/>
-    <meta name="description" content="<?=stripslashes($result['commonContent']['setting'][75]->value)?>"/>
-    <meta name="keywords" content="<?=stripslashes($result['commonContent']['setting'][74]->value)?>"/>
+		@if(Route::currentRouteName()=="productDetail")
+		<meta name="DC.title"  content="{{$result['detail']['product_data'][0]->products_name}}"/>
+			<meta name="description" content="{{$result['detail']['product_data'][0]->products_description}}"/>
+			<meta name="keywords" content="<?=stripslashes($result['commonContent']['setting'][74]->value)?>"/>
+			<meta property="og:title" content="{{$result['detail']['product_data'][0]->products_name}}">
+			<meta property="og:description" content="{{$result['detail']['product_data'][0]->products_description}}">
+			<meta property="og:image" content="{{asset('').$result['detail']['product_data'][0]->default_images }}">
+			<meta property="og:url" content="{{ URL::to('/product-detail/'.$result['detail']['product_data'][0]->products_slug)}}">
 
+    @else
+		<meta name="DC.title"  content="<?=stripslashes($result['commonContent']['setting'][73]->value)?>"/>
+		<meta name="description" content="<?=stripslashes($result['commonContent']['setting'][75]->value)?>"/>
+		<meta name="keywords" content="<?=stripslashes($result['commonContent']['setting'][74]->value)?>"/>
+		<meta property="og:title" content="{{stripslashes($result['commonContent']['setting'][73]->value)}}">
+		<meta property="og:description" content="{{stripslashes($result['commonContent']['setting'][75]->value)}}">
+		<meta property="og:image" content="{{asset('').$result['commonContent']['settings']['website_logo']}}">
+		<meta property="og:url" content="{{ URL::to('/')}}">
+
+	@endif
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<meta name="csrf-token" content="{{ csrf_token() }}">

@@ -21,6 +21,10 @@ CREATE TABLE IF NOT EXISTS `shipping_pincodes` (
 
 ALTER TABLE `manage_role` ADD `check_for_pincode_view` TINYINT(1) NOT NULL DEFAULT '0' AFTER `theme_setting`, ADD `check_for_pincode_create` TINYINT(1) NOT NULL DEFAULT '0' AFTER `check_for_pincode_view`, ADD `check_for_pincode_update` TINYINT(1) NOT NULL DEFAULT '0' AFTER `check_for_pincode_create`, ADD `check_for_pincode_delete` TINYINT(1) NOT NULL DEFAULT '0' AFTER `check_for_pincode_update`;
 
+
+ALTER TABLE `manage_role` ADD `home_page_settings` TINYINT(1) NOT NULL DEFAULT '0' AFTER `theme_setting`;
+
+
 ALTER TABLE `manage_role` CHANGE `currency_view` `currency_view` TINYINT(1) NOT NULL DEFAULT '0', CHANGE `currency_create` `currency_create` TINYINT(1) NOT NULL DEFAULT '0', CHANGE `currency_update` `currency_update` TINYINT(1) NOT NULL DEFAULT '0', CHANGE `currency_delete` `currency_delete` TINYINT(1) NOT NULL DEFAULT '0';
 
 ALTER TABLE `manage_role` CHANGE `theme_setting` `theme_setting` TINYINT(1) NOT NULL DEFAULT '0';

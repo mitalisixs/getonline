@@ -96,9 +96,7 @@
                                                     <td>
                                                         {{ $product->products_name }} @if(!empty($product->products_model)) ( {{ $product->products_model }} ) @endif
                                                     </td>
-                                                    <td>
-                                                        {{ $product->first_name }} {{ $product->last_name }}
-                                                    </td>
+                                                    
                                                     <td>
                                                         <strong>{{ trans('labels.Product Type') }}:</strong>
                                                         @if($product->products_type==0)
@@ -115,7 +113,7 @@
                                                         <strong>{{ trans('labels.Price') }}: </strong>   
                                                         @if(!empty($result['commonContent']['currency']->symbol_left)) {{$result['commonContent']['currency']->symbol_left}} @endif {{ $product->products_price }} @if(!empty($result['commonContent']['currency']->symbol_right)) {{$result['commonContent']['currency']->symbol_right}} @endif
                                                         <br>
-                                                        <strong>{{ trans('labels.Weight') }}: </strong>  {{ $product->products_weight }}{{ $product->products_weight_unit }}<br>
+                                                        <strong>{{ trans('labels.Weight') }}: </strong>  {{ $product->products_weight }} {{ $product->products_weight_unit }}<br>
                                                         <strong>{{ trans('labels.Viewed') }}: </strong>  {{ $product->products_viewed }}<br>
                                                         @if(!empty($product->specials_id))
                                                             <strong class="badge bg-light-blue">{{ trans('labels.Special Product') }}</strong><br>

@@ -258,6 +258,9 @@
                 ?>
                 </div>
               
+              <div class="pro-single-info"><b>Weight :</b>
+                {{ $result['detail']['product_data'][0]->products_weight }} {{ $result['detail']['product_data'][0]->products_weight_unit }}
+              </div>
               <div class="pro-single-info"><b>@lang('website.Available') : </b>
 
                 @if($result['detail']['product_data'][0]->products_type == 0)
@@ -275,6 +278,7 @@
                 @if($result['detail']['product_data'][0]->products_type == 2)
                 <span class="text-secondary">@lang('website.External')</span>
                 @endif
+
               </div>
 
               @if($result['detail']['product_data'][0]->products_min_order>0)
@@ -385,6 +389,8 @@
                           <button class="btn btn-danger btn btn-lg swipe-to-top  stock-out-cart" hidden type="button">@lang('website.Out of Stock')</button>
                     @endif
                   @endif
+                  @include('web.details.whatsapp-product-share')
+
 
                   @if($result['detail']['product_data'][0]->products_type == 2)
                     <a href="{{$result['detail']['product_data'][0]->products_url}}" target="_blank" class="btn btn-secondary btn-lg swipe-to-top">@lang('website.External Link')</a>
