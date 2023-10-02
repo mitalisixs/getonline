@@ -116,7 +116,7 @@
                 <?php productCategories2(); ?>
               </select>
             </div>
-            <input  type="search" name="search" placeholder="@lang('website.Search entire store here')..."  value="{{ app('request')->input('search') }}">
+            <input  type="search" name="search" id="search-box" placeholder="@lang('website.Search entire store here')..."  value="{{ app('request')->input('search') }}">
             <button class="btn btn-secondary" type="submit">
             <i class="fa fa-search"></i></button>
           </div>

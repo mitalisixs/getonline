@@ -13,7 +13,7 @@
         $selected = "";
       }
 
-      $option .= '<a class="dropdown-item categories-list '.$selected.'" value="'.$parents->categories_name.'" slug="'.$parents->slug.'" '.$selected.'>'.$parents->categories_name.'</a>';
+      $option .= '<a class="dropdown-item categories-list '.$selected.'" value="'.ucwords(strtolower($parents->categories_name)).'" slug="'.$parents->slug.'" '.$selected.'>'.ucwords(strtolower($parents->categories_name)).'</a>';
 
         if(isset($parents->childs)){
           $i = 1;
@@ -39,7 +39,7 @@
       $selected = "";
     }
 
-    $contents.='<a class="dropdown-item categories-list '.$selected.'"  value="'.$child->categories_name.'" slug="'.$child->slug.'" '.$selected.'>'.$dash.$child->categories_name.'</a>';
+    $contents.='<a class="dropdown-item categories-list '.$selected.'"  value="'.ucwords(strtolower($child->categories_name)).'" slug="'.$child->slug.'" '.$selected.'>'.$dash.ucwords(strtolower($child->categories_name)).'</a>';
     if(isset($child->childs)){
 
       $k = $i+1;

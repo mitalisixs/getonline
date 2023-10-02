@@ -64,3 +64,6 @@
         height: 50px;
     }
     
+.ui-autocomplete-clear{
+    display: none !important;
+}
